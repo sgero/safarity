@@ -33,10 +33,10 @@ public class Evento {
     private String imagen;
 
     @Column(name="aforo")
-    private int aforo;
+    private Integer aforo;
 
     @Column(name="total_asistentes")
-    private int totalAsistentes;
+    private Integer totalAsistentes;
 
     @Column(name="fecha_lanzamiento")
     private Date fechaLanzamiento;
@@ -51,7 +51,7 @@ public class Evento {
     private Date fechaFin;
 
     @Column(name="entradas_vendidas")
-    private int entradasVendidas;
+    private Integer entradasVendidas;
 
     @Enumerated(EnumType.STRING)
     private TipoEvento tipoEvento;
