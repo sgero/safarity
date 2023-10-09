@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Table(name="evento", schema="safarity")
 @Getter
@@ -58,5 +60,15 @@ public class Evento {
 
     @Enumerated(EnumType.STRING)
     private TipoPago tipoPago;
+
+
+//EJEMPLO DE RELACIONES CON BBDD
+//    @OneToOne
+//    @JoinColumn(name = "id_usuario", nullable = false)
+//    private Usuario usuario;
+//
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizacion", fetch = FetchType.LAZY)
+//    @EqualsAndHashCode.Exclude
+//    private Set<Evento> eventos = new HashSet<>();
 
 }

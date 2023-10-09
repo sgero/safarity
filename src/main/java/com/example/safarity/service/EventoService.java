@@ -14,12 +14,6 @@ public class EventoService {
     @Autowired
     private EventoRepository eventoRepository;
 
-    public List<EventoDTO> listarEventos() {
-        List<EventoDTO> listEventos = new ArrayList<>();
-        eventoRepository.findAll().forEach(r-> listEventos.add(convertir(r)));
-
-        return listEventos;
-    }
 
     private EventoDTO convertir(Evento evento){
         EventoDTO eventoDTO = new EventoDTO();
@@ -41,6 +35,16 @@ public class EventoService {
         return eventoDTO;
     }
 
+
+    //Obtener los eventos disponibles
+    public List<EventoDTO> listarEventos() {
+        List<EventoDTO> listEventos = new ArrayList<>();
+        eventoRepository.findAll().forEach(e-> listEventos.add(convertir(e)));
+
+        return listEventos;
+    }
+
+    //Eliminar un evento
     public void eliminarEvento(Long id) {
         eventoRepository.deleteById(id);
     }
