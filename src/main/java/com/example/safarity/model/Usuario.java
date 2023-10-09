@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"participante","organizacion"})
 public class Usuario {
 
     @Id
@@ -28,12 +28,5 @@ public class Usuario {
     @Enumerated(EnumType.ORDINAL)
     private Rol rol;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "usuario", fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    private Participante participante;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    private Organizacion organizacion;
 
 }
