@@ -2,7 +2,7 @@ package com.example.safarity.service;
 
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.model.Evento;
-import com.example.safarity.repository.EventoRepository;
+import com.example.safarity.repository.IEventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
 public class EventoService {
 
     @Autowired
-    private EventoRepository eventoRepository;
+    private IEventoRepository eventoRepository;
 
 
     private EventoDTO convertir(Evento evento){
