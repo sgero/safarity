@@ -1,5 +1,6 @@
 package com.example.safarity.service;
 
+import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.UsuarioRepository;
@@ -13,6 +14,21 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private UsuarioMapper usuarioMapper;
+
+    //Listar
+    public List<UsuarioDTO> listar(){
+        return usuarioMapper.toDTO(usuarioRepository.findAll());
+    }
+
+    public UsuarioDTO crear(UsuarioDTO usuarioDTO){
+        Usuario usuarioGuardar = usuarioMapper.toEntity(usuarioDTO);
+        Usuario usuarioGuardada = usuarioRepository.save(usuarioGuardar);
+        UsuarioDTO usuarioGuardadaDTO = usuarioMapper.toDTO(usuarioGuardada);
+        return usuarioGuardadaDTO;
+    }
 
 
 }
