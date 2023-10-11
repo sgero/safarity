@@ -12,7 +12,7 @@ public class OrganizacionDTO {
     private String email;
     private String cif;
     private String telefono;
-    private LocalDate fechaFundacion;
+    private String fechaFundacion;
     private String info;
     private String sitioWeb;
     private String logo;

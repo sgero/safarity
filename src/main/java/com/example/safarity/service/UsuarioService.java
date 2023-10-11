@@ -30,5 +30,8 @@ public class UsuarioService {
         return usuarioGuardadaDTO;
     }
 
+    public Usuario getById(Integer id){
+        return usuarioRepository.findById(id).orElse(null);
+    }
 
 }
