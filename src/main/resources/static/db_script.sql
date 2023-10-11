@@ -89,3 +89,12 @@ create table asistente(
                           primary key (id),
                           constraint asistente_ticket_fk foreign key (id_ticket) references ticket (id)
 );
+
+create table evento_participante(
+
+    id_evento int4 not null,
+    id_participante int4 not null,
+    constraint evento_evento_participante foreign key (id_evento) references evento(id),
+    constraint participante_evento_participante foreign key (id_participante) references participante(id)
+
+);

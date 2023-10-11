@@ -3,7 +3,7 @@ package com.example.safarity.service;
 import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Usuario;
-import com.example.safarity.repository.UsuarioRepository;
+import com.example.safarity.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class UsuarioService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private IUsuarioRepository usuarioRepository;
 
     @Autowired
     private UsuarioMapper usuarioMapper;
