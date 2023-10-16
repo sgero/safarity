@@ -29,7 +29,6 @@ public abstract class OrganizacionMapper {
 
     @Mapping(source = "usuario", target = "usuarioDTO", qualifiedByName = "conversorUsuarioDTO")
     @Mapping(source = "fechaFundacion", target = "fechaFundacion", qualifiedByName = "conversorFechaString")
-
     public abstract OrganizacionDTO toDTO(Organizacion entity);
 
     public abstract List<Organizacion> toEntity(List<OrganizacionDTO> dto);
@@ -41,7 +40,7 @@ public abstract class OrganizacionMapper {
         return usuarioService.getById(dto.getId());
     }
 
-    @Named(value = "conversorRestauranteDTO")
+    @Named(value = "conversorUsuarioDTO")
     UsuarioDTO conversor(Usuario entity){
         return usuarioMapper.toDTO(entity);
     }
