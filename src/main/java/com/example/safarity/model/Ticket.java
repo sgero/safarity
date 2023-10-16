@@ -26,7 +26,7 @@ public class Ticket {
     @Column(name = "dinero_aportado")
     private Integer dineroAportado;
 
-    @Column(name = "fecha")
+    @Column(name = "fecha_compra")
     private LocalDate fecha;
 
 

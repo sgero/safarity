@@ -3,7 +3,7 @@ package com.example.safarity.service;
 import com.example.safarity.converter.TicketMapper;
 import com.example.safarity.dto.TicketDTO;
 import com.example.safarity.model.Ticket;
-import com.example.safarity.repository.TicketRepository;
+import com.example.safarity.repository.ITicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class TicketService {
 
     @Autowired
-    private TicketRepository ticketRepository;
+    private ITicketRepository ticketRepository;
     @Autowired
     private TicketMapper ticketMapper;
 

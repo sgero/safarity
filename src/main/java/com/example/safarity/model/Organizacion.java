@@ -50,6 +50,6 @@ public class Organizacion {
     private Usuario usuario;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizacion", fetch = FetchType.LAZY)
-    private Set<Evento> eventos = new HashSet<>();
+    private Set<Evento> eventos= new HashSet<>();
 
 }
