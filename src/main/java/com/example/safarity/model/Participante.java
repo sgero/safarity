@@ -5,6 +5,8 @@ import lombok.*;
 import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "participate" , schema = "safarity" , catalog = "postgres")
@@ -45,6 +47,13 @@ public class Participante {
     @OneToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name="evento_participante",
+            joinColumns = {@JoinColumn(name = "id_participante", nullable=false)},
+            inverseJoinColumns = {@JoinColumn(name= "id_evento", nullable=false)})
+
+    private Set<Evento> eventos= new HashSet<>(0);
 
 
 }

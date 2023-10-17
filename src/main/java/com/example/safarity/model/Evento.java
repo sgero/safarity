@@ -62,13 +62,15 @@ public class Evento {
     private TipoPago tipoPago;
 
 
-//EJEMPLO DE RELACIONES CON BBDD
-//    @OneToOne
-//    @JoinColumn(name = "id_usuario", nullable = false)
-//    private Usuario usuario;
-//
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizacion", fetch = FetchType.LAZY)
-//    @EqualsAndHashCode.Exclude
-//    private Set<Evento> eventos = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "id_organizacion")
+    private Organizacion organizacion;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name="evento_participante",
+        joinColumns = {@JoinColumn(name = "id_evento", nullable=false)},
+        inverseJoinColumns = {@JoinColumn(name= "id_participante", nullable=false)})
+
+    private Set<Participante> participantes= new HashSet<>(0);
 
 }
