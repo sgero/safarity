@@ -30,7 +30,6 @@ public class Usuario {
     private Rol rol;
 
     @Column(name = "activo")
-    @Builder.Default
     private boolean activo = true;
 
 

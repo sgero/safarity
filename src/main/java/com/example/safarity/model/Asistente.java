@@ -44,6 +44,5 @@ public class Asistente {
     private Ticket ticket;
 
     @Column(name = "activo")
-    @Builder.Default
     private boolean activo = true;
 }

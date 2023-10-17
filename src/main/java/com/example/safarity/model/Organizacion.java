@@ -53,6 +53,5 @@ public class Organizacion {
     private Set<Evento> eventos= new HashSet<>();
 
     @Column(name = "activo")
-    @Builder.Default
     private boolean activo = true;
 }

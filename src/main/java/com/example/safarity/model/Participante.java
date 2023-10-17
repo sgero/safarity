@@ -49,7 +49,6 @@ public class Participante {
     private Usuario usuario;
 
     @Column(name = "activo")
-    @Builder.Default
     private boolean activo = true;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name="evento_participante",

@@ -42,7 +42,6 @@ public class Ticket {
     private Evento evento;
 
     @Column(name = "activo")
-    @Builder.Default
     private boolean activo = true;
 
 }
