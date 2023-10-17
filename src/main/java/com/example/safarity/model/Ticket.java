@@ -41,6 +41,8 @@ public class Ticket {
     @JoinColumn(name = "id_evento")
     private Evento evento;
 
-
+    @Column(name = "activo")
+    @Builder.Default
+    private boolean activo = true;
 
 }

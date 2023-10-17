@@ -46,5 +46,7 @@ public class Participante {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-
+    @Column(name = "activo")
+    @Builder.Default
+    private boolean activo = true;
 }
