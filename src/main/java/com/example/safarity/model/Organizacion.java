@@ -52,4 +52,7 @@ public class Organizacion {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizacion", fetch = FetchType.LAZY)
     private Set<Evento> eventos= new HashSet<>();
 
+    @Column(name = "activo")
+    @Builder.Default
+    private boolean activo = true;
 }

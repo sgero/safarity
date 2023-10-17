@@ -43,4 +43,7 @@ public class Asistente {
     @JoinColumn(name = "id_ticket", nullable = false)
     private Ticket ticket;
 
+    @Column(name = "activo")
+    @Builder.Default
+    private boolean activo = true;
 }

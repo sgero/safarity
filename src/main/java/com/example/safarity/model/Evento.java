@@ -73,4 +73,7 @@ public class Evento {
 
     private Set<Participante> participantes= new HashSet<>(0);
 
+    @Column(name = "activo")
+    @Builder.Default
+    private boolean activo = true;
 }

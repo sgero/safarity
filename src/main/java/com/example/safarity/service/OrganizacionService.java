@@ -2,6 +2,8 @@ package com.example.safarity.service;
 
 import com.example.safarity.converter.OrganizacionMapper;
 import com.example.safarity.dto.OrganizacionDTO;
+import com.example.safarity.model.Organizacion;
+import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IOrganizacionRepository;
 import com.example.safarity.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +31,7 @@ public class OrganizacionService {
         return organizacionMapper.toDTO(organizacionRepository.save(organizacionMapper.toEntity(organizacionDTO)));
     }
 
+    public Organizacion getById(Integer id){
+        return organizacionRepository.findById(id).orElse(null);
+    }
 }

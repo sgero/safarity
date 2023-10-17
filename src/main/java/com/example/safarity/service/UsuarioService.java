@@ -34,4 +34,6 @@ public class UsuarioService {
         return usuarioRepository.findById(id).orElse(null);
     }
 
+    //public void eliminar(Integer id){usuarioRepository.findById(id)}
+
 }

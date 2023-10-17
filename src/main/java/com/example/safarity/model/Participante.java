@@ -48,6 +48,9 @@ public class Participante {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
+    @Column(name = "activo")
+    @Builder.Default
+    private boolean activo = true;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name="evento_participante",
             joinColumns = {@JoinColumn(name = "id_participante", nullable=false)},
