@@ -31,6 +31,4 @@ public class Usuario {
 
     @Column(name = "activo")
     private boolean activo = true;
-
-
 }
