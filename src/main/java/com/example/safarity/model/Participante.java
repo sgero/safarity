@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"usuario", "eventos", "tickets"})
+@EqualsAndHashCode(exclude = {"eventos", "tickets"})
 
 public class Participante {
 
