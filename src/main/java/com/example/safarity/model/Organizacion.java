@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"usuario","eventos"})
 public class Organizacion {
 
     @Id
@@ -45,12 +45,15 @@ public class Organizacion {
     @Column(name = "logo")
     private String logo;
 
+    @Column(name = "activo")
+    private boolean activo = true;
+
     @OneToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizacion", fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    private Set<Evento> eventos = new HashSet<>();
+    private Set<Evento> eventos= new HashSet<>();
+
 
 }

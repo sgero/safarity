@@ -12,7 +12,8 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude={"evento", "participante", "asistente"})
+
 public class Ticket {
 
     @Id
@@ -26,21 +27,23 @@ public class Ticket {
     @Column(name = "dinero_aportado")
     private Integer dineroAportado;
 
-    @Column(name = "fecha")
+    @Column(name = "fecha_compra")
     private LocalDate fecha;
 
+    @Column(name = "activo")
+    private boolean activo = true;
 
-    @EqualsAndHashCode.Exclude
-    @OneToOne
+
+
+    @ManyToOne
     @JoinColumn(name="id_participante", nullable = false)
     private Participante participante;
 
-
-    @EqualsAndHashCode.Exclude
     @ManyToOne
-    @JoinColumn(name = "id_evento")
+    @JoinColumn(name = "id_evento", nullable = false)
     private Evento evento;
 
-
+    @OneToOne(cascade = CascadeType.ALL , mappedBy = "ticket" , fetch = FetchType.LAZY)
+    private Asistente asistente;
 
 }

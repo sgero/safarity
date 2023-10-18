@@ -9,12 +9,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Table(name="evento", schema="safarity")
+@Table(name="evento", schema="safarity", catalog = "postgres")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@EqualsAndHashCode(exclude = {"organizacion", "participantes", "tickets"})
 @Entity
 public class Evento {
     @Id
@@ -43,7 +43,7 @@ public class Evento {
     @Column(name="fecha_lanzamiento")
     private Date fechaLanzamiento;
 
-    @Column(name="fecha_venta_disponible")
+    @Column(name="fecha_venta")
     private Date fechaVentaDisponible;
 
     @Column(name="fecha_inicio")
@@ -55,6 +55,9 @@ public class Evento {
     @Column(name="entradas_vendidas")
     private Integer entradasVendidas;
 
+    @Column(name = "activo")
+    private boolean activo = true;
+
     @Enumerated(EnumType.STRING)
     private TipoEvento tipoEvento;
 
@@ -62,13 +65,21 @@ public class Evento {
     private TipoPago tipoPago;
 
 
-//EJEMPLO DE RELACIONES CON BBDD
-//    @OneToOne
-//    @JoinColumn(name = "id_usuario", nullable = false)
-//    private Usuario usuario;
-//
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizacion", fetch = FetchType.LAZY)
-//    @EqualsAndHashCode.Exclude
-//    private Set<Evento> eventos = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "id_organizacion")
+    private Organizacion organizacion;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name="evento_participante",
+        joinColumns = {@JoinColumn(name = "id_evento", nullable=false)},
+        inverseJoinColumns = {@JoinColumn(name= "id_participante", nullable=false)})
+    private Set<Participante> participantes= new HashSet<>(0);
+
+    @OneToMany(mappedBy = "evento" , fetch = FetchType.LAZY)
+    private Set<Ticket> tickets;
+
+
+
+
 
 }

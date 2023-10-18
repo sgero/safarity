@@ -1,6 +1,7 @@
 package com.example.safarity.model;
 
 import com.example.safarity.model.enums.Rol;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,5 +29,6 @@ public class Usuario {
     @Enumerated(EnumType.ORDINAL)
     private Rol rol;
 
-
+    @Column(name = "activo")
+    private boolean activo = true;
 }
