@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 public class TicketDTO {
 
-
+    @NonNull
     private Integer id;
 
     private String esDisponible;
@@ -21,6 +21,5 @@ public class TicketDTO {
     //private ParticipanteDTO  participanteDTO;
 
     //private EventoDTO eventoDTO;
-
 
 }
