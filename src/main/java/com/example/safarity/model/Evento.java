@@ -43,7 +43,7 @@ public class Evento {
     @Column(name="fecha_lanzamiento")
     private Date fechaLanzamiento;
 
-    @Column(name="fecha_venta_disponible")
+    @Column(name="fecha_venta")
     private Date fechaVentaDisponible;
 
     @Column(name="fecha_inicio")
