@@ -98,3 +98,10 @@ create table evento_participante(
     constraint participante_evento_participante foreign key (id_participante) references participante(id)
 
 );
+
+ALTER TABLE organizacion ADD COLUMN activo bool;
+ALTER TABLE participante ADD COLUMN activo bool;
+ALTER TABLE usuario ADD COLUMN activo bool;
+ALTER TABLE evento ADD COLUMN activo bool;
+ALTER TABLE ticket ADD COLUMN activo bool;
+ALTER TABLE asistente ADD COLUMN activo bool;
