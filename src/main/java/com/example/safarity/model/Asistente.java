@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {""})
+@EqualsAndHashCode(exclude = {"ticket"})
 public class Asistente {
 
     @Id
@@ -39,10 +39,12 @@ public class Asistente {
     @Column(name="email")
     private String email;
 
+    @Column(name = "activo")
+    private boolean activo = true;
+
     @OneToOne
     @JoinColumn(name = "id_ticket", nullable = false)
     private Ticket ticket;
 
-    @Column(name = "activo")
-    private boolean activo = true;
+
 }

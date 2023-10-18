@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping(path = "/usuario")
 public class UsuarioController {
 
     @Autowired
@@ -22,4 +22,6 @@ public class UsuarioController {
     public UsuarioDTO crearUsuario(@RequestBody UsuarioDTO dto){
         return usuarioService.crear(dto);
     }
+
+
 }

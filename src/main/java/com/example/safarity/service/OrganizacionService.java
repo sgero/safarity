@@ -34,4 +34,23 @@ public class OrganizacionService {
     public Organizacion getById(Integer id){
         return organizacionRepository.findById(id).orElse(null);
     }
+
+    public Organizacion modificarOrganizacion(OrganizacionDTO organizacionDTO) {
+        Organizacion organizacion = organizacionRepository.findById(organizacionDTO.getId()).orElse(null);
+
+        if (organizacion == null) {
+            return null;
+        } else {
+            organizacion.setNombre(organizacionDTO.getNombre());
+            organizacion.setEmail(organizacionDTO.getEmail());
+            organizacion.setTelefono(organizacionDTO.getTelefono());
+            organizacion.setInfo(organizacionDTO.getInfo());
+            organizacion.setSitioWeb(organizacionDTO.getSitioWeb());
+            organizacion.setLogo(organizacionDTO.getLogo());
+
+            Organizacion organizacionModificado = organizacionRepository.save(organizacion);
+            return organizacionModificado;
+
+        }
+    }
 }
