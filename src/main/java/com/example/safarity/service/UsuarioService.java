@@ -30,10 +30,9 @@ public class UsuarioService {
         return usuarioGuardadaDTO;
     }
 
-    public Usuario getById(Integer id){
-        return usuarioRepository.findById(id).orElse(null);
+    public Usuario getById(Integer id){return usuarioRepository.findById(id).orElse(null);
     }
 
-    //public void eliminar(Integer id){usuarioRepository.findById(id)}
+    //public void eliminar(Integer id){usuarioRepository.deleteById(id);}
 
 }

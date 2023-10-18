@@ -36,13 +36,11 @@ public abstract class OrganizacionMapper {
     public abstract List<OrganizacionDTO> toDTO(List<Organizacion> entity);
 
     @Named(value = "conversorUsuarioEntity")
-    Usuario conversor(UsuarioDTO dto){
-        return usuarioService.getById(dto.getId());
+    Usuario conversor(UsuarioDTO dto){return usuarioService.getById(dto.getId());
     }
 
     @Named(value = "conversorUsuarioDTO")
-    UsuarioDTO conversor(Usuario entity){
-        return usuarioMapper.toDTO(entity);
+    UsuarioDTO conversor(Usuario entity){return usuarioMapper.toDTO(entity);
     }
 
     @Named(value ="conversorFechaString")
