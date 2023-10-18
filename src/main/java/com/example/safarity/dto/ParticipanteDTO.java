@@ -1,12 +1,13 @@
 package com.example.safarity.dto;
 import jakarta.persistence.Column;
 import lombok.Data;
+import lombok.NonNull;
 
 
 @Data
 public class ParticipanteDTO {
 
-
+    @NonNull
     private Integer id;
 
     private String nombre;

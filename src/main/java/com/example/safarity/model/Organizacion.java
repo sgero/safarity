@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"usuario","eventos"})
+@EqualsAndHashCode(exclude = {"eventos"})
 public class Organizacion {
 
     @Id
