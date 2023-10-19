@@ -16,6 +16,7 @@ public class EventoService {
 
 
     private EventoDTO convertir(Evento evento){
+
         EventoDTO eventoDTO = new EventoDTO();
         eventoDTO.setId(evento.getId());
         eventoDTO.setNombre(evento.getNombre());
@@ -49,4 +50,24 @@ public class EventoService {
         eventoRepository.deleteById(id);
     }
 
+    //Método para crear y modificar que se llame GUARDAR
+    public void guardarEvento(EventoDTO eventoDTO) {
+        Evento evento = new Evento();
+        evento.setId(eventoDTO.getId());
+        evento.setNombre(eventoDTO.getNombre());
+        evento.setDescripcion(eventoDTO.getDescripcion());
+        evento.setDireccion(eventoDTO.getDireccion());
+        evento.setImagen(eventoDTO.getImagen());
+        evento.setAforo(eventoDTO.getAforo());
+        evento.setTotalAsistentes(eventoDTO.getTotalAsistentes());
+        evento.setTipoEvento(eventoDTO.getTipoEvento());
+        evento.setTipoPago(eventoDTO.getTipoPago());
+        evento.setFechaInicio(eventoDTO.getFechaInicio());
+        evento.setFechaFin(eventoDTO.getFechaFin());
+        evento.setFechaLanzamiento(eventoDTO.getFechaLanzamiento());
+        evento.setFechaVentaDisponible(eventoDTO.getFechaVentaDisponible());
+        evento.setEntradasVendidas(eventoDTO.getEntradasVendidas());
+
+        eventoRepository.save(evento);
+    }
 }

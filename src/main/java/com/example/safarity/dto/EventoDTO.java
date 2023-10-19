@@ -9,7 +9,6 @@ import java.util.Date;
 
 @Data
 public class EventoDTO {
-    @NonNull
     private Long id;
 
     private String nombre;

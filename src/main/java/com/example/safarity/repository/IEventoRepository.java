@@ -8,4 +8,5 @@ public interface IEventoRepository extends JpaRepository<Evento, Long> {
     // Métodos personalizados
 
 
+
 }
