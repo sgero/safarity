@@ -7,7 +7,7 @@ import lombok.NonNull;
 @Data
 public class UsuarioDTO {
 
-    @NonNull
+
     private Integer id;
 
     private String alias;

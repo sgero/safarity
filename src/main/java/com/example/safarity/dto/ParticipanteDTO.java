@@ -7,7 +7,7 @@ import lombok.NonNull;
 @Data
 public class ParticipanteDTO {
 
-    @NonNull
+
     private Integer id;
 
     private String nombre;

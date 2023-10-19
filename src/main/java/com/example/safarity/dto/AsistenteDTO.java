@@ -10,7 +10,7 @@ import java.util.Date;
 @EqualsAndHashCode(exclude = {""})
 public class AsistenteDTO {
 
-    @NonNull
+
     private long id;
 
     private String nombre;

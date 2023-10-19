@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 public class TicketDTO {
 
-    @NonNull
+
     private Integer id;
 
     private String esDisponible;

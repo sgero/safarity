@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 public class OrganizacionDTO {
-    @NonNull
+
     private Integer id;
 
     private String nombre;
