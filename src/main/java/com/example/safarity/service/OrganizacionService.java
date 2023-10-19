@@ -2,6 +2,7 @@ package com.example.safarity.service;
 
 import com.example.safarity.converter.OrganizacionMapper;
 import com.example.safarity.dto.OrganizacionDTO;
+import com.example.safarity.model.Evento;
 import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IOrganizacionRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OrganizacionService {
@@ -52,5 +54,32 @@ public class OrganizacionService {
             return organizacionModificado;
 
         }
+    }
+    public Organizacion eliminarOrganizacion(OrganizacionDTO organizacionDTO){
+        Organizacion organizacionEliminar = organizacionRepository.findById(organizacionDTO.getId()).orElse(null);
+        if(organizacionEliminar != null){
+            organizacionEliminar.setActivo(false);
+            organizacionEliminar.getUsuario().setActivo(false);
+            Set<Evento> eventosRelacionados = organizacionEliminar.getEventos();
+            for (Evento e : eventosRelacionados){
+                e.setActivo(false);
+            }
+            Organizacion organizacionEliminada = organizacionRepository.save(organizacionEliminar);
+            return organizacionEliminada;
+
+        }else{
+            return null;
+        }
+
+//        public String eliminarProducto(ProductoDTO productoDTO){
+//            Producto productoEliminar = productoRepository.findById(productoDTO.getId()).orElse(null);
+//            if (productoEliminar != null) {
+//                productoRepository.delete(productoEliminar);
+//                return "Datos eliminados correctamente";
+//            } else {
+//                return "No se ha podido eliminar su producto";
+//            }
+//        }
+
     }
 }
