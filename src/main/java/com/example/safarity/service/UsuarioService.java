@@ -1,7 +1,9 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.UsuarioMapper;
+import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.UsuarioDTO;
+import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +36,20 @@ public class UsuarioService {
     }
 
     //public void eliminar(Integer id){usuarioRepository.deleteById(id);}
+
+    public Usuario modificarUsuario(UsuarioDTO usuarioDTO) {
+        Usuario usuario = usuarioRepository.findById(usuarioDTO.getId()).orElse(null);
+
+        if (usuario == null) {
+            return null;
+        } else {
+            usuario.setAlias(usuarioDTO.getAlias());
+            usuario.setPassword(usuarioDTO.getPassword());
+
+            Usuario usuarioModificado = usuarioRepository.save(usuario);
+            return usuarioModificado;
+
+        }
+    }
 
 }

@@ -10,6 +10,7 @@ import com.example.safarity.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -70,7 +71,7 @@ public class OrganizacionService {
         }else{
             return null;
         }
-
+    }
 //        public String eliminarProducto(ProductoDTO productoDTO){
 //            Producto productoEliminar = productoRepository.findById(productoDTO.getId()).orElse(null);
 //            if (productoEliminar != null) {
@@ -81,5 +82,23 @@ public class OrganizacionService {
 //            }
 //        }
 
+
+    public List<OrganizacionDTO> listarLogicoOrganizacionFalse() {
+        List<Organizacion> organizacionActiva = new ArrayList<>();
+        for (Organizacion o : organizacionRepository.findAll()){
+            if (!o.isActivo()){
+                organizacionActiva.add(o);
+            }
+        }
+        return organizacionMapper.toDTO(organizacionActiva);
+    }
+    public List<OrganizacionDTO> listarLogicoOrganizacionTrue() {
+        List<Organizacion> organizacionActiva = new ArrayList<>();
+        for (Organizacion o : organizacionRepository.findAll()){
+            if (o.isActivo()){
+                organizacionActiva.add(o);
+            }
+        }
+        return organizacionMapper.toDTO(organizacionActiva);
     }
 }

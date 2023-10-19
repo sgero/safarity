@@ -39,4 +39,13 @@ public class OrganizacionController {
         return organizacionService.eliminarOrganizacion(organizacionDTO);
     }
 
+    @GetMapping(value = "/listarlogicoinactivo")
+    public List<OrganizacionDTO> listarLogicoOrganizacionFalse(){
+        return organizacionService.listarLogicoOrganizacionFalse();
+    }
+    @GetMapping(value = "/listarlogicoactivo")
+    public List<OrganizacionDTO> listarLogicoOrganizacionTrue(){
+        return organizacionService.listarLogicoOrganizacionTrue();
+    }
+
 }
