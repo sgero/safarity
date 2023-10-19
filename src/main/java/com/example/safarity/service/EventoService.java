@@ -1,5 +1,6 @@
 package com.example.safarity.service;
 
+import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.model.Evento;
 import com.example.safarity.repository.IEventoRepository;
@@ -14,33 +15,35 @@ public class EventoService {
     @Autowired
     private IEventoRepository eventoRepository;
 
+//Dejo el conversor a DTO ya que lo voy a hacer con el mapper abajo (donde tengo el eventoMapper.toDTO iria el convertir)
+//    private EventoDTO convertir(Evento evento){
+//
+//        EventoDTO eventoDTO = new EventoDTO();
+//        eventoDTO.setId(evento.getId());
+//        eventoDTO.setNombre(evento.getNombre());
+//        eventoDTO.setDescripcion(evento.getDescripcion());
+//        eventoDTO.setDireccion(evento.getDireccion());
+//        eventoDTO.setImagen(evento.getImagen());
+//        eventoDTO.setAforo(evento.getAforo());
+//        eventoDTO.setTotalAsistentes(evento.getTotalAsistentes());
+//        eventoDTO.setTipoEvento(evento.getTipoEvento());
+//        eventoDTO.setTipoPago(evento.getTipoPago());
+//        eventoDTO.setFechaInicio(evento.getFechaInicio());
+//        eventoDTO.setFechaFin(evento.getFechaFin());
+//        eventoDTO.setFechaLanzamiento(evento.getFechaLanzamiento());
+//        eventoDTO.setFechaVentaDisponible(evento.getFechaVentaDisponible());
+//        eventoDTO.setEntradasVendidas(evento.getEntradasVendidas());
+//
+//        return eventoDTO;
+//    }
 
-    private EventoDTO convertir(Evento evento){
-
-        EventoDTO eventoDTO = new EventoDTO();
-        eventoDTO.setId(evento.getId());
-        eventoDTO.setNombre(evento.getNombre());
-        eventoDTO.setDescripcion(evento.getDescripcion());
-        eventoDTO.setDireccion(evento.getDireccion());
-        eventoDTO.setImagen(evento.getImagen());
-        eventoDTO.setAforo(evento.getAforo());
-        eventoDTO.setTotalAsistentes(evento.getTotalAsistentes());
-        eventoDTO.setTipoEvento(evento.getTipoEvento());
-        eventoDTO.setTipoPago(evento.getTipoPago());
-        eventoDTO.setFechaInicio(evento.getFechaInicio());
-        eventoDTO.setFechaFin(evento.getFechaFin());
-        eventoDTO.setFechaLanzamiento(evento.getFechaLanzamiento());
-        eventoDTO.setFechaVentaDisponible(evento.getFechaVentaDisponible());
-        eventoDTO.setEntradasVendidas(evento.getEntradasVendidas());
-
-        return eventoDTO;
-    }
-
+    @Autowired
+    private EventoMapper eventoMapper;
 
     //Obtener los eventos disponibles
     public List<EventoDTO> listarEventos() {
         List<EventoDTO> listEventos = new ArrayList<>();
-        eventoRepository.findAll().forEach(e-> listEventos.add(convertir(e)));
+        eventoRepository.findAll().forEach(e-> listEventos.add(eventoMapper.toDTO(e)));
 
         return listEventos;
     }
