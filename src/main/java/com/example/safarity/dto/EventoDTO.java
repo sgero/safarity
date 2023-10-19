@@ -23,13 +23,13 @@ public class EventoDTO {
 
     private Integer totalAsistentes;
 
-    private Date fechaLanzamiento;
+    private String fechaLanzamiento;
 
-    private Date fechaVentaDisponible;
+    private String fechaVentaDisponible;
 
-    private Date fechaInicio;
+    private String fechaInicio;
 
-    private Date fechaFin;
+    private String fechaFin;
 
     private Integer entradasVendidas;
 
