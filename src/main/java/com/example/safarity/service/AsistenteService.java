@@ -5,7 +5,6 @@ import com.example.safarity.model.Asistente;
 import com.example.safarity.repository.IAsistenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

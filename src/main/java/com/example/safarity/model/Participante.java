@@ -3,7 +3,6 @@ package com.example.safarity.model;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Entity;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +14,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"eventos", "tickets"})
-
 public class Participante {
 
     @Id
@@ -39,7 +37,7 @@ public class Participante {
     private String dni;
 
     @Column(name = "fecha_nacimiento")
-    private String fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     @Column(name="direccion")
     private String direccion;

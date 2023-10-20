@@ -3,7 +3,6 @@ package com.example.safarity.model;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Entity;
-
 import java.time.LocalDate;
 
 @Entity

@@ -1,7 +1,6 @@
 package com.example.safarity.model;
 
 import com.example.safarity.model.enums.Rol;
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
 import jakarta.persistence.*;
 import lombok.*;
 

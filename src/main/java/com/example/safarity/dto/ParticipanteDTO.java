@@ -1,8 +1,5 @@
 package com.example.safarity.dto;
-import jakarta.persistence.Column;
 import lombok.Data;
-import lombok.NonNull;
-
 
 @Data
 public class ParticipanteDTO {
@@ -20,7 +17,7 @@ public class ParticipanteDTO {
 
     private String dni;
 
-    private String fechaNacimiento;
+    private String fecha_nacimiento;
 
     private String direccion;
 

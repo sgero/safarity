@@ -1,10 +1,6 @@
 package com.example.safarity.dto;
 
-import com.example.safarity.model.Usuario;
 import lombok.Data;
-import lombok.NonNull;
-
-import java.time.LocalDate;
 
 @Data
 public class OrganizacionDTO {

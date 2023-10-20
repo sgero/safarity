@@ -6,7 +6,6 @@ import com.example.safarity.model.Participante;
 import com.example.safarity.repository.IParticipanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class ParticipanteService {
             participante.setApellidos(participanteDTO.getApellidos());
             participante.setTelefono(participanteDTO.getTelefono());
             participante.setDni(participanteDTO.getDni());
-            participante.setFechaNacimiento(participanteDTO.getFechaNacimiento());
+            participante.setFechaNacimiento(participanteMapper.StringToLocalDate(participanteDTO.getFecha_nacimiento()));
             participante.setDireccion(participanteDTO.getDireccion());
 
             Participante participanteModificado = participanteRepository.save(participante);

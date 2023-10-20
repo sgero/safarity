@@ -6,7 +6,6 @@ import com.example.safarity.model.Ticket;
 import com.example.safarity.repository.ITicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
