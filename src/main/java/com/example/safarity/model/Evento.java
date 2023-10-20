@@ -4,8 +4,7 @@ import com.example.safarity.model.enums.TipoEvento;
 import com.example.safarity.model.enums.TipoPago;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,16 +40,16 @@ public class Evento {
     private Integer totalAsistentes;
 
     @Column(name="fecha_lanzamiento")
-    private Date fechaLanzamiento;
+    private LocalDate fechaLanzamiento;
 
     @Column(name="fecha_venta")
-    private Date fechaVentaDisponible;
+    private LocalDate fechaVentaDisponible;
 
     @Column(name="fecha_inicio")
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(name="fecha_fin")
-    private Date fechaFin;
+    private LocalDate fechaFin;
 
     @Column(name="entradas_vendidas")
     private Integer entradasVendidas;

@@ -4,7 +4,6 @@ import com.example.safarity.converter.OrganizacionMapper;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.model.Evento;
 import com.example.safarity.model.Organizacion;
-import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IOrganizacionRepository;
 import com.example.safarity.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ public class OrganizacionService {
 
     @Autowired
     private IOrganizacionRepository organizacionRepository;
-
-    @Autowired
-    private IUsuarioRepository usuarioRepository;
 
     @Autowired
     private OrganizacionMapper organizacionMapper;
