@@ -130,7 +130,7 @@ public class EventoService {
             eventoRepository.delete(eventoEliminar);
             return "Evento eliminado correctamente";
             }else {
-            return "Nose ha podido eliminar el evento";
+            return "No se ha podido eliminar el evento";
         }
 
 

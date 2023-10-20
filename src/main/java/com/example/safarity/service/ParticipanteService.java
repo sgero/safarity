@@ -62,7 +62,7 @@ public class ParticipanteService {
             participanteRepository.delete(participanteEliminar);
             return "Participante eliminado correctamente";
         }else {
-            return "Nose ha podido eliminar el participante";
+            return "No se ha podido eliminar el participante";
         }
 
 

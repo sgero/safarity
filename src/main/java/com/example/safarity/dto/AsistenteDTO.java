@@ -11,7 +11,7 @@ import java.util.Date;
 public class AsistenteDTO {
 
 
-    private long id;
+    private Integer id;
 
     private String nombre;
 
