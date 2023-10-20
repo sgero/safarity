@@ -3,9 +3,6 @@ package com.example.safarity.dto;
 import com.example.safarity.model.enums.TipoEvento;
 import com.example.safarity.model.enums.TipoPago;
 import lombok.Data;
-import lombok.NonNull;
-
-import java.util.Date;
 
 @Data
 public class EventoDTO {

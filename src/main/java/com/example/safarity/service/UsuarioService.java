@@ -1,14 +1,11 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.UsuarioMapper;
-import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.UsuarioDTO;
-import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

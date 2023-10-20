@@ -4,7 +4,6 @@ import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.service.EventoService;
-import jdk.jfr.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

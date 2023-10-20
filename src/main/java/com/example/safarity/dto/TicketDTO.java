@@ -1,10 +1,7 @@
 package com.example.safarity.dto;
-import jakarta.persistence.criteria.CriteriaBuilder;
+
 import lombok.Data;
-import lombok.NonNull;
-
 import java.time.LocalDate;
-
 
 @Data
 public class TicketDTO {

@@ -1,10 +1,8 @@
 package com.example.safarity.controller;
 
 import com.example.safarity.dto.OrganizacionDTO;
-import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Organizacion;
 import com.example.safarity.service.OrganizacionService;
-import com.example.safarity.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

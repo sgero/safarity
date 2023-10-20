@@ -3,7 +3,6 @@ package com.example.safarity.model;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Entity;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +14,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"eventos", "tickets"})
-
 public class Participante {
 
     @Id
