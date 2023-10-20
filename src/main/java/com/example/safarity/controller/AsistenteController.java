@@ -1,5 +1,6 @@
 package com.example.safarity.controller;
 
+import com.example.safarity.converter.AsistenteMapper;
 import com.example.safarity.dto.AsistenteDTO;
 import com.example.safarity.model.Asistente;
 import com.example.safarity.service.AsistenteService;
@@ -18,6 +19,9 @@ public class AsistenteController {
     @Autowired
     private AsistenteService asistenteService;
 
+    @Autowired
+    private AsistenteMapper asistenteMapper;
+
 
 @GetMapping(value = "/listar")
 public List<AsistenteDTO> listarAsistente(){
@@ -32,8 +36,8 @@ public AsistenteDTO crearAsistente(@RequestBody AsistenteDTO asistenteDTO){
 
 
 @GetMapping(value = "/modificar")
-public Asistente modificarAsistente(@RequestBody AsistenteDTO asistenteDTO){
-    return asistenteService.modificarAsistente(asistenteDTO);
+public AsistenteDTO modificarAsistente(@RequestBody AsistenteDTO asistenteDTO){
+    return asistenteMapper.toDTO(asistenteService.modificarAsistente(asistenteDTO));
 }
 
 
