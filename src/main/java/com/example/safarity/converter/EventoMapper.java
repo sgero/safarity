@@ -15,10 +15,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface EventoMapper {
 
-    @Mapping(source = "fechaLanzamiento", target = "fecha_lanzamiento", qualifiedByName = "conversorFechaString")
+    @Mapping(source = "fecha_lanzamiento", target = "fechaLanzamiento", qualifiedByName = "conversorFechaString")
     Evento toEntity(EventoDTO dto);
 
-    @Mapping(source = "fecha_lanzamiento", target = "fechaLanzamiento", qualifiedByName = "conversorFechaString")
+    @Mapping(source = "fechaLanzamiento", target = "fecha_lanzamiento", qualifiedByName = "conversorFechaString")
     EventoDTO toDTO (Evento entity);
 
     List<EventoDTO> toEntity (List<EventoDTO> dto);
