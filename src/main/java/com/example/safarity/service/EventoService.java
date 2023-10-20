@@ -111,7 +111,7 @@ public class EventoService {
         evento.setFechaFin(eventoDTO.getFechaFin());
         evento.setFechaLanzamiento(eventoDTO.getFechaLanzamiento());
         evento.setFechaVentaDisponible(eventoDTO.getFechaVentaDisponible());
-        evento.setEntradasVendidas(eventoDTO.getEntradasVendidas());
+        //evento.setEntradasVendidas(eventoDTO.getEntradasVendidas());
 
         Evento eventoModificado = eventoRepository.save(evento);
 
