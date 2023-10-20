@@ -107,11 +107,11 @@ public class EventoService {
         evento.setTotalAsistentes(eventoDTO.getTotalAsistentes());
         evento.setTipoEvento(eventoDTO.getTipoEvento());
         evento.setTipoPago(eventoDTO.getTipoPago());
-        evento.setFechaInicio(eventoDTO.getFechaInicio());
-        evento.setFechaFin(eventoDTO.getFechaFin());
-        evento.setFechaLanzamiento(eventoDTO.getFechaLanzamiento());
-        evento.setFechaVentaDisponible(eventoDTO.getFechaVentaDisponible());
-        //evento.setEntradasVendidas(eventoDTO.getEntradasVendidas());
+        evento.setFechaInicio(eventoMapper.StringToLocalDate(eventoDTO.getFecha_inicio()));
+        evento.setFechaFin(eventoMapper.StringToLocalDate(eventoDTO.getFecha_fin()));
+        evento.setFechaLanzamiento(eventoMapper.StringToLocalDate(eventoDTO.getFecha_lanzamiento()));
+        evento.setFechaVentaDisponible(eventoMapper.StringToLocalDate(eventoDTO.getFecha_venta()));
+//        evento.setEntradasVendidas(eventoDTO.getEntradasVendidas());
 
         Evento eventoModificado = eventoRepository.save(evento);
 
