@@ -34,5 +34,5 @@ public class EventoDTO {
 
     private TipoPago tipoPago;
 
-    private EventoDTO eventoDTO;
+//    private EventoDTO eventoDTO;
 }
