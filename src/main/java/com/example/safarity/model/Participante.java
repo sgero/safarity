@@ -39,7 +39,7 @@ public class Participante {
     private String dni;
 
     @Column(name = "fecha_nacimiento")
-    private String fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     @Column(name="direccion")
     private String direccion;
@@ -47,9 +47,7 @@ public class Participante {
     @Column(name = "activo")
     private boolean activo = true;
 
-    @OneToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+
 
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -57,6 +55,10 @@ public class Participante {
             joinColumns = {@JoinColumn(name = "id_participante", nullable=false)},
             inverseJoinColumns = {@JoinColumn(name= "id_evento", nullable=false)})
     private Set<Evento> eventos= new HashSet<>(0);
+
+    @OneToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "participante" , fetch = FetchType.LAZY)
     private Set<Ticket> tickets;
