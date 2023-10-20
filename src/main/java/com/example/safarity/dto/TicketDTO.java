@@ -16,10 +16,12 @@ public class TicketDTO {
 
     private Integer dineroAportado;
 
-    private LocalDate fecha;
+    private String fecha;
 
-    //private ParticipanteDTO  participanteDTO;
+    private ParticipanteDTO  participanteDTO;
 
-    //private EventoDTO eventoDTO;
+    private EventoDTO eventoDTO;
+
+    private AsistenteDTO asistenteDTO;
 
 }

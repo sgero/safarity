@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude={"evento", "participante", "asistente"})
+@EqualsAndHashCode
 
 public class Ticket {
 
