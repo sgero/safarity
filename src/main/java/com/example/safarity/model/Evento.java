@@ -72,7 +72,7 @@ public class Evento {
     @JoinTable(name="evento_participante",
         joinColumns = {@JoinColumn(name = "id_evento", nullable=false)},
         inverseJoinColumns = {@JoinColumn(name= "id_participante", nullable=false)})
-    private Set<Participante> participantes= new HashSet<>(0);
+    private Set<Participante> participantes = new HashSet<>(0);
 
     @OneToMany(mappedBy = "evento" , fetch = FetchType.LAZY)
     private Set<Ticket> tickets;
