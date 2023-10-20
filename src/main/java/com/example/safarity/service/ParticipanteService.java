@@ -1,9 +1,7 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.ParticipanteMapper;
-import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.dto.ParticipanteDTO;
-import com.example.safarity.model.Evento;
 import com.example.safarity.model.Participante;
 import com.example.safarity.repository.IParticipanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +39,12 @@ public class ParticipanteService {
         {
 
             participante.setNombre(participanteDTO.getNombre());
-            //MAS CAMPOS HAY QUE INCLUIR
-
+            participante.setEmail(participanteDTO.getEmail());
+            participante.setApellidos(participanteDTO.getApellidos());
+            participante.setTelefono(participanteDTO.getTelefono());
+            participante.setDni(participanteDTO.getDni());
+            participante.setFechaNacimiento(participanteDTO.getFechaNacimiento());
+            participante.setDireccion(participanteDTO.getDireccion());
 
             Participante participanteModificado = participanteRepository.save(participante);
 

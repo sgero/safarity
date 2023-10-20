@@ -21,6 +21,7 @@ public class OrganizacionController {
     public List<OrganizacionDTO> listarOrganizacion(){
         return organizacionService.listarOrganizacion();
     }
+
     @PostMapping(value = "/crear")
     public OrganizacionDTO crearOrganizacion(@RequestBody OrganizacionDTO dto){
         return organizacionService.crearOrganizacion(dto);
