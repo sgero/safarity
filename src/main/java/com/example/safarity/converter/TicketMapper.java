@@ -17,8 +17,6 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring")
-
-
 public abstract class TicketMapper {
 
     @Autowired
