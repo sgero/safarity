@@ -3,6 +3,7 @@ package com.example.safarity.service;
 import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.model.Evento;
+import com.example.safarity.model.Organizacion;
 import com.example.safarity.repository.IEventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,11 @@ public class EventoService {
 
     @Autowired
     private EventoMapper eventoMapper;
+
+
+    public Evento getById(Long id){
+        return eventoRepository.findById(id).orElse(null);
+    }
 
     //Obtener los eventos disponibles
     public List<EventoDTO> listarEventos() {

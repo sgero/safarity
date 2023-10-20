@@ -2,6 +2,7 @@ package com.example.safarity.service;
 
 import com.example.safarity.converter.ParticipanteMapper;
 import com.example.safarity.dto.ParticipanteDTO;
+import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Participante;
 import com.example.safarity.repository.IParticipanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class ParticipanteService {
 
     @Autowired
     private ParticipanteMapper participanteMapper;
+
+
+    public Participante getById(Integer id){
+        return participanteRepository.findById(id).orElse(null);
+    }
 
     public List<ParticipanteDTO> listarParticipantes() {
         List<ParticipanteDTO> listParticipantes = new ArrayList<>();
