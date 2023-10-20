@@ -20,13 +20,13 @@ public class AsistenteController {
 
 
 @GetMapping(value = "/listar")
-public List<Asistente> listarAsistente(){
+public List<AsistenteDTO> listarAsistente(){
     return asistenteService.listarAsistente();
 }
 
 
 @GetMapping(value = "/crear")
-public Asistente crearAsistente(@RequestBody AsistenteDTO asistenteDTO){
+public AsistenteDTO crearAsistente(@RequestBody AsistenteDTO asistenteDTO){
     return asistenteService.crearAsistente(asistenteDTO);
 }
 

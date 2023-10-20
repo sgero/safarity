@@ -32,8 +32,6 @@ public class Ticket {
     @Column(name = "activo")
     private boolean activo = true;
 
-
-
     @ManyToOne
     @JoinColumn(name="id_participante", nullable = false)
     private Participante participante;

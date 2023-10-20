@@ -19,6 +19,7 @@ public class UsuarioController {
     public List<UsuarioDTO> listarUsuarios(){
         return usuarioService.listar();
     }
+
     @PostMapping(value = "/crear")
     public UsuarioDTO crearUsuario(@RequestBody UsuarioDTO dto){
         return usuarioService.crear(dto);

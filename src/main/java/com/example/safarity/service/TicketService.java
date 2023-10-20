@@ -2,14 +2,11 @@ package com.example.safarity.service;
 
 import com.example.safarity.converter.TicketMapper;
 import com.example.safarity.dto.TicketDTO;
-import com.example.safarity.model.Evento;
-import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Ticket;
 import com.example.safarity.repository.ITicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class TicketService {

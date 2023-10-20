@@ -6,7 +6,6 @@ import com.example.safarity.model.Asistente;
 import com.example.safarity.repository.IAsistenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +58,7 @@ public class AsistenteService {
         asistente.setDireccion(asistenteDTO.getDireccion());
         asistente.setDni(asistenteDTO.getDni());
         asistente.setTelefono(asistenteDTO.getTelefono());
-        asistente.setFecha_nacimiento(asistenteDTO.getFecha_nacimiento());
+        asistente.setFechaNacimiento(asistenteMapper.StringToLocalDate(asistenteDTO.getFecha_nacimiento()));
 
         Asistente asistenteModificado = asistenteRepository.save(asistente);
 

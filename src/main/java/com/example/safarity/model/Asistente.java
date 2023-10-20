@@ -2,6 +2,8 @@ package com.example.safarity.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -28,7 +30,7 @@ public class Asistente {
     private String dni;
 
     @Column(name="fecha_nacimiento")
-    private Date fecha_nacimiento;
+    private LocalDate fechaNacimiento;
 
     @Column(name="telefono")
     private Integer telefono;
