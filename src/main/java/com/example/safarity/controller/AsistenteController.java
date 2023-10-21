@@ -5,10 +5,7 @@ import com.example.safarity.dto.AsistenteDTO;
 import com.example.safarity.model.Asistente;
 import com.example.safarity.service.AsistenteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,19 +26,19 @@ public List<AsistenteDTO> listarAsistente(){
 }
 
 
-@GetMapping(value = "/crear")
+@PostMapping(value = "/crear")
 public AsistenteDTO crearAsistente(@RequestBody AsistenteDTO asistenteDTO){
     return asistenteService.crearAsistente(asistenteDTO);
 }
 
 
-@GetMapping(value = "/modificar")
+@PutMapping(value = "/modificar")
 public AsistenteDTO modificarAsistente(@RequestBody AsistenteDTO asistenteDTO){
     return asistenteMapper.toDTO(asistenteService.modificarAsistente(asistenteDTO));
 }
 
 
-@GetMapping(value = "/eliminar")
+@DeleteMapping(value = "/eliminar")
 public String eliminarAsistente(@RequestBody AsistenteDTO asistenteDTO){
     return asistenteService.eliminarAsistente(asistenteDTO);
 }

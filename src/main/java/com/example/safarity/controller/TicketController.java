@@ -29,7 +29,7 @@ public class TicketController {
 //        return organizacionService.modificarOrganizacion(organizacionDTO);
 //    }
 
-    @PutMapping(value = "/eliminar")
+    @DeleteMapping(value = "/eliminar")
     public Ticket eliminarTicket(@RequestBody TicketDTO ticketDTO){
         return ticketService.eliminarTicket(ticketDTO);
     }
