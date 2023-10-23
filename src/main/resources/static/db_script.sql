@@ -99,9 +99,23 @@ create table evento_participante(
 
 );
 
+
+create table token(
+
+                      id serial not null,
+                      token varchar(800) not null,
+                      fecha_expiracion timestamp(6) not null,
+                      id_usuario int4 not null,
+                      constraint token_usuario foreign key (id_usuario) references usuario(id)
+
+);
+
+
 ALTER TABLE organizacion ADD COLUMN activo bool;
 ALTER TABLE participante ADD COLUMN activo bool;
 ALTER TABLE usuario ADD COLUMN activo bool;
 ALTER TABLE evento ADD COLUMN activo bool;
 ALTER TABLE ticket ADD COLUMN activo bool;
 ALTER TABLE asistente ADD COLUMN activo bool;
+
+

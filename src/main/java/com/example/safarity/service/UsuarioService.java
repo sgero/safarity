@@ -4,18 +4,44 @@ import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IUsuarioRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+//@RequiredArgsConstructor
 public class UsuarioService {
+
 
     @Autowired
     private IUsuarioRepository usuarioRepository;
 
     @Autowired
     private UsuarioMapper usuarioMapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return usuarioRepository.findTopByAlias(username)
+                .orElseThrow(()-> new UsernameNotFoundException("Usuario no encontrado"));
+    }
+
+
+    public Usuario buscarPorUsername(String username){
+        return usuarioRepository.findTopByAlias(username).orElse(null);
+    }
+
+    public Usuario save(UsuarioDTO dto){
+        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+        return  usuarioRepository.save(usuarioMapper.toEntity(dto));
+    }
+
 
     //Listar
     public List<UsuarioDTO> listar(){
@@ -49,5 +75,6 @@ public class UsuarioService {
 
         }
     }
+
 
 }
