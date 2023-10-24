@@ -30,36 +30,48 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public AuthDTO login(@RequestBody UsuarioDTO usuarioDTO){
+    public AuthDTO login(@RequestBody UsuarioDTO usuarioDTO) {
         Usuario usuario = (Usuario) usuarioService.loadUserByUsername(usuarioDTO.getAlias());
         String apiKey = null;
+        String mensaje;
 
-        //Usuario sin token
-        if(usuario.getToken() == null ){
-            apiKey = jwtService.generateToken(usuario);
-            Token token = new Token();
-            token.setUsuario(usuario);
-            token.setToken(apiKey);
-            token.setFechaExpiracion(LocalDateTime.now().plusDays(1));
-            tokenService.save(token);
+        if (usuario != null) {
+            if (usuarioService.validarPassword(usuario, usuarioDTO.getPassword())) {
 
-            //Usuario con token caducado
-        }else if(usuario.getToken().getFechaExpiracion().isBefore(LocalDateTime.now())){
-            Token token = usuario.getToken();
-            apiKey = jwtService.generateToken(usuario);
-            token.setToken(apiKey);
-            token.setFechaExpiracion(LocalDateTime.now().plusDays(1));
-            tokenService.save(token);
+                mensaje = "Usuario Logueado";
 
-            //Usuario con token válido
-        }else{
-            apiKey = usuario.getToken().getToken();
+                //Usuario sin token
+                if (usuario.getToken() == null) {
+                    apiKey = jwtService.generateToken(usuario);
+                    Token token = new Token();
+                    token.setUsuario(usuario);
+                    token.setToken(apiKey);
+                    token.setFechaExpiracion(LocalDateTime.now().plusDays(1));
+                    tokenService.save(token);
+
+                    //Usuario con token caducado
+                } else if (usuario.getToken().getFechaExpiracion().isBefore(LocalDateTime.now())) {
+                    Token token = usuario.getToken();
+                    apiKey = jwtService.generateToken(usuario);
+                    token.setToken(apiKey);
+                    token.setFechaExpiracion(LocalDateTime.now().plusDays(1));
+                    tokenService.save(token);
+
+                    //Usuario con token válido
+                } else {
+                    apiKey = usuario.getToken().getToken();
+                }
+            } else {
+                mensaje = "Contraseña no válida";
+            }
+        } else {
+            mensaje = "Usuario No encontrado";
         }
 
         return AuthDTO
                 .builder()
                 .token(apiKey)
-                .info("Usuario logueado")
+                .info(mensaje)
                 .build();
     }
 

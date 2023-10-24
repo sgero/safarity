@@ -29,4 +29,6 @@ public class UsuarioController {
     public Usuario modificarUsuario(@RequestBody UsuarioDTO usuarioDTO){
         return usuarioService.modificarUsuario(usuarioDTO);
     }
+
+
 }

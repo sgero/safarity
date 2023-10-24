@@ -77,4 +77,8 @@ public class UsuarioService {
     }
 
 
+    public boolean validarPassword(Usuario usuario, String password) {
+
+        return passwordEncoder.matches(password, usuario.getPassword());
+    }
 }

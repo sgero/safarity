@@ -36,7 +36,7 @@ public class JWTService {
     public String generateToken(Usuario usuario){
         TokenDataDTO tokenDataDTO = TokenDataDTO
                 .builder()
-                .username(usuario.getUsername())
+                .username(usuario.getAlias())
                 .rol(usuario.getRol().name())
                 .fecha_creacion(System.currentTimeMillis())
                 .fecha_expiracion(System.currentTimeMillis() + 1000 * 60 * 60 * 3)
