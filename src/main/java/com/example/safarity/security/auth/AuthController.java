@@ -3,6 +3,7 @@ package com.example.safarity.security.auth;
 import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Token;
 import com.example.safarity.model.Usuario;
+import com.example.safarity.model.enums.Rol;
 import com.example.safarity.security.jwt.JWTService;
 import com.example.safarity.service.TokenService;
 import com.example.safarity.service.UsuarioService;
@@ -77,6 +78,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public AuthDTO register(@RequestBody UsuarioDTO usuarioDTO){
+
+        usuarioDTO.setRol(Rol.PARTICIPANTE);
         Usuario usuarioNuevo = usuarioService.save(usuarioDTO);
         String token = jwtService.generateToken(usuarioNuevo);
 

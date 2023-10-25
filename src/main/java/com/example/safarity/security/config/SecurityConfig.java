@@ -33,10 +33,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req ->
                         req
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/usuario/**").permitAll()
-                                .requestMatchers("/admin/**").hasAnyRole(Rol.ADMIN.name())
-                                .requestMatchers("/organizacion/**").hasAnyRole(Rol.ORGANIZACION.name())
-                                .requestMatchers("/participante/**").hasAnyRole(Rol.PARTICIPANTE.name())
+                                .requestMatchers("/usuario/crear").permitAll()
+                                .requestMatchers("/usuario/listar").hasAnyAuthority(Rol.ADMIN.name())
+                                .requestMatchers("/admin/**").hasAnyAuthority(Rol.ADMIN.name())
+                                .requestMatchers("/organizacion/**").hasAnyAuthority(Rol.ORGANIZACION.name())
+                                .requestMatchers("/participante/**").hasAnyAuthority(Rol.PARTICIPANTE.name())
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
