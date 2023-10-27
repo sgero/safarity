@@ -30,14 +30,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                //.cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
                         req
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/usuario/crear").permitAll()
+                                .requestMatchers("/organizacion/listar").permitAll()
+                                .requestMatchers("/organizacion/crear").permitAll()
+                                .requestMatchers("/participante/listar").permitAll()
+                                .requestMatchers("/participante/crear").permitAll()
                                 .requestMatchers("/usuario/listar").hasAnyAuthority(Rol.ADMIN.name())
                                 .requestMatchers("/admin/**").hasAnyAuthority(Rol.ADMIN.name())
-                                .requestMatchers("/organizacion/**").hasAnyAuthority(Rol.ORGANIZACION.name())
-                                .requestMatchers("/participante/**").hasAnyAuthority(Rol.PARTICIPANTE.name())
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))

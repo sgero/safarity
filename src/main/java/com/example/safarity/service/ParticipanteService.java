@@ -5,8 +5,9 @@ import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.model.Participante;
 import com.example.safarity.repository.IParticipanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
@@ -18,15 +19,18 @@ public class ParticipanteService {
     @Autowired
     private ParticipanteMapper participanteMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     public Participante getById(Integer id){
         return participanteRepository.findById(id).orElse(null);
     }
 
     public List<ParticipanteDTO> listarParticipantes() {
-        List<ParticipanteDTO> listParticipantes = new ArrayList<>();
-        participanteRepository.findAll().forEach(p->listParticipantes.add(participanteMapper.toDTO(p)));
-        return listParticipantes;
+//        List<ParticipanteDTO> listParticipantes = new ArrayList<>();
+//        participanteRepository.findAll().forEach(p->listParticipantes.add(participanteMapper.toDTO(p)));
+        return participanteMapper.toDTO(participanteRepository.findAll());
     }
 
     public ParticipanteDTO crearParticipante(ParticipanteDTO participanteDTO) {
@@ -65,7 +69,11 @@ public class ParticipanteService {
             return "No se ha podido eliminar el participante";
         }
 
+    }
 
-
+    public Participante save(ParticipanteDTO dto){
+        Participante entity = participanteMapper.toEntity(dto);
+        entity.getUsuario().setPassword(passwordEncoder.encode(entity.getUsuario().getPassword()));
+        return participanteRepository.save(entity);
     }
 }

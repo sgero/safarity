@@ -1,10 +1,17 @@
 package com.example.safarity.security.auth;
 
+import com.example.safarity.controller.ParticipanteController;
+import com.example.safarity.dto.OrganizacionDTO;
+import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.dto.UsuarioDTO;
+import com.example.safarity.model.Organizacion;
+import com.example.safarity.model.Participante;
 import com.example.safarity.model.Token;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.model.enums.Rol;
 import com.example.safarity.security.jwt.JWTService;
+import com.example.safarity.service.OrganizacionService;
+import com.example.safarity.service.ParticipanteService;
 import com.example.safarity.service.TokenService;
 import com.example.safarity.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +35,13 @@ public class AuthController {
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private ParticipanteService participanteService;
+
+    @Autowired
+    private OrganizacionService organizacionService;
+
 
 
     @PostMapping("/login")
@@ -77,17 +91,28 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public AuthDTO register(@RequestBody UsuarioDTO usuarioDTO){
+    public AuthDTO register(@RequestBody ParticipanteDTO participanteDTO, @RequestBody OrganizacionDTO organizacionDTO){
+        if (participanteDTO != null){
+            participanteDTO.getUsuarioDTO().setRol(Rol.PARTICIPANTE);
+            Participante participanteNuevo = participanteService.save(participanteDTO);
+            String token = jwtService.generateToken(participanteNuevo.getUsuario());
 
-        usuarioDTO.setRol(Rol.PARTICIPANTE);
-        Usuario usuarioNuevo = usuarioService.save(usuarioDTO);
-        String token = jwtService.generateToken(usuarioNuevo);
+            return AuthDTO
+                    .builder()
+                    .token(token)
+                    .info("Usuario creado correctamente")
+                    .build();
+        }else{
+            organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
+            Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
+            String token = jwtService.generateToken(organizacionNueva.getUsuario());
 
-        return AuthDTO
-                .builder()
-                .token(token)
-                .info("Usuario creado correctamente")
-                .build();
+            return AuthDTO
+                    .builder()
+                    .token(token)
+                    .info("Usuario creado correctamente")
+                    .build();
+        }
     }
 
 }

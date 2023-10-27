@@ -2,10 +2,13 @@ package com.example.safarity.service;
 
 import com.example.safarity.converter.OrganizacionMapper;
 import com.example.safarity.dto.OrganizacionDTO;
+import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.model.Evento;
 import com.example.safarity.model.Organizacion;
+import com.example.safarity.model.Participante;
 import com.example.safarity.repository.IOrganizacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,9 @@ public class OrganizacionService {
 
     @Autowired
     private OrganizacionMapper organizacionMapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<OrganizacionDTO> listarOrganizacion() {
         return organizacionMapper.toDTO(organizacionRepository.findAll());
@@ -94,5 +100,11 @@ public class OrganizacionService {
             }
         }
         return organizacionMapper.toDTO(organizacionActiva);
+    }
+
+    public Organizacion save(OrganizacionDTO dto){
+        Organizacion entity = organizacionMapper.toEntity(dto);
+        entity.getUsuario().setPassword(passwordEncoder.encode(entity.getUsuario().getPassword()));
+        return organizacionRepository.save(entity);
     }
 }

@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "participate" , schema = "safarity" , catalog = "postgres")
+@Table(name = "participante" , schema = "safarity" , catalog = "postgres")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -54,7 +54,7 @@ public class Participante {
             inverseJoinColumns = {@JoinColumn(name= "id_evento", nullable=false)})
     private Set<Evento> eventos= new HashSet<>(0);
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 

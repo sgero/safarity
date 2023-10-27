@@ -1,7 +1,10 @@
 package com.example.safarity.controller;
 
-import com.example.safarity.converter.ParticipanteMapper;
+
+import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.ParticipanteDTO;
+import com.example.safarity.model.Participante;
+import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.service.ParticipanteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +20,6 @@ public class ParticipanteController {
     @Autowired
     private ParticipanteService participanteService;
 
-    @Autowired
-    private IParticipanteRepository participanteRepository;
-
-    @Autowired
-    private ParticipanteMapper participanteMapper;
     @GetMapping(value = "/listar")
     public List<ParticipanteDTO> listarParticipantes(){
         return participanteService.listarParticipantes();
@@ -33,13 +31,13 @@ public class ParticipanteController {
     }
 
     @PutMapping(value="/modificar")
-    public ParticipanteDTO modificarEvento(@RequestBody ParticipanteDTO participanteDTO) {
-        return participanteMapper.toDTO(participanteService.modificarParticipante(participanteDTO));
+    public Participante modificarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
+        return participanteService.modificarParticipante(participanteDTO);
     }
 
 
     @DeleteMapping(value="/eliminar")
-    public String eliminarEvento(@RequestBody ParticipanteDTO participanteDTO){
+    public String eliminarParticipante(@RequestBody ParticipanteDTO participanteDTO){
         return participanteService.eliminarParticipante(participanteDTO);
     }
 

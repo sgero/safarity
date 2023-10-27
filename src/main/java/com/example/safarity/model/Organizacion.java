@@ -47,7 +47,7 @@ public class Organizacion {
     @Column(name = "activo")
     private boolean activo = true;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
