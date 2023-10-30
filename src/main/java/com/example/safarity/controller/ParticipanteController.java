@@ -9,7 +9,6 @@ import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.service.ParticipanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

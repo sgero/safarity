@@ -2,7 +2,6 @@ package com.example.safarity.controller;
 
 import com.example.safarity.converter.AsistenteMapper;
 import com.example.safarity.dto.AsistenteDTO;
-import com.example.safarity.model.Asistente;
 import com.example.safarity.service.AsistenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

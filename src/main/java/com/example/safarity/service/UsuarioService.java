@@ -4,7 +4,6 @@ import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IUsuarioRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

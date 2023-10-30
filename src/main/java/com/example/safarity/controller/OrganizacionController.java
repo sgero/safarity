@@ -5,7 +5,6 @@ import com.example.safarity.model.Organizacion;
 import com.example.safarity.service.OrganizacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

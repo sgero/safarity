@@ -2,9 +2,7 @@ package com.example.safarity.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name= "asistentes")
