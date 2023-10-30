@@ -1,17 +1,13 @@
 package com.example.safarity.security.jwt;
 
-import com.example.safarity.model.enums.Rol;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.security.auth.TokenDataDTO;
-import com.example.safarity.service.UsuarioService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
