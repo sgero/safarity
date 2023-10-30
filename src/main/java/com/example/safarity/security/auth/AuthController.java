@@ -91,28 +91,30 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public AuthDTO register(@RequestBody ParticipanteDTO participanteDTO, @RequestBody OrganizacionDTO organizacionDTO){
-        if (participanteDTO != null){
-            participanteDTO.getUsuarioDTO().setRol(Rol.PARTICIPANTE);
-            Participante participanteNuevo = participanteService.save(participanteDTO);
-            String token = jwtService.generateToken(participanteNuevo.getUsuario());
+    public AuthDTO register(@RequestBody ParticipanteDTO participanteDTO){
+        participanteDTO.getUsuarioDTO().setRol(Rol.PARTICIPANTE);
+        Participante participanteNuevo = participanteService.save(participanteDTO);
+        String token = jwtService.generateToken(participanteNuevo.getUsuario());
 
-            return AuthDTO
-                    .builder()
-                    .token(token)
-                    .info("Usuario creado correctamente")
-                    .build();
-        }else{
-            organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
-            Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
-            String token = jwtService.generateToken(organizacionNueva.getUsuario());
-
-            return AuthDTO
-                    .builder()
-                    .token(token)
-                    .info("Usuario creado correctamente")
-                    .build();
-        }
+        return AuthDTO
+                .builder()
+                .token(token)
+                .info("Usuario creado correctamente")
+                .build();
     }
+
+    @PostMapping("/registerOrganizacion")
+    public AuthDTO registerOrganizacion(@RequestBody OrganizacionDTO organizacionDTO){
+        organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
+        Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
+        String token = jwtService.generateToken(organizacionNueva.getUsuario());
+
+        return AuthDTO
+                .builder()
+                .token(token)
+                .info("Usuario creado correctamente")
+                .build();
+    }
+
 
 }
