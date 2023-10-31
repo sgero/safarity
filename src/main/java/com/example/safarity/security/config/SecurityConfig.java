@@ -36,6 +36,7 @@ public class SecurityConfig {
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/usuario/crear").permitAll()
                                 .requestMatchers("/organizacion/listar").permitAll()
+                                .requestMatchers("/evento/**").permitAll()
                                 .requestMatchers("/organizacion/crear").permitAll()
                                 .requestMatchers("/participante/listar").permitAll()
                                 .requestMatchers("/participante/crear").permitAll()

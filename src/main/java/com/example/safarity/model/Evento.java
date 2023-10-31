@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"organizacion", "participantes", "tickets"})
+@EqualsAndHashCode(exclude = { "participantes", "tickets"})
 @Entity
 public class Evento {
     @Id
@@ -36,9 +36,6 @@ public class Evento {
     @Column(name="aforo")
     private Integer aforo;
 
-    @Column(name="total_asistentes")
-    private Integer totalAsistentes;
-
     @Column(name="fecha_lanzamiento")
     private LocalDate fechaLanzamiento;
 
@@ -51,16 +48,13 @@ public class Evento {
     @Column(name="fecha_fin")
     private LocalDate fechaFin;
 
-    @Column(name="entradas_vendidas")
-    private Integer entradasVendidas;
-
     @Column(name = "activo")
     private boolean activo = true;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private TipoEvento tipoEvento;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private TipoPago tipoPago;
 
 

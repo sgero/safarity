@@ -109,7 +109,6 @@ public class EventoService {
         evento.setDireccion(eventoDTO.getDireccion());
         evento.setImagen(eventoDTO.getImagen());
         evento.setAforo(eventoDTO.getAforo());
-        evento.setTotalAsistentes(eventoDTO.getTotalAsistentes());
         evento.setTipoEvento(eventoDTO.getTipoEvento());
         evento.setTipoPago(eventoDTO.getTipoPago());
         evento.setFechaInicio(eventoMapper.StringToLocalDate(eventoDTO.getFecha_inicio()));

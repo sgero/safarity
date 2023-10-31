@@ -119,3 +119,7 @@ ALTER TABLE ticket ADD COLUMN activo bool;
 ALTER TABLE asistente ADD COLUMN activo bool;
 
 
+ALTER TABLE evento DROP COLUMN total_asistentes;
+ALTER TABLE evento DROP COLUMN entradas_vendidas;
+
+
