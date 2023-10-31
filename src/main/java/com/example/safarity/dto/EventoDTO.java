@@ -2,6 +2,7 @@ package com.example.safarity.dto;
 
 import com.example.safarity.model.enums.TipoEvento;
 import com.example.safarity.model.enums.TipoPago;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.Data;
 
 @Data
@@ -18,8 +19,6 @@ public class EventoDTO {
 
     private Integer aforo;
 
-    private Integer totalAsistentes;
-
     private String fecha_lanzamiento;
 
     private String fecha_venta;
@@ -33,5 +32,7 @@ public class EventoDTO {
     private TipoEvento tipoEvento;
 
     private TipoPago tipoPago;
+
+    private OrganizacionDTO organizacionDTO;
 
 }
