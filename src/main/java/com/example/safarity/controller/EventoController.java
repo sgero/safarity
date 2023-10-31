@@ -2,6 +2,8 @@ package com.example.safarity.controller;
 
 import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.dto.EventoDTO;
+import com.example.safarity.dto.OrganizacionDTO;
+import com.example.safarity.model.Evento;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,19 @@ public class EventoController {
         return eventoService.eliminarEvento(eventoDTO);
     }
 
+    @PutMapping(value="/eliminar-logico")
+    public EventoDTO eventoEliminar(@RequestBody EventoDTO eventoDTO) {
+        return eventoMapper.toDTO(eventoService.eventoEliminar(eventoDTO));
+    }
 
+    @GetMapping(value = "/listarlogicoinactivo")
+    public List<EventoDTO> listarLogicoEventoFalse(){
+        return eventoService.listarLogicoEventoFalse();
+    }
+    @GetMapping(value = "/listarlogicoactivo")
+    public List<EventoDTO> listarLogicoEventoTrue(){
+        return eventoService.listarLogicoEventoTrue();
+    }
     //    @DeleteMapping(value= "/{id}")
 //    public void eliminarEvento(@PathVariable Long id) {
 //        eventoService.eliminarEvento(id);
