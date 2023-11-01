@@ -24,7 +24,7 @@ public class Ticket {
     private String esDisponible;
 
     @Column(name = "dinero_aportado")
-    private Integer dineroAportado;
+    private Double dineroAportado;
 
     @Column(name = "fecha_compra")
     private LocalDate fecha;
