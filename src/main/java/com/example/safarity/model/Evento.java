@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"organizacion", "participantes", "tickets"})
+@EqualsAndHashCode(exclude = {"participantes", "tickets"})
 @Entity
 public class Evento {
     @Id
@@ -57,10 +57,10 @@ public class Evento {
     @Column(name = "activo")
     private boolean activo = true;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private TipoEvento tipoEvento;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private TipoPago tipoPago;
 
 
