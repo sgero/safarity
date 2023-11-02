@@ -2,12 +2,16 @@ package com.example.safarity.service;
 
 import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.dto.EventoDTO;
+import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.model.Evento;
+import com.example.safarity.model.Organizacion;
+import com.example.safarity.model.Ticket;
 import com.example.safarity.repository.IEventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class EventoService {
@@ -135,5 +139,41 @@ public class EventoService {
 
 
 
+    }
+
+    public Evento eventoEliminar(EventoDTO eventoDTO){
+        Evento eventoEliminar = eventoRepository.findById(eventoDTO.getId()).orElse(null);
+        if(eventoEliminar != null){
+            eventoEliminar.setActivo(false);
+            Set<Ticket> ticketsRelacionados = eventoEliminar.getTickets();
+            for (Ticket t : ticketsRelacionados){
+                t.setActivo(false);
+                t.getAsistente().setActivo(false);
+            }
+            Evento eventoEliminado = eventoRepository.save(eventoEliminar);
+            return eventoEliminado;
+
+        }else{
+            return null;
+        }
+    }
+
+    public List<EventoDTO> listarLogicoEventoFalse() {
+        List<Evento> eventoActivo = new ArrayList<>();
+        for (Evento e : eventoRepository.findAll()){
+            if (!e.isActivo()){
+                eventoActivo.add(e);
+            }
+        }
+        return eventoMapper.toDTO(eventoActivo);
+    }
+    public List<EventoDTO> listarLogicoEventoTrue() {
+        List<Evento> eventoActivo = new ArrayList<>();
+        for (Evento e : eventoRepository.findAll()){
+            if (e.isActivo()){
+                eventoActivo.add(e);
+            }
+        }
+        return eventoMapper.toDTO(eventoActivo);
     }
 }
