@@ -69,6 +69,7 @@ public class TicketService {
         this.eventoRepository = eventoRepository;
     }
 
+
     public Ticket generarTicket(Integer id_participante, Long id_evento, double dinero_aportado) {
         // Obtener el usuario y el evento basado en los ID proporcionados
         Participante participante = participanteRepository.findById(id_participante)
