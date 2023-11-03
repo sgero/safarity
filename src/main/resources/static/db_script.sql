@@ -128,3 +128,4 @@ create table token(
 );
 
 
+select * from evento;
