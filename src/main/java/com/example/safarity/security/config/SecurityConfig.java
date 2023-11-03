@@ -38,6 +38,7 @@ public class SecurityConfig {
                                 .requestMatchers("/organizacion/crear").permitAll()
                                 .requestMatchers("/participante/listar").permitAll()
                                 .requestMatchers("/participante/crear").permitAll()
+                                .requestMatchers("/ticket/**").permitAll()
                                 .requestMatchers("/usuario/listar").hasAnyAuthority(Rol.ADMIN.name())
                                 .requestMatchers("/admin/**").hasAnyAuthority(Rol.ADMIN.name())
                                 .anyRequest().authenticated()

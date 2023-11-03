@@ -8,9 +8,6 @@ drop table if exists token;
 drop table if exists usuario;
 
 
-
-
-
 create table usuario(
 
                         id serial not null,
@@ -126,6 +123,3 @@ create table token(
                       constraint token_usuario foreign key (id_usuario) references usuario(id)
 
 );
-
-
-select * from evento;
