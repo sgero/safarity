@@ -3,11 +3,13 @@ package com.example.safarity.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "token", schema = "safarity", catalog = "postgres")
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"usuario"})

@@ -10,6 +10,7 @@ import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.repository.ITicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -21,18 +22,15 @@ public class TicketService {
     private TicketMapper ticketMapper;
 
 
-
-
     public List<TicketDTO> listarTicket() {
         return ticketMapper.toDTO(ticketRepository.findAll());
     }
 
-    public TicketDTO crearTicket(TicketDTO ticketDTO){
+    public TicketDTO crearTicket(TicketDTO ticketDTO) {
 
         return ticketMapper.toDTO(ticketRepository.save(ticketMapper.toEntity(ticketDTO)));
 
     }
-
 
 
 //    public Ticket modificarTicket(TicketDTO ticketDTO){
@@ -42,14 +40,14 @@ public class TicketService {
 //    }
 
 
-    public Ticket eliminarTicket(TicketDTO ticketDTO){
+    public Ticket eliminarTicket(TicketDTO ticketDTO) {
         Ticket ticketEliminar = ticketRepository.findById(ticketDTO.getId()).orElse(null);
-        if(ticketEliminar != null) {
+        if (ticketEliminar != null) {
             ticketEliminar.setActivo(false);
             ticketEliminar.getAsistente().setActivo(false);
             Ticket ticketEliminado = ticketRepository.save(ticketEliminar);
             return ticketEliminado;
-        }else {
+        } else {
             return null;
         }
 
@@ -63,7 +61,7 @@ public class TicketService {
     private final IEventoRepository eventoRepository;
 
     @Autowired
-    public TicketService(ITicketRepository ticketRepository, IParticipanteRepository participanteRepository, IEventoRepository eventoRepository){
+    public TicketService(ITicketRepository ticketRepository, IParticipanteRepository participanteRepository, IEventoRepository eventoRepository) {
         this.ticketRepository = ticketRepository;
         this.participanteRepository = participanteRepository;
         this.eventoRepository = eventoRepository;
@@ -89,8 +87,6 @@ public class TicketService {
 
         return ticket;
     }
-
-
 
 
 }

@@ -34,23 +34,25 @@ public abstract class ParticipanteMapper {
 
     public abstract List<ParticipanteDTO> toDTO(List<Participante> entity);
 
-    @Named(value ="conversorFechaString")
-    public String LocalDateToString(LocalDate fecha){
+    @Named(value = "conversorFechaString")
+    public String LocalDateToString(LocalDate fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return fecha.format(formatter);
     }
 
-    @Named(value ="conversorStringFecha")
+    @Named(value = "conversorStringFecha")
     public LocalDate StringToLocalDate(String fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(fecha, formatter);
     }
 
     @Named(value = "conversorUsuarioEntity")
-    Usuario conversor(UsuarioDTO dto){return usuarioMapper.toEntity(dto);
+    Usuario conversor(UsuarioDTO dto) {
+        return usuarioMapper.toEntity(dto);
     }
 
     @Named(value = "conversorUsuarioDTO")
-    UsuarioDTO conversor(Usuario entity){return usuarioMapper.toDTO(entity);
+    UsuarioDTO conversor(Usuario entity) {
+        return usuarioMapper.toDTO(entity);
     }
 }

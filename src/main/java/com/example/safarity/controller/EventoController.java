@@ -8,6 +8,7 @@ import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class EventoController {
     private EventoMapper eventoMapper;
 
     @GetMapping(value = "/listar")
-    public List<EventoDTO> listarEventos(){
+    public List<EventoDTO> listarEventos() {
         return eventoService.listarEventos();
     }
 
@@ -33,28 +34,29 @@ public class EventoController {
         return eventoService.crearEvento(eventoDTO);
     }
 
-    @PutMapping(value="/modificar")
+    @PutMapping(value = "/modificar")
     public EventoDTO modificarEvento(@RequestBody EventoDTO eventoDTO) {
         return eventoMapper.toDTO(eventoService.modificarEvento(eventoDTO));
     }
 
 
-    @DeleteMapping(value="/eliminar")
-    public String eliminarEvento(@RequestBody EventoDTO eventoDTO){
+    @DeleteMapping(value = "/eliminar")
+    public String eliminarEvento(@RequestBody EventoDTO eventoDTO) {
         return eventoService.eliminarEvento(eventoDTO);
     }
 
-    @PutMapping(value="/eliminar-logico")
+    @PutMapping(value = "/eliminar-logico")
     public EventoDTO eventoEliminar(@RequestBody EventoDTO eventoDTO) {
         return eventoMapper.toDTO(eventoService.eventoEliminar(eventoDTO));
     }
 
     @GetMapping(value = "/listarlogicoinactivo")
-    public List<EventoDTO> listarLogicoEventoFalse(){
+    public List<EventoDTO> listarLogicoEventoFalse() {
         return eventoService.listarLogicoEventoFalse();
     }
+
     @GetMapping(value = "/listarlogicoactivo")
-    public List<EventoDTO> listarLogicoEventoTrue(){
+    public List<EventoDTO> listarLogicoEventoTrue() {
         return eventoService.listarLogicoEventoTrue();
     }
     //    @DeleteMapping(value= "/{id}")

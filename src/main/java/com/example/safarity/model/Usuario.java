@@ -6,16 +6,17 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name="usuario",schema="safarity",catalog = "postgres")
+@Table(name = "usuario", schema = "safarity", catalog = "postgres")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"participante","organizacion"})
+@EqualsAndHashCode(exclude = {"participante", "organizacion"})
 public class Usuario implements UserDetails {
 
     @Id

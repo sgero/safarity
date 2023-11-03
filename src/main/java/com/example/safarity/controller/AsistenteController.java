@@ -19,27 +19,27 @@ public class AsistenteController {
     private AsistenteMapper asistenteMapper;
 
 
-@GetMapping(value = "/listar")
-public List<AsistenteDTO> listarAsistente(){
-    return asistenteService.listarAsistente();
-}
+    @GetMapping(value = "/listar")
+    public List<AsistenteDTO> listarAsistente() {
+        return asistenteService.listarAsistente();
+    }
 
 
-@PostMapping(value = "/crear")
-public AsistenteDTO crearAsistente(@RequestBody AsistenteDTO asistenteDTO){
-    return asistenteService.crearAsistente(asistenteDTO);
-}
+    @PostMapping(value = "/crear")
+    public AsistenteDTO crearAsistente(@RequestBody AsistenteDTO asistenteDTO) {
+        return asistenteService.crearAsistente(asistenteDTO);
+    }
 
 
-@PutMapping(value = "/modificar")
-public AsistenteDTO modificarAsistente(@RequestBody AsistenteDTO asistenteDTO){
-    return asistenteMapper.toDTO(asistenteService.modificarAsistente(asistenteDTO));
-}
+    @PutMapping(value = "/modificar")
+    public AsistenteDTO modificarAsistente(@RequestBody AsistenteDTO asistenteDTO) {
+        return asistenteMapper.toDTO(asistenteService.modificarAsistente(asistenteDTO));
+    }
 
 
-@DeleteMapping(value = "/eliminar")
-public String eliminarAsistente(@RequestBody AsistenteDTO asistenteDTO){
-    return asistenteService.eliminarAsistente(asistenteDTO);
-}
+    @DeleteMapping(value = "/eliminar")
+    public String eliminarAsistente(@RequestBody AsistenteDTO asistenteDTO) {
+        return asistenteService.eliminarAsistente(asistenteDTO);
+    }
 
 }

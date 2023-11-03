@@ -13,11 +13,11 @@ public class TokenService {
     private final ITokenRepository tokenRepository;
 
 
-    public Token getByUsuario(Usuario usuario){
+    public Token getByUsuario(Usuario usuario) {
         return tokenRepository.findTopByUsuario(usuario);
     }
 
-    public Token save(Token token){
+    public Token save(Token token) {
         return tokenRepository.save(token);
     }
 

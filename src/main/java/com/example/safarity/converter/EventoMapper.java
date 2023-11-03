@@ -21,7 +21,7 @@ public abstract class EventoMapper {
     @Autowired
     protected OrganizacionService organizacionService;
 
-    OrganizacionMapper organizacionMapper= Mappers.getMapper(OrganizacionMapper.class);
+    OrganizacionMapper organizacionMapper = Mappers.getMapper(OrganizacionMapper.class);
 
 
     @Mapping(source = "fecha_lanzamiento", target = "fechaLanzamiento", qualifiedByName = "conversorStringFecha")
@@ -36,31 +36,31 @@ public abstract class EventoMapper {
     @Mapping(source = "fechaInicio", target = "fecha_inicio", qualifiedByName = "conversorFechaString")
     @Mapping(source = "fechaFin", target = "fecha_fin", qualifiedByName = "conversorFechaString")
     @Mapping(source = "organizacion", target = "organizacionDTO", qualifiedByName = "conversorOrganizacionaDTO")
-    public abstract EventoDTO toDTO (Evento entity);
+    public abstract EventoDTO toDTO(Evento entity);
 
-    public abstract List<EventoDTO> toEntity (List<EventoDTO> dto);
+    public abstract List<EventoDTO> toEntity(List<EventoDTO> dto);
 
-    public abstract List<EventoDTO> toDTO (List<Evento> entity);
+    public abstract List<EventoDTO> toDTO(List<Evento> entity);
 
     @Named(value = "conversorFechaString")
-    public String LocalDateToString(LocalDate fecha){
+    public String LocalDateToString(LocalDate fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return fecha.format(formatter);
     }
 
     @Named(value = "conversorStringFecha")
-    public LocalDate StringToLocalDate(String fecha){
+    public LocalDate StringToLocalDate(String fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return LocalDate.parse(fecha,formatter);
+        return LocalDate.parse(fecha, formatter);
     }
 
     @Named(value = "conversorOrganizacionDTOaEntity")
-    Organizacion conversor(OrganizacionDTO dto){
-       return organizacionService.getById(dto.getId());
+    Organizacion conversor(OrganizacionDTO dto) {
+        return organizacionService.getById(dto.getId());
     }
 
     @Named(value = "conversorOrganizacionaDTO")
-    OrganizacionDTO conversor(Organizacion entity){
+    OrganizacionDTO conversor(Organizacion entity) {
         return organizacionMapper.toDTO(entity);
     }
 

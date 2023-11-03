@@ -6,6 +6,7 @@ import com.example.safarity.model.Asistente;
 import com.example.safarity.repository.IAsistenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,32 +50,30 @@ public class AsistenteService {
         Asistente asistente = asistenteRepository.findById(asistenteDTO.getId()).orElse(null);
 
         if (asistente == null) {
-            return null; }
-        else
-        {
-        asistente.setNombre(asistenteDTO.getNombre());
-        asistente.setApellidos(asistenteDTO.getApellidos());
-        asistente.setEmail(asistenteDTO.getEmail());
-        asistente.setDireccion(asistenteDTO.getDireccion());
-        asistente.setDni(asistenteDTO.getDni());
-        asistente.setTelefono(asistenteDTO.getTelefono());
-        asistente.setFechaNacimiento(asistenteMapper.StringToLocalDate(asistenteDTO.getFecha_nacimiento()));
+            return null;
+        } else {
+            asistente.setNombre(asistenteDTO.getNombre());
+            asistente.setApellidos(asistenteDTO.getApellidos());
+            asistente.setEmail(asistenteDTO.getEmail());
+            asistente.setDireccion(asistenteDTO.getDireccion());
+            asistente.setDni(asistenteDTO.getDni());
+            asistente.setTelefono(asistenteDTO.getTelefono());
+            asistente.setFechaNacimiento(asistenteMapper.StringToLocalDate(asistenteDTO.getFecha_nacimiento()));
 
-        Asistente asistenteModificado = asistenteRepository.save(asistente);
+            Asistente asistenteModificado = asistenteRepository.save(asistente);
 
-        return asistenteModificado;
+            return asistenteModificado;
         }
 
     }
 
 
-
-    public String eliminarAsistente(AsistenteDTO asistenteDTO){
+    public String eliminarAsistente(AsistenteDTO asistenteDTO) {
         Asistente asistenteEliminar = asistenteRepository.findById(asistenteDTO.getId()).orElse(null);
         if (asistenteEliminar != null) {
             asistenteRepository.delete(asistenteEliminar);
             return "Asistente eliminado correctamente";
-            }else {
+        } else {
 
             return "No se ha podido eliminar el asistente";
         }

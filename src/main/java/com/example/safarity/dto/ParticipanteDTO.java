@@ -1,4 +1,5 @@
 package com.example.safarity.dto;
+
 import lombok.Data;
 
 @Data

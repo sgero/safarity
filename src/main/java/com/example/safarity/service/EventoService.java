@@ -9,6 +9,7 @@ import com.example.safarity.model.Ticket;
 import com.example.safarity.repository.IEventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -45,14 +46,14 @@ public class EventoService {
     private EventoMapper eventoMapper;
 
 
-    public Evento getById(Long id){
+    public Evento getById(Long id) {
         return eventoRepository.findById(id).orElse(null);
     }
 
     //Obtener los eventos disponibles
     public List<EventoDTO> listarEventos() {
         List<EventoDTO> listEventos = new ArrayList<>();
-        eventoRepository.findAll().forEach(e-> listEventos.add(eventoMapper.toDTO(e)));
+        eventoRepository.findAll().forEach(e -> listEventos.add(eventoMapper.toDTO(e)));
 
         return listEventos;
     }
@@ -104,73 +105,71 @@ public class EventoService {
 
         if (evento == null) {
             return null;
-        }
-        else
-        {
+        } else {
 
-        evento.setNombre(eventoDTO.getNombre());
-        evento.setDescripcion(eventoDTO.getDescripcion());
-        evento.setDireccion(eventoDTO.getDireccion());
-        evento.setImagen(eventoDTO.getImagen());
-        evento.setAforo(eventoDTO.getAforo());
+            evento.setNombre(eventoDTO.getNombre());
+            evento.setDescripcion(eventoDTO.getDescripcion());
+            evento.setDireccion(eventoDTO.getDireccion());
+            evento.setImagen(eventoDTO.getImagen());
+            evento.setAforo(eventoDTO.getAforo());
 //        evento.setTotalAsistentes(eventoDTO.getTotalAsistentes());
-        evento.setTipoEvento(eventoDTO.getTipoEvento());
-        evento.setTipoPago(eventoDTO.getTipoPago());
-        evento.setFechaInicio(eventoMapper.StringToLocalDate(eventoDTO.getFecha_inicio()));
-        evento.setFechaFin(eventoMapper.StringToLocalDate(eventoDTO.getFecha_fin()));
-        evento.setFechaLanzamiento(eventoMapper.StringToLocalDate(eventoDTO.getFecha_lanzamiento()));
-        evento.setFechaVentaDisponible(eventoMapper.StringToLocalDate(eventoDTO.getFecha_venta()));
+            evento.setTipoEvento(eventoDTO.getTipoEvento());
+            evento.setTipoPago(eventoDTO.getTipoPago());
+            evento.setFechaInicio(eventoMapper.StringToLocalDate(eventoDTO.getFecha_inicio()));
+            evento.setFechaFin(eventoMapper.StringToLocalDate(eventoDTO.getFecha_fin()));
+            evento.setFechaLanzamiento(eventoMapper.StringToLocalDate(eventoDTO.getFecha_lanzamiento()));
+            evento.setFechaVentaDisponible(eventoMapper.StringToLocalDate(eventoDTO.getFecha_venta()));
 //        evento.setEntradasVendidas(eventoDTO.getEntradasVendidas());
 
-        Evento eventoModificado = eventoRepository.save(evento);
+            Evento eventoModificado = eventoRepository.save(evento);
 
-        return eventoModificado;
+            return eventoModificado;
         }
     }
 
-    public String eliminarEvento (EventoDTO eventoDTO){
+    public String eliminarEvento(EventoDTO eventoDTO) {
         Evento eventoEliminar = eventoRepository.findById(eventoDTO.getId()).orElse(null);
-        if (eventoEliminar != null){
+        if (eventoEliminar != null) {
             eventoRepository.delete(eventoEliminar);
             return "Evento eliminado correctamente";
-            }else {
+        } else {
             return "No se ha podido eliminar el evento";
         }
 
 
-
     }
 
-    public Evento eventoEliminar(EventoDTO eventoDTO){
+    public Evento eventoEliminar(EventoDTO eventoDTO) {
         Evento eventoEliminar = eventoRepository.findById(eventoDTO.getId()).orElse(null);
-        if(eventoEliminar != null){
+        if (eventoEliminar != null) {
             eventoEliminar.setActivo(false);
             Set<Ticket> ticketsRelacionados = eventoEliminar.getTickets();
-            for (Ticket t : ticketsRelacionados){
+            for (Ticket t : ticketsRelacionados) {
                 t.setActivo(false);
                 t.getAsistente().setActivo(false);
             }
             Evento eventoEliminado = eventoRepository.save(eventoEliminar);
             return eventoEliminado;
 
-        }else{
+        } else {
             return null;
         }
     }
 
     public List<EventoDTO> listarLogicoEventoFalse() {
         List<Evento> eventoActivo = new ArrayList<>();
-        for (Evento e : eventoRepository.findAll()){
-            if (!e.isActivo()){
+        for (Evento e : eventoRepository.findAll()) {
+            if (!e.isActivo()) {
                 eventoActivo.add(e);
             }
         }
         return eventoMapper.toDTO(eventoActivo);
     }
+
     public List<EventoDTO> listarLogicoEventoTrue() {
         List<Evento> eventoActivo = new ArrayList<>();
-        for (Evento e : eventoRepository.findAll()){
-            if (e.isActivo()){
+        for (Evento e : eventoRepository.findAll()) {
+            if (e.isActivo()) {
                 eventoActivo.add(e);
             }
         }

@@ -3,10 +3,11 @@ package com.example.safarity.model;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Entity;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "ticket" , schema = "safarity" , catalog = "postgres")
+@Table(name = "ticket", schema = "safarity", catalog = "postgres")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -33,14 +34,14 @@ public class Ticket {
     private boolean activo = true;
 
     @ManyToOne
-    @JoinColumn(name="id_participante", nullable = false)
+    @JoinColumn(name = "id_participante", nullable = false)
     private Participante participante;
 
     @ManyToOne
     @JoinColumn(name = "id_evento", nullable = false)
     private Evento evento;
 
-    @OneToOne(cascade = CascadeType.ALL , mappedBy = "ticket" , fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ticket", fetch = FetchType.LAZY)
     private Asistente asistente;
 
 }

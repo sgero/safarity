@@ -6,9 +6,11 @@ import com.example.safarity.service.AsistenteService;
 import com.example.safarity.service.EventoService;
 import com.example.safarity.service.ParticipanteService;
 import org.mapstruct.Mapper;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
@@ -19,7 +21,7 @@ public abstract class TicketMapper {
 
     @Autowired
     protected EventoService eventoService;
-    
+
     @Autowired
     protected ParticipanteService participanteService;
 
@@ -46,39 +48,45 @@ public abstract class TicketMapper {
 
     public abstract List<TicketDTO> toDTO(List<Ticket> entity);
 
-    @Named(value ="conversorFechaString")
-    String LocalDateToString(LocalDate fecha){
+    @Named(value = "conversorFechaString")
+    String LocalDateToString(LocalDate fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return fecha.format(formatter);
     }
 
-    @Named(value ="conversorStringFecha")
-    LocalDate StringToLocalDate(String fecha){
+    @Named(value = "conversorStringFecha")
+    LocalDate StringToLocalDate(String fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return LocalDate.parse(fecha,formatter);
+        return LocalDate.parse(fecha, formatter);
     }
 
     @Named(value = "conversorEventoEntity")
-    Evento conversor(EventoDTO dto){return eventoService.getById(dto.getId());
+    Evento conversor(EventoDTO dto) {
+        return eventoService.getById(dto.getId());
     }
 
     @Named(value = "conversorEventoDTO")
-    EventoDTO conversor(Evento entity){return eventoMapper.toDTO(entity);
+    EventoDTO conversor(Evento entity) {
+        return eventoMapper.toDTO(entity);
     }
 
     @Named(value = "conversorParticipanteEntity")
-    Participante conversor(ParticipanteDTO dto){return participanteService.getById(dto.getId());
+    Participante conversor(ParticipanteDTO dto) {
+        return participanteService.getById(dto.getId());
     }
 
     @Named(value = "conversorParticipanteDTO")
-    ParticipanteDTO conversor(Participante entity){return participanteMapper.toDTO(entity);
+    ParticipanteDTO conversor(Participante entity) {
+        return participanteMapper.toDTO(entity);
     }
 
     @Named(value = "conversorAsistenteEntity")
-    Asistente conversor(AsistenteDTO dto){return asistenteService.getById(dto.getId());
+    Asistente conversor(AsistenteDTO dto) {
+        return asistenteService.getById(dto.getId());
     }
 
     @Named(value = "conversorAsistenteDTO")
-    AsistenteDTO conversor(Asistente entity){return asistenteMapper.toDTO(entity);
+    AsistenteDTO conversor(Asistente entity) {
+        return asistenteMapper.toDTO(entity);
     }
 }
