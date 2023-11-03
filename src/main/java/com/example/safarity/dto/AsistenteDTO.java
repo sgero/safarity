@@ -2,11 +2,7 @@ package com.example.safarity.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(exclude = {""})
+@Data
 public class AsistenteDTO {
 
 
