@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {""})
+@EqualsAndHashCode()
 public class AsistenteDTO {
 
 
@@ -20,7 +20,7 @@ public class AsistenteDTO {
 
     private String fecha_nacimiento;
 
-    private Integer telefono;
+    private String telefono;
 
     private String direccion;
 

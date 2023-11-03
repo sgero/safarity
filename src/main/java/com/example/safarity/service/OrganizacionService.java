@@ -58,7 +58,7 @@ public class OrganizacionService {
         }
     }
 
-    public Organizacion eliminarOrganizacion(OrganizacionDTO organizacionDTO) {
+    public OrganizacionDTO eliminarOrganizacion(OrganizacionDTO organizacionDTO) {
         Organizacion organizacionEliminar = organizacionRepository.findById(organizacionDTO.getId()).orElse(null);
         if (organizacionEliminar != null) {
             organizacionEliminar.setActivo(false);
@@ -68,7 +68,8 @@ public class OrganizacionService {
                 e.setActivo(false);
             }
             Organizacion organizacionEliminada = organizacionRepository.save(organizacionEliminar);
-            return organizacionEliminada;
+
+            return organizacionMapper.toDTO(organizacionEliminada);
 
         } else {
             return null;

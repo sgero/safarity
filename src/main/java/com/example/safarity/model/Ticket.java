@@ -22,7 +22,7 @@ public class Ticket {
     private Integer id;
 
     @Column(name = "es_disponible")
-    private String esDisponible;
+    private boolean esDisponible;
 
     @Column(name = "dinero_aportado")
     private Double dineroAportado;

@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "asistentes")
+@Table(name = "asistente")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,7 +32,7 @@ public class Asistente {
     private LocalDate fechaNacimiento;
 
     @Column(name = "telefono")
-    private Integer telefono;
+    private String telefono;
 
     @Column(name = "direccion")
     private String direccion;
