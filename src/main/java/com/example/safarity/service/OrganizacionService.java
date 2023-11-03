@@ -56,7 +56,7 @@ public class OrganizacionService {
 
         }
     }
-    public Organizacion eliminarOrganizacion(OrganizacionDTO organizacionDTO){
+    public String eliminarOrganizacion(OrganizacionDTO organizacionDTO){
         Organizacion organizacionEliminar = organizacionRepository.findById(organizacionDTO.getId()).orElse(null);
         if(organizacionEliminar != null){
             organizacionEliminar.setActivo(false);
@@ -65,11 +65,11 @@ public class OrganizacionService {
             for (Evento e : eventosRelacionados){
                 e.setActivo(false);
             }
-            Organizacion organizacionEliminada = organizacionRepository.save(organizacionEliminar);
-            return organizacionEliminada;
+            organizacionRepository.save(organizacionEliminar);
+            return "se ha eliminado correctamente";
 
         }else{
-            return null;
+            return "No se ha podido eliminar";
         }
     }
 //        public String eliminarProducto(ProductoDTO productoDTO){

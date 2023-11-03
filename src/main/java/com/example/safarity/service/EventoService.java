@@ -1,6 +1,7 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.EventoMapper;
+import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.model.Evento;
@@ -9,6 +10,8 @@ import com.example.safarity.model.Ticket;
 import com.example.safarity.repository.IEventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -43,6 +46,9 @@ public class EventoService {
 
     @Autowired
     private EventoMapper eventoMapper;
+
+    @Autowired
+    private IEventoRepository iEventoRepository;
 
 
     public Evento getById(Long id){
@@ -141,7 +147,7 @@ public class EventoService {
 
     }
 
-    public Evento eventoEliminar(EventoDTO eventoDTO){
+    public String eventoEliminar(EventoDTO eventoDTO){
         Evento eventoEliminar = eventoRepository.findById(eventoDTO.getId()).orElse(null);
         if(eventoEliminar != null){
             eventoEliminar.setActivo(false);
@@ -150,11 +156,11 @@ public class EventoService {
                 t.setActivo(false);
                 t.getAsistente().setActivo(false);
             }
-            Evento eventoEliminado = eventoRepository.save(eventoEliminar);
-            return eventoEliminado;
+            eventoRepository.save(eventoEliminar);
+            return "Evento eliminado correctamente";
 
         }else{
-            return null;
+            return "No se pudo eliminar el evento";
         }
     }
 
@@ -175,5 +181,18 @@ public class EventoService {
             }
         }
         return eventoMapper.toDTO(eventoActivo);
+    }
+
+    public  List<EventoDTO> busquedaEvento(BusquedaDTO busquedaDTO){
+        if (busquedaDTO.getBusqueda() != null){
+           return eventoMapper.toDTO(iEventoRepository.findAllByNombreLikeAndActivoTrueOrderByNombre("%" + busquedaDTO.getBusqueda() + "%"));
+//            for (Evento e : eventoRepository.findAll()){
+//
+//            }
+        }else if (busquedaDTO.getTipoEvento() != null){
+            return eventoMapper.toDTO(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(busquedaDTO.getTipoEvento()));
+        }else {
+            return null;
+        }
     }
 }

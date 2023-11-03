@@ -1,6 +1,7 @@
 package com.example.safarity.controller;
 
 import com.example.safarity.converter.EventoMapper;
+import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.model.Evento;
@@ -45,8 +46,8 @@ public class EventoController {
     }
 
     @PutMapping(value="/eliminar-logico")
-    public EventoDTO eventoEliminar(@RequestBody EventoDTO eventoDTO) {
-        return eventoMapper.toDTO(eventoService.eventoEliminar(eventoDTO));
+    public String eventoEliminar(@RequestBody EventoDTO eventoDTO) {
+        return eventoService.eventoEliminar(eventoDTO);
     }
 
     @GetMapping(value = "/listarlogicoinactivo")
@@ -61,4 +62,9 @@ public class EventoController {
 //    public void eliminarEvento(@PathVariable Long id) {
 //        eventoService.eliminarEvento(id);
 //    }
+
+    @PostMapping(value = "/buscar")
+    public List<EventoDTO> listarBusqueda(@RequestBody BusquedaDTO busquedaDTO){
+        return eventoService.busquedaEvento(busquedaDTO);
+    }
 }
