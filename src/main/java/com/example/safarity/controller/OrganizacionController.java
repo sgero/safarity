@@ -34,8 +34,8 @@ public class OrganizacionController {
 //    public String eliminarProducto(@RequestBody ProductoDTO productoDTO){
 //        return productoService.eliminarProducto(productoDTO);
 //    }
-    @PutMapping(value = "/eliminar")
-    public OrganizacionDTO eliminarOrganizacion(@RequestBody OrganizacionDTO organizacionDTO) {
+    @DeleteMapping(value = "/eliminar")
+    public String eliminarOrganizacion(@RequestBody OrganizacionDTO organizacionDTO) {
         return organizacionService.eliminarOrganizacion(organizacionDTO);
     }
 
