@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -28,33 +29,33 @@ public class UsuarioService {
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return usuarioRepository.findTopByAlias(username)
-                .orElseThrow(()-> new UsernameNotFoundException("Usuario no encontrado"));
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
     }
 
 
-    public Usuario buscarPorUsername(String username){
+    public Usuario buscarPorUsername(String username) {
         return usuarioRepository.findTopByAlias(username).orElse(null);
     }
 
-    public Usuario save(UsuarioDTO dto){
+    public Usuario save(UsuarioDTO dto) {
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
-        return  usuarioRepository.save(usuarioMapper.toEntity(dto));
+        return usuarioRepository.save(usuarioMapper.toEntity(dto));
     }
 
 
     //Listar
-    public List<UsuarioDTO> listar(){
+    public List<UsuarioDTO> listar() {
         return usuarioMapper.toDTO(usuarioRepository.findAll());
     }
 
-    public UsuarioDTO crear(UsuarioDTO usuarioDTO){
+    public UsuarioDTO crear(UsuarioDTO usuarioDTO) {
         Usuario usuarioGuardar = usuarioMapper.toEntity(usuarioDTO);
         Usuario usuarioGuardada = usuarioRepository.save(usuarioGuardar);
         UsuarioDTO usuarioGuardadaDTO = usuarioMapper.toDTO(usuarioGuardada);
         return usuarioGuardadaDTO;
     }
 
-    public Usuario getById(Integer id){
+    public Usuario getById(Integer id) {
         return usuarioRepository.findById(id).orElse(null);
     }
 

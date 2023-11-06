@@ -5,6 +5,7 @@ import com.example.safarity.model.Ticket;
 import com.example.safarity.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -15,12 +16,12 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping(value = "/listar")
-    public List<TicketDTO> listarTicket(){
+    public List<TicketDTO> listarTicket() {
         return ticketService.listarTicket();
     }
 
     @PostMapping(value = "/crear")
-    public TicketDTO crearTicket(@RequestBody TicketDTO dto){
+    public TicketDTO crearTicket(@RequestBody TicketDTO dto) {
         return ticketService.crearTicket(dto);
     }
 //    @PutMapping(value = "/modificar")
@@ -29,7 +30,7 @@ public class TicketController {
 //    }
 
     @DeleteMapping(value = "/eliminar")
-    public Ticket eliminarTicket(@RequestBody TicketDTO ticketDTO){
+    public Ticket eliminarTicket(@RequestBody TicketDTO ticketDTO) {
         return ticketService.eliminarTicket(ticketDTO);
     }
 

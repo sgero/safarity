@@ -15,7 +15,7 @@ public class TicketDTO {
 
     private String fecha;
 
-    private ParticipanteDTO  participanteDTO;
+    private ParticipanteDTO participanteDTO;
 
     private EventoDTO eventoDTO;
 

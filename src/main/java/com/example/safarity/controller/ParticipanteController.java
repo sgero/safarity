@@ -9,6 +9,7 @@ import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.service.ParticipanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class ParticipanteController {
     private ParticipanteService participanteService;
 
     @GetMapping(value = "/listar")
-    public List<ParticipanteDTO> listarParticipantes(){
+    public List<ParticipanteDTO> listarParticipantes() {
         return participanteService.listarParticipantes();
     }
 
@@ -29,14 +30,14 @@ public class ParticipanteController {
         return participanteService.crearParticipante(participanteDTO);
     }
 
-    @PutMapping(value="/modificar")
+    @PutMapping(value = "/modificar")
     public Participante modificarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
         return participanteService.modificarParticipante(participanteDTO);
     }
 
 
-    @DeleteMapping(value="/eliminar")
-    public String eliminarParticipante(@RequestBody ParticipanteDTO participanteDTO){
+    @DeleteMapping(value = "/eliminar")
+    public String eliminarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
         return participanteService.eliminarParticipante(participanteDTO);
     }
 

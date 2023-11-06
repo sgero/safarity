@@ -5,6 +5,7 @@ import com.example.safarity.model.Usuario;
 import com.example.safarity.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -15,17 +16,17 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping(value = "/listar")
-    public List<UsuarioDTO> listarUsuarios(){
+    public List<UsuarioDTO> listarUsuarios() {
         return usuarioService.listar();
     }
 
     @PostMapping(value = "/crear")
-    public UsuarioDTO crearUsuario(@RequestBody UsuarioDTO dto){
+    public UsuarioDTO crearUsuario(@RequestBody UsuarioDTO dto) {
         return usuarioService.crear(dto);
     }
 
     @PutMapping(value = "/modificar")
-    public Usuario modificarUsuario(@RequestBody UsuarioDTO usuarioDTO){
+    public Usuario modificarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         return usuarioService.modificarUsuario(usuarioDTO);
     }
 

@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -35,22 +36,24 @@ public abstract class OrganizacionMapper {
     public abstract List<OrganizacionDTO> toDTO(List<Organizacion> entity);
 
     @Named(value = "conversorUsuarioEntity")
-    Usuario conversor(UsuarioDTO dto){return usuarioMapper.toEntity(dto);
+    Usuario conversor(UsuarioDTO dto) {
+        return usuarioMapper.toEntity(dto);
     }
 
     @Named(value = "conversorUsuarioDTO")
-    UsuarioDTO conversor(Usuario entity){return usuarioMapper.toDTO(entity);
+    UsuarioDTO conversor(Usuario entity) {
+        return usuarioMapper.toDTO(entity);
     }
 
-    @Named(value ="conversorFechaString")
-    String LocalDateToString(LocalDate fecha){
+    @Named(value = "conversorFechaString")
+    String LocalDateToString(LocalDate fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return fecha.format(formatter);
     }
 
-    @Named(value ="conversorStringFecha")
-    LocalDate StringToLocalDate(String fecha){
+    @Named(value = "conversorStringFecha")
+    LocalDate StringToLocalDate(String fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return LocalDate.parse(fecha,formatter);
+        return LocalDate.parse(fecha, formatter);
     }
 }

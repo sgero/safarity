@@ -2,12 +2,13 @@ package com.example.safarity.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="organizacion",schema="safarity",catalog = "postgres")
+@Table(name = "organizacion", schema = "safarity", catalog = "postgres")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -47,12 +48,12 @@ public class Organizacion {
     @Column(name = "activo")
     private boolean activo = true;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizacion", fetch = FetchType.LAZY)
-    private Set<Evento> eventos= new HashSet<>();
+    private Set<Evento> eventos = new HashSet<>();
 
 
 }

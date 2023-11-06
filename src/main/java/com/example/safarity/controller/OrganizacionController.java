@@ -5,6 +5,7 @@ import com.example.safarity.model.Organizacion;
 import com.example.safarity.service.OrganizacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -15,16 +16,17 @@ public class OrganizacionController {
     private OrganizacionService organizacionService;
 
     @GetMapping(value = "/listar")
-    public List<OrganizacionDTO> listarOrganizacion(){
+    public List<OrganizacionDTO> listarOrganizacion() {
         return organizacionService.listarOrganizacion();
     }
 
     @PostMapping(value = "/crear")
-    public OrganizacionDTO crearOrganizacion(@RequestBody OrganizacionDTO dto){
+    public OrganizacionDTO crearOrganizacion(@RequestBody OrganizacionDTO dto) {
         return organizacionService.crearOrganizacion(dto);
     }
+
     @PutMapping(value = "/modificar")
-    public Organizacion modificarOrganizacion(@RequestBody OrganizacionDTO organizacionDTO){
+    public Organizacion modificarOrganizacion(@RequestBody OrganizacionDTO organizacionDTO) {
         return organizacionService.modificarOrganizacion(organizacionDTO);
     }
 
@@ -32,17 +34,18 @@ public class OrganizacionController {
 //    public String eliminarProducto(@RequestBody ProductoDTO productoDTO){
 //        return productoService.eliminarProducto(productoDTO);
 //    }
-    @PutMapping(value = "/eliminar")
-    public String eliminarOrganizacion(@RequestBody OrganizacionDTO organizacionDTO){
+    @DeleteMapping(value = "/eliminar")
+    public String eliminarOrganizacion(@RequestBody OrganizacionDTO organizacionDTO) {
         return organizacionService.eliminarOrganizacion(organizacionDTO);
     }
 
     @GetMapping(value = "/listarlogicoinactivo")
-    public List<OrganizacionDTO> listarLogicoOrganizacionFalse(){
+    public List<OrganizacionDTO> listarLogicoOrganizacionFalse() {
         return organizacionService.listarLogicoOrganizacionFalse();
     }
+
     @GetMapping(value = "/listarlogicoactivo")
-    public List<OrganizacionDTO> listarLogicoOrganizacionTrue(){
+    public List<OrganizacionDTO> listarLogicoOrganizacionTrue() {
         return organizacionService.listarLogicoOrganizacionTrue();
     }
 

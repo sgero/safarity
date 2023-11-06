@@ -2,10 +2,11 @@ package com.example.safarity.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name= "asistentes")
+@Table(name = "asistente")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,28 +16,28 @@ public class Asistente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name="nombre")
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name="apellidos")
+    @Column(name = "apellidos")
     private String apellidos;
 
-    @Column(name="dni")
+    @Column(name = "dni")
     private String dni;
 
-    @Column(name="fecha_nacimiento")
+    @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
-    @Column(name="telefono")
+    @Column(name = "telefono")
     private Integer telefono;
 
-    @Column(name="direccion")
+    @Column(name = "direccion")
     private String direccion;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
     @Column(name = "activo")

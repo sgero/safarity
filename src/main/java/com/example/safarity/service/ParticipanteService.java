@@ -23,7 +23,7 @@ public class ParticipanteService {
     private PasswordEncoder passwordEncoder;
 
 
-    public Participante getById(Integer id){
+    public Participante getById(Integer id) {
         return participanteRepository.findById(id).orElse(null);
     }
 
@@ -42,9 +42,7 @@ public class ParticipanteService {
 
         if (participante == null) {
             return null;
-        }
-        else
-        {
+        } else {
 
             participante.setNombre(participanteDTO.getNombre());
             participante.setEmail(participanteDTO.getEmail());
@@ -60,18 +58,18 @@ public class ParticipanteService {
         }
     }
 
-    public String eliminarParticipante (ParticipanteDTO participanteDTO){
+    public String eliminarParticipante(ParticipanteDTO participanteDTO) {
         Participante participanteEliminar = participanteRepository.findById(participanteDTO.getId()).orElse(null);
-        if (participanteEliminar != null){
+        if (participanteEliminar != null) {
             participanteRepository.delete(participanteEliminar);
             return "Participante eliminado correctamente";
-        }else {
+        } else {
             return "No se ha podido eliminar el participante";
         }
 
     }
 
-    public Participante save(ParticipanteDTO dto){
+    public Participante save(ParticipanteDTO dto) {
         Participante entity = participanteMapper.toEntity(dto);
         entity.getUsuario().setPassword(passwordEncoder.encode(entity.getUsuario().getPassword()));
         return participanteRepository.save(entity);

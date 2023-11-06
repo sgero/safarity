@@ -3,12 +3,13 @@ package com.example.safarity.model;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Entity;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "participante" , schema = "safarity" , catalog = "postgres")
+@Table(name = "participante", schema = "safarity", catalog = "postgres")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -39,25 +40,23 @@ public class Participante {
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
-    @Column(name="direccion")
+    @Column(name = "direccion")
     private String direccion;
 
     @Column(name = "activo")
     private boolean activo = true;
 
 
-
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name="evento_participante",
-            joinColumns = {@JoinColumn(name = "id_participante", nullable=false)},
-            inverseJoinColumns = {@JoinColumn(name= "id_evento", nullable=false)})
-    private Set<Evento> eventos= new HashSet<>(0);
+    @JoinTable(name = "evento_participante",
+            joinColumns = {@JoinColumn(name = "id_participante", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "id_evento", nullable = false)})
+    private Set<Evento> eventos = new HashSet<>(0);
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "participante" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "participante", fetch = FetchType.LAZY)
     private Set<Ticket> tickets;
 }
