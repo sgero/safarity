@@ -3,6 +3,7 @@ package com.example.safarity.model;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Entity;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 
@@ -41,7 +42,7 @@ public class Ticket {
     @JoinColumn(name = "id_evento", nullable = false)
     private Evento evento;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ticket", fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.PERSIST,mappedBy = "ticket", fetch = FetchType.LAZY)
     private Asistente asistente;
 
 }

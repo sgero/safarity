@@ -123,3 +123,5 @@ create table token(
                       constraint token_usuario foreign key (id_usuario) references usuario(id)
 
 );
+
+alter table asistente alter column id_ticket drop not null;

@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "asistente")
+@Table(name = "asistente", schema = "safarity")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -44,7 +44,7 @@ public class Asistente {
     private boolean activo = true;
 
     @OneToOne
-    @JoinColumn(name = "id_ticket", nullable = false)
+    @JoinColumn(name = "id_ticket")
     private Ticket ticket;
 
 
