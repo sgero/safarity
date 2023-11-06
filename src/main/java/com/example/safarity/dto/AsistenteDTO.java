@@ -16,7 +16,7 @@ public class AsistenteDTO {
 
     private String fecha_nacimiento;
 
-    private Integer telefono;
+    private String telefono;
 
     private String direccion;
 
