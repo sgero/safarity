@@ -66,7 +66,7 @@ public class OrganizacionService {
                 e.setActivo(false);
             }
             organizacionRepository.save(organizacionEliminar);
-            return "se ha eliminado correctamente";
+            return "Se ha eliminado correctamente";
 
         }else{
             return "No se ha podido eliminar";
