@@ -127,3 +127,18 @@ create table token(
 
 );
 
+
+ALTER TABLE asistente
+    ALTER COLUMN id_ticket DROP NOT NULL;
+
+
+
+
+-- HASTA AQUÍ EL ESQUEMA FINAL
+
+-- CONSULTAS
+
+select * from usuario;
+select * from asistente;
+
+
