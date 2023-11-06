@@ -2,11 +2,7 @@ package com.example.safarity.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode()
+@Data
 public class AsistenteDTO {
 
 
@@ -20,7 +16,7 @@ public class AsistenteDTO {
 
     private String fecha_nacimiento;
 
-    private String telefono;
+    private Integer telefono;
 
     private String direccion;
 
