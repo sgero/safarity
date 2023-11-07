@@ -3,11 +3,13 @@ package com.example.safarity.service;
 import com.example.safarity.converter.ParticipanteMapper;
 import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.model.Participante;
+import com.example.safarity.model.enums.Rol;
 import com.example.safarity.repository.IParticipanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,7 +32,20 @@ public class ParticipanteService {
     public List<ParticipanteDTO> listarParticipantes() {
 //        List<ParticipanteDTO> listParticipantes = new ArrayList<>();
 //        participanteRepository.findAll().forEach(p->listParticipantes.add(participanteMapper.toDTO(p)));
-        return participanteMapper.toDTO(participanteRepository.findAll());
+
+        List<Participante> listaParticipantes = new ArrayList<>();
+
+        for (Participante p : participanteRepository.findAll()){
+
+            if (p.getUsuario().getRol().equals(Rol.PARTICIPANTE)){
+
+                listaParticipantes.add(p);
+
+            }
+
+        }
+
+        return participanteMapper.toDTO(listaParticipantes);
     }
 
     public ParticipanteDTO crearParticipante(ParticipanteDTO participanteDTO) {

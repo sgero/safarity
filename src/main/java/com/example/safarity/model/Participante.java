@@ -47,7 +47,7 @@ public class Participante {
     private boolean activo = true;
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "evento_participante",
             joinColumns = {@JoinColumn(name = "id_participante", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "id_evento", nullable = false)})
