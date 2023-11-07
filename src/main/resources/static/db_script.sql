@@ -8,6 +8,9 @@ drop table if exists token;
 drop table if exists usuario;
 
 
+
+
+
 create table usuario(
 
                         id serial not null,
@@ -44,9 +47,9 @@ create table organizacion(
                              cif varchar(9) not null,
                              telefono varchar(50) not null,
                              fecha_fundacion date not null,
-                             info varchar(50) not null,
-                             sitio_web varchar(50) not null,
-                             logo varchar(50) not null,
+                             info varchar(500) not null,
+                             sitio_web varchar(500) not null,
+                             logo varchar(500) not null,
                              id_usuario int4 not null,
                              activo bool default true,
                              primary key (id),
@@ -124,4 +127,16 @@ create table token(
 
 );
 
-alter table asistente alter column id_ticket drop not null;
+
+ALTER TABLE asistente
+    ALTER COLUMN id_ticket DROP NOT NULL;
+
+
+
+
+-- HASTA AQUÍ EL ESQUEMA FINAL
+
+-- CONSULTAS
+
+
+
