@@ -27,6 +27,8 @@ public class EventoDTO {
 
     private String fecha_fin;
 
+    private Integer entradasDisponibles;
+
     private Integer entradasVendidas;
 
     private TipoEvento tipoEvento;

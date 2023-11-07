@@ -62,4 +62,9 @@ public class EventoController {
 //    public void eliminarEvento(@PathVariable Long id) {
 //        eventoService.eliminarEvento(id);
 //    }
+
+    @PostMapping(value = "/mostrarCalculado")
+    public EventoDTO mostrarCalculado(@RequestBody EventoDTO eventoDTO) {
+        return eventoService.mostrarCalculado(eventoDTO);
+    }
 }

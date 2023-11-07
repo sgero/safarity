@@ -44,4 +44,5 @@ public class Ticket {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "ticket", fetch = FetchType.LAZY)
     private Asistente asistente;
 
+
 }
