@@ -67,4 +67,9 @@ public class EventoController {
     public List<EventoDTO> listarBusqueda(@RequestBody BusquedaDTO busquedaDTO){
         return eventoService.busquedaEvento(busquedaDTO);
     }
+
+    @PostMapping(value = "/mostrarCalculado")
+    public EventoDTO mostrarCalculado(@RequestBody EventoDTO eventoDTO) {
+        return eventoService.mostrarCalculado(eventoDTO);
+    }
 }

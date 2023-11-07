@@ -8,6 +8,9 @@ drop table if exists token;
 drop table if exists usuario;
 
 
+
+
+
 create table usuario(
 
                         id serial not null,
@@ -124,4 +127,16 @@ create table token(
 
 );
 
-alter table asistente alter column id_ticket drop not null;
+
+ALTER TABLE asistente
+    ALTER COLUMN id_ticket DROP NOT NULL;
+
+
+
+
+-- HASTA AQUÍ EL ESQUEMA FINAL
+
+-- CONSULTAS
+
+
+

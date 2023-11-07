@@ -199,4 +199,35 @@ public class EventoService {
 //    public EventoDTO mostrarCalculado(){
 //
 //    }
+
+
+    //Método para mostrar entradas vendidas y entradas disponibles
+    public EventoDTO mostrarEntradasVendidas(Long id) {
+        Evento evento = eventoRepository.findById(id).orElse(null);
+        if (evento != null) {
+            EventoDTO eventoDTO = eventoMapper.toDTO(evento);
+            eventoDTO.setEntradasVendidas(evento.getTickets().size());
+            eventoDTO.setEntradasDisponibles(evento.getAforo() - evento.getTickets().size());
+            return eventoDTO;
+        } else {
+            return null;
+        }
+    }
+
+
+    //Cálculo de entradas vendidas y disponibles a partir de ID que nos llegue por front al pulsar un evento.
+    public EventoDTO mostrarCalculado(EventoDTO eventoFront){
+        Evento eventoCalcular = eventoRepository.getById(eventoFront.getId());
+        EventoDTO eventoCalculado = eventoMapper.toDTO(eventoCalcular);
+        eventoCalculado.setEntradasVendidas(0);
+        eventoCalculado.setEntradasDisponibles(eventoCalculado.getAforo());
+
+        for (Ticket t : eventoCalcular.getTickets()){
+
+            eventoCalculado.setEntradasVendidas(eventoCalculado.getEntradasVendidas()+1); ;       eventoCalculado.setEntradasDisponibles(eventoCalculado.getEntradasDisponibles()-1);
+        }
+        return eventoCalculado;
+    }
+
+
 }

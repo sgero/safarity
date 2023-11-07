@@ -45,4 +45,5 @@ public class Ticket {
     @OneToOne(cascade = CascadeType.PERSIST,mappedBy = "ticket", fetch = FetchType.LAZY)
     private Asistente asistente;
 
+
 }
