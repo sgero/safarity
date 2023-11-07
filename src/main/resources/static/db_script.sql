@@ -8,9 +8,6 @@ drop table if exists token;
 drop table if exists usuario;
 
 
-
-
-
 create table usuario(
 
                         id serial not null,
@@ -127,5 +124,4 @@ create table token(
 
 );
 
-
-select * from evento;
+alter table asistente alter column id_ticket drop not null;

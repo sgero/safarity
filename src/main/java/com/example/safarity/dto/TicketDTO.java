@@ -9,7 +9,7 @@ public class TicketDTO {
 
     private Integer id;
 
-    private String esDisponible;
+    private Boolean esDisponible;
 
     private Integer dineroAportado;
 

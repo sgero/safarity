@@ -82,7 +82,7 @@ public abstract class TicketMapper {
 
     @Named(value = "conversorAsistenteEntity")
     Asistente conversor(AsistenteDTO dto) {
-        return asistenteService.getById(dto.getId());
+        return asistenteMapper.toEntity(dto);
     }
 
     @Named(value = "conversorAsistenteDTO")
