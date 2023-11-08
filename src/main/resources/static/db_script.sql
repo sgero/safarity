@@ -140,5 +140,6 @@ ALTER TABLE asistente
 
 select * from usuario;
 select * from asistente;
+select * from organizacion;
 
 
