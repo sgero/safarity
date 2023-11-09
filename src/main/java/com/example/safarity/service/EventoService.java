@@ -224,7 +224,8 @@ public class EventoService {
 
         for (Ticket t : eventoCalcular.getTickets()){
 
-            eventoCalculado.setEntradasVendidas(eventoCalculado.getEntradasVendidas()+1); ;       eventoCalculado.setEntradasDisponibles(eventoCalculado.getEntradasDisponibles()-1);
+            eventoCalculado.setEntradasVendidas(eventoCalculado.getEntradasVendidas()+1);
+            eventoCalculado.setEntradasDisponibles(eventoCalculado.getEntradasDisponibles()-1);
         }
         return eventoCalculado;
     }
