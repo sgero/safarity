@@ -47,9 +47,9 @@ create table organizacion(
                              cif varchar(9) not null,
                              telefono varchar(50) not null,
                              fecha_fundacion date not null,
-                             info varchar(50) not null,
-                             sitio_web varchar(50) not null,
-                             logo varchar(50) not null,
+                             info varchar(500) not null,
+                             sitio_web varchar(500) not null,
+                             logo varchar(500) not null,
                              id_usuario int4 not null,
                              activo bool default true,
                              primary key (id),
@@ -138,8 +138,5 @@ ALTER TABLE asistente
 
 -- CONSULTAS
 
-select * from usuario;
-select * from asistente;
-select * from organizacion;
 
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/organizacion")
 public class OrganizacionController {
 
@@ -34,8 +35,8 @@ public class OrganizacionController {
 //    public String eliminarProducto(@RequestBody ProductoDTO productoDTO){
 //        return productoService.eliminarProducto(productoDTO);
 //    }
-    @DeleteMapping(value = "/eliminar")
-    public Organizacion eliminarOrganizacion(@RequestBody OrganizacionDTO organizacionDTO) {
+    @PutMapping(value = "/eliminar")
+    public String eliminarOrganizacion(@RequestBody OrganizacionDTO organizacionDTO) {
         return organizacionService.eliminarOrganizacion(organizacionDTO);
     }
 

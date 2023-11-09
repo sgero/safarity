@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "asistentes")
+@Table(name = "asistente", schema = "safarity")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,7 +32,7 @@ public class Asistente {
     private LocalDate fechaNacimiento;
 
     @Column(name = "telefono")
-    private Integer telefono;
+    private String telefono;
 
     @Column(name = "direccion")
     private String direccion;
@@ -44,7 +44,7 @@ public class Asistente {
     private boolean activo = true;
 
     @OneToOne
-    @JoinColumn(name = "id_ticket", nullable = false)
+    @JoinColumn(name = "id_ticket")
     private Ticket ticket;
 
 

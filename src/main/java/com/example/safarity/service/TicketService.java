@@ -2,12 +2,15 @@ package com.example.safarity.service;
 
 import com.example.safarity.converter.TicketMapper;
 import com.example.safarity.dto.TicketDTO;
+import com.example.safarity.model.Asistente;
 import com.example.safarity.model.Participante;
 import com.example.safarity.model.Evento;
 import com.example.safarity.model.Ticket;
+import com.example.safarity.repository.IAsistenteRepository;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.repository.ITicketRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +29,11 @@ public class TicketService {
         return ticketMapper.toDTO(ticketRepository.findAll());
     }
 
+    @Transactional
     public TicketDTO crearTicket(TicketDTO ticketDTO) {
-
-        return ticketMapper.toDTO(ticketRepository.save(ticketMapper.toEntity(ticketDTO)));
+        Ticket ticket = ticketMapper.toEntity(ticketDTO);
+        ticket.getAsistente().setTicket(ticket);
+        return ticketMapper.toDTO(ticketRepository.save(ticket));
 
     }
 

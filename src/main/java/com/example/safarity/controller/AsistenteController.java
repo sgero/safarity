@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
-@RequestMapping(path = "/asistentes")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(path = "/asistente")
 public class AsistenteController {
 
     @Autowired
