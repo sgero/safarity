@@ -11,7 +11,7 @@ public class TicketDTO {
 
     private Boolean esDisponible;
 
-    private Integer dineroAportado;
+    private Double dineroAportado;
 
     private String fecha;
 
