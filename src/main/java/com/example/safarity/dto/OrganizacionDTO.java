@@ -24,4 +24,6 @@ public class OrganizacionDTO {
     private String logo;
 
     private UsuarioDTO usuarioDTO;
+
+    private Double monedero;
 }

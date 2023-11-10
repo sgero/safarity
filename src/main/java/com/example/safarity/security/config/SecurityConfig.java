@@ -39,6 +39,7 @@ public class SecurityConfig {
                                 .requestMatchers("/participante/listar").permitAll()
                                 .requestMatchers("/participante/crear").permitAll()
                                 .requestMatchers("/organizacion/eliminar").permitAll()
+                                .requestMatchers("/organizacion/mostrarcalculado").permitAll()
                                 .requestMatchers("/ticket/**").permitAll()
                                 .requestMatchers("/asistente/**").permitAll()
                                 .requestMatchers("/usuario/listar").hasAnyAuthority(Rol.ADMIN.name())

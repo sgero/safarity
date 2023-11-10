@@ -221,9 +221,10 @@ public class EventoService {
         EventoDTO eventoCalculado = eventoMapper.toDTO(eventoCalcular);
         eventoCalculado.setEntradasVendidas(0);
         eventoCalculado.setEntradasDisponibles(eventoCalculado.getAforo());
-
+        eventoCalculado.setTotalRecaudado(0.00);
         for (Ticket t : eventoCalcular.getTickets()){
 
+            eventoCalculado.setTotalRecaudado(eventoCalculado.getTotalRecaudado()+t.getDineroAportado());
             eventoCalculado.setEntradasVendidas(eventoCalculado.getEntradasVendidas()+1);
             eventoCalculado.setEntradasDisponibles(eventoCalculado.getEntradasDisponibles()-1);
         }

@@ -1,6 +1,7 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.OrganizacionMapper;
+import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.model.Evento;
@@ -114,5 +115,17 @@ public class OrganizacionService {
         Organizacion entity = organizacionMapper.toEntity(dto);
         entity.getUsuario().setPassword(passwordEncoder.encode(entity.getUsuario().getPassword()));
         return organizacionRepository.save(entity);
+    }
+
+    public OrganizacionDTO mostrarCalculado(OrganizacionDTO organizacionFront){
+        Organizacion organizacionCalcular = organizacionRepository.getById(organizacionFront.getId());
+        OrganizacionDTO organizacionCalculado = organizacionMapper.toDTO(organizacionCalcular);
+        organizacionCalculado.setMonedero(0.00);
+        for (Evento e : organizacionCalcular.getEventos()){
+            for (Ticket t : e.getTickets()){
+                organizacionCalculado.setMonedero(organizacionCalculado.getMonedero()+t.getDineroAportado());
+            }
+        }
+        return organizacionCalculado;
     }
 }

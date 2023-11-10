@@ -37,4 +37,6 @@ public class EventoDTO {
 
     private OrganizacionDTO organizacionDTO;
 
+    private Double totalRecaudado;
+
 }
