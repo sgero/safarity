@@ -9,6 +9,8 @@ import com.example.safarity.model.Participante;
 import com.example.safarity.model.Token;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.model.enums.Rol;
+import com.example.safarity.repository.IOrganizacionRepository;
+import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.security.jwt.JWTService;
 import com.example.safarity.service.OrganizacionService;
 import com.example.safarity.service.ParticipanteService;
@@ -40,7 +42,13 @@ public class AuthController {
     private ParticipanteService participanteService;
 
     @Autowired
+    private IParticipanteRepository iParticipanteRepository;
+
+    @Autowired
     private OrganizacionService organizacionService;
+
+    @Autowired
+    private IOrganizacionRepository iOrganizacionRepository;
 
 
 
@@ -92,28 +100,42 @@ public class AuthController {
 
     @PostMapping("/register")
     public AuthDTO register(@RequestBody ParticipanteDTO participanteDTO){
-        participanteDTO.getUsuarioDTO().setRol(Rol.PARTICIPANTE);
-        Participante participanteNuevo = participanteService.save(participanteDTO);
-        String token = jwtService.generateToken(participanteNuevo.getUsuario());
+        for (Participante p : iParticipanteRepository.findAll()){
+            if (p.getDni().equals(participanteDTO.getDni()) || p.getUsuario().getAlias().equals(participanteDTO.getUsuarioDTO().getAlias())){
+                return AuthDTO.builder().info("Ya existe").build();
+            }else {
+                participanteDTO.getUsuarioDTO().setRol(Rol.PARTICIPANTE);
+                Participante participanteNuevo = participanteService.save(participanteDTO);
+                String token = jwtService.generateToken(participanteNuevo.getUsuario());
 
-        return AuthDTO
-                .builder()
-                .token(token)
-                .info("Usuario creado correctamente")
-                .build();
+                return AuthDTO
+                        .builder()
+                        .token(token)
+                        .info("Usuario creado correctamente")
+                        .build();
+            }
+        }
+        return null;
     }
 
     @PostMapping("/registerOrganizacion")
     public AuthDTO registerOrganizacion(@RequestBody OrganizacionDTO organizacionDTO){
-        organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
-        Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
-        String token = jwtService.generateToken(organizacionNueva.getUsuario());
+        for (Organizacion o : iOrganizacionRepository.findAll()) {
+            if (o.getCif().equals(organizacionDTO.getCif()) || o.getUsuario().getAlias().equals(organizacionDTO.getUsuarioDTO().getAlias())) {
+                return AuthDTO.builder().info("Ya existe").build();
+            } else {
+                organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
+                Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
+                String token = jwtService.generateToken(organizacionNueva.getUsuario());
 
-        return AuthDTO
-                .builder()
-                .token(token)
-                .info("Usuario creado correctamente")
-                .build();
+                return AuthDTO
+                        .builder()
+                        .token(token)
+                        .info("Usuario creado correctamente")
+                        .build();
+            }
+        }
+        return null;
     }
 
 
