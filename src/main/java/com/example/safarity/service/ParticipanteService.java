@@ -1,8 +1,12 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.ParticipanteMapper;
+import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.ParticipanteDTO;
+import com.example.safarity.model.Evento;
+import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Participante;
+import com.example.safarity.model.Ticket;
 import com.example.safarity.model.enums.Rol;
 import com.example.safarity.repository.IParticipanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ParticipanteService {
@@ -88,5 +93,17 @@ public class ParticipanteService {
         Participante entity = participanteMapper.toEntity(dto);
         entity.getUsuario().setPassword(passwordEncoder.encode(entity.getUsuario().getPassword()));
         return participanteRepository.save(entity);
+    }
+    public String ParticipanteEliminar(ParticipanteDTO participanteDTO) {
+        Participante participanteEliminar = participanteRepository.findById(participanteDTO.getId()).orElse(null);
+        if (participanteEliminar != null) {
+            participanteEliminar.setActivo(false);
+            participanteEliminar.getUsuario().setActivo(false);
+            participanteRepository.save(participanteEliminar);
+            return "Se ha eliminado correctamente";
+
+        } else {
+            return "No se ha podido eliminar";
+        }
     }
 }

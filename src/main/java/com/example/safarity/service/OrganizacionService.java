@@ -6,6 +6,7 @@ import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.model.Evento;
 import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Participante;
+import com.example.safarity.model.Ticket;
 import com.example.safarity.repository.IOrganizacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -66,6 +67,10 @@ public class OrganizacionService {
             Set<Evento> eventosRelacionados = organizacionEliminar.getEventos();
             for (Evento e : eventosRelacionados) {
                 e.setActivo(false);
+                for (Ticket t : e.getTickets()){
+                    t.setActivo(false);
+                    t.getAsistente().setActivo(false);
+                }
             }
             organizacionRepository.save(organizacionEliminar);
             return "Se ha eliminado correctamente";
