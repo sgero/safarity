@@ -1,6 +1,7 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.OrganizacionMapper;
+import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.ParticipanteDTO;
@@ -127,5 +128,12 @@ public class OrganizacionService {
             }
         }
         return organizacionCalculado;
+    }
+    public  List<OrganizacionDTO> busquedaOrganizacion(BusquedaDTO busquedaDTO){
+        if (busquedaDTO.getBusqueda() != null){
+            return organizacionMapper.toDTO(organizacionRepository.findAllByNombreLikeAndActivoTrueOrderByNombre("%" + busquedaDTO.getBusqueda() + "%"));
+        }else {
+            return null;
+        }
     }
 }

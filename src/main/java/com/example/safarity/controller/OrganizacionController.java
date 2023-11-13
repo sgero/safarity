@@ -1,5 +1,6 @@
 package com.example.safarity.controller;
 
+import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.model.Organizacion;
@@ -54,6 +55,10 @@ public class OrganizacionController {
     @PostMapping(value = "/mostrarcalculado")
     public OrganizacionDTO mostrarCalculado(@RequestBody OrganizacionDTO organizacionDTO) {
         return organizacionService.mostrarCalculado(organizacionDTO);
+    }
+    @PostMapping(value = "/buscar")
+    public List<OrganizacionDTO> listarBusqueda(@RequestBody BusquedaDTO busquedaDTO){
+        return organizacionService.busquedaOrganizacion(busquedaDTO);
     }
 
 }
