@@ -9,9 +9,7 @@ public class TicketDTO {
 
     private Integer id;
 
-    private Boolean esDisponible;
-
-    private Double dineroAportado;
+    private Integer dineroAportado;
 
     private String fecha;
 
