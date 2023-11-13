@@ -34,6 +34,9 @@ public class Evento {
     @Column(name = "imagen")
     private String imagen;
 
+    @Column(name = "precio")
+    private Double precio;
+
     @Column(name = "aforo")
     private Integer aforo;
 

@@ -36,6 +36,9 @@ public class Organizacion {
     @Column(name = "fecha_fundacion")
     private LocalDate fechaFundacion;
 
+    @Column(name = "direccion")
+    private String direccion;
+
     @Column(name = "info")
     private String info;
 

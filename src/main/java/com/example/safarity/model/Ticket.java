@@ -22,9 +22,6 @@ public class Ticket {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "es_disponible")
-    private boolean esDisponible;
-
     @Column(name = "dinero_aportado")
     private Double dineroAportado;
 

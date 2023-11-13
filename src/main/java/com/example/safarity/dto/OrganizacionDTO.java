@@ -17,6 +17,8 @@ public class OrganizacionDTO {
 
     private String fechaFundacion;
 
+    private String direccion;
+
     private String info;
 
     private String sitioWeb;
