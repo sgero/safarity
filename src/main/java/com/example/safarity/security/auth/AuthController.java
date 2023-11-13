@@ -120,22 +120,20 @@ public class AuthController {
 
     @PostMapping("/registerOrganizacion")
     public AuthDTO registerOrganizacion(@RequestBody OrganizacionDTO organizacionDTO){
-        for (Organizacion o : iOrganizacionRepository.findAll()) {
-            if (o.getCif().equals(organizacionDTO.getCif()) || o.getUsuario().getAlias().equals(organizacionDTO.getUsuarioDTO().getAlias())) {
-                return AuthDTO.builder().info("Ya existe").build();
-            } else {
-                organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
-                Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
-                String token = jwtService.generateToken(organizacionNueva.getUsuario());
+        if (iOrganizacionRepository.findTopByCif(organizacionDTO.getCif()) != null) {
+            return AuthDTO.builder().info("Ya existe").build();
+        } else {
+            organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
+            Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
+            String token = jwtService.generateToken(organizacionNueva.getUsuario());
 
-                return AuthDTO
-                        .builder()
-                        .token(token)
-                        .info("Usuario creado correctamente")
-                        .build();
-            }
+            return AuthDTO
+                    .builder()
+                    .token(token)
+                    .info("Usuario creado correctamente")
+                    .build();
         }
-        return null;
+
     }
 
 

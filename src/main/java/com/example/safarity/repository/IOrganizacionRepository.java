@@ -12,4 +12,6 @@ public interface IOrganizacionRepository extends JpaRepository<Organizacion, Int
 
     List<Organizacion> findAllByNombreLikeAndActivoTrueOrderByNombre(String nombre);
 
+    Organizacion findTopByCif(String cif);
+
 }
