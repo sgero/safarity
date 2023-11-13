@@ -62,14 +62,24 @@ create table evento(
 
                        id serial not null,
                        nombre varchar(100) not null,
+
+--                     CUANDO COMIENZA EL EVENTO
                        fecha_inicio timestamp(6) not null,
+
+--                     CUANDO ACABA EL EVENTO
                        fecha_fin timestamp(6) not null,
+
                        tipo_pago int2 not null,
                        tipo_evento int2 not null,
                        aforo integer not null,
                        direccion varchar(200) not null,
+
+--                     CUANDO ESTA DISPONIBLE LA COMPRA DE TICKET
                        fecha_venta timestamp(6) not null,
+
+--                     CUANDO SE MUESTRA EL EVENTO
                        fecha_lanzamiento timestamp(6) not null,
+
                        descripcion varchar(1000) not null,
                        imagen varchar(1000) not null,
                        precio numeric(5,2),
