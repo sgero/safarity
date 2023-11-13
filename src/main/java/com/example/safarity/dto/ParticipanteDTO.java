@@ -22,6 +22,8 @@ public class ParticipanteDTO {
 
     private String direccion;
 
+    private Double saldo;
+
     private UsuarioDTO usuarioDTO;
 
 

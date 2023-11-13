@@ -46,6 +46,9 @@ public class Participante {
     @Column(name = "activo")
     private boolean activo = true;
 
+    @Column(name="saldo")
+    private Double saldo;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "evento_participante",

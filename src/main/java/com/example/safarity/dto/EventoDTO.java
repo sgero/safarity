@@ -17,6 +17,8 @@ public class EventoDTO {
 
     private String imagen;
 
+    private Double precio;
+
     private Integer aforo;
 
     private String fecha_lanzamiento;
