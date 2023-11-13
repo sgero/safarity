@@ -27,7 +27,7 @@ create table participante(
                              id serial not null,
                              nombre varchar(100) not null,
                              apellidos varchar(100) not null,
-                             direccion varchar(100) not null,
+                             direccion varchar(200) not null,
                              email varchar(100) not null,
                              dni varchar(9) not null,
                              telefono varchar(50) not null,
@@ -47,9 +47,10 @@ create table organizacion(
                              cif varchar(9) not null,
                              telefono varchar(50) not null,
                              fecha_fundacion date not null,
-                             info varchar(500) not null,
-                             sitio_web varchar(500) not null,
-                             logo varchar(500) not null,
+                             direccion varchar(200),
+                             info varchar(1000) not null,
+                             sitio_web varchar(1000) not null,
+                             logo varchar(1000) not null,
                              id_usuario int4 not null,
                              activo bool default true,
                              primary key (id),
@@ -61,16 +62,27 @@ create table evento(
 
                        id serial not null,
                        nombre varchar(100) not null,
+
+--                     CUANDO COMIENZA EL EVENTO
                        fecha_inicio timestamp(6) not null,
+
+--                     CUANDO ACABA EL EVENTO
                        fecha_fin timestamp(6) not null,
+
                        tipo_pago int2 not null,
                        tipo_evento int2 not null,
                        aforo integer not null,
-                       direccion varchar(100) not null,
+                       direccion varchar(200) not null,
+
+--                     CUANDO ESTA DISPONIBLE LA COMPRA DE TICKET
                        fecha_venta timestamp(6) not null,
+
+--                     CUANDO SE MUESTRA EL EVENTO
                        fecha_lanzamiento timestamp(6) not null,
-                       descripcion varchar(500) not null,
-                       imagen varchar(500) not null,
+
+                       descripcion varchar(1000) not null,
+                       imagen varchar(1000) not null,
+                       precio numeric(5,2),
                        id_organizacion int4 not null,
                        activo bool default true,
                        primary key (id),
@@ -80,7 +92,6 @@ create table evento(
 create table ticket(
 
                        id serial not null,
-                       es_disponible boolean not null,
                        dinero_aportado numeric(10,2) not null,
                        fecha_compra date not null,
                        id_participante int4 not null,
@@ -96,7 +107,7 @@ create table asistente(
                           id serial not null,
                           nombre varchar(100) not null,
                           apellidos varchar(100) not null,
-                          direccion varchar(100) not null,
+                          direccion varchar(200) not null,
                           email varchar(100) not null,
                           dni varchar(9) not null,
                           telefono varchar(50) not null,
@@ -138,5 +149,10 @@ ALTER TABLE asistente
 
 -- CONSULTAS
 
+
+select * from usuario;
+select * from asistente;
+select * from organizacion;
+select * from evento;
 
 
