@@ -151,4 +151,9 @@ ALTER TABLE asistente
 -- CONSULTAS
 
 
+select * from usuario;
+select * from asistente;
+select * from organizacion;
+select * from evento;
+
 
