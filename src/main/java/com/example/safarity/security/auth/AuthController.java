@@ -9,10 +9,8 @@ import com.example.safarity.model.Participante;
 import com.example.safarity.model.Token;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.model.enums.Rol;
-import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.repository.IOrganizacionRepository;
 import com.example.safarity.repository.IParticipanteRepository;
-import com.example.safarity.repository.IUsuarioRepository;
 import com.example.safarity.security.jwt.JWTService;
 import com.example.safarity.service.OrganizacionService;
 import com.example.safarity.service.ParticipanteService;
@@ -51,9 +49,6 @@ public class AuthController {
 
     @Autowired
     private IOrganizacionRepository iOrganizacionRepository;
-
-    @Autowired
-    private IUsuarioRepository usuarioRepository;
 
 
 
@@ -125,20 +120,22 @@ public class AuthController {
 
     @PostMapping("/registerOrganizacion")
     public AuthDTO registerOrganizacion(@RequestBody OrganizacionDTO organizacionDTO){
-        if (iOrganizacionRepository.findTopByCif(organizacionDTO.getCif()) != null || usuarioRepository.findTopByAlias(organizacionDTO.getUsuarioDTO().getAlias()) != null) {
-            return AuthDTO.builder().info("Ya existe").build();
-        } else {
-            organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
-            Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
-            String token = jwtService.generateToken(organizacionNueva.getUsuario());
+        for (Organizacion o : iOrganizacionRepository.findAll()) {
+            if (o.getCif().equals(organizacionDTO.getCif()) || o.getUsuario().getAlias().equals(organizacionDTO.getUsuarioDTO().getAlias())) {
+                return AuthDTO.builder().info("Ya existe").build();
+            } else {
+                organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
+                Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
+                String token = jwtService.generateToken(organizacionNueva.getUsuario());
 
-            return AuthDTO
-                    .builder()
-                    .token(token)
-                    .info("Usuario creado correctamente")
-                    .build();
+                return AuthDTO
+                        .builder()
+                        .token(token)
+                        .info("Usuario creado correctamente")
+                        .build();
+            }
         }
-
+        return null;
     }
 
 
