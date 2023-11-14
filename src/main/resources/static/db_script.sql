@@ -32,7 +32,7 @@ create table participante(
                              dni varchar(9) not null,
                              telefono varchar(50) not null,
                              fecha_nacimiento date not null,
-                             saldo numeric(10,2) default 0,
+                             saldo numeric(10,2) default 0.0,
                              id_usuario int4 not null,
                              activo bool default true,
                              primary key (id),
