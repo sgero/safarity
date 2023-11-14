@@ -108,19 +108,20 @@ public class AuthController {
         for (Participante p : iParticipanteRepository.findAll()){
             if (p.getDni().equals(participanteDTO.getDni()) || p.getUsuario().getAlias().equals(participanteDTO.getUsuarioDTO().getAlias())){
                 return AuthDTO.builder().info("Ya existe").build();
-            }else {
-                participanteDTO.getUsuarioDTO().setRol(Rol.PARTICIPANTE);
-                Participante participanteNuevo = participanteService.save(participanteDTO);
-                String token = jwtService.generateToken(participanteNuevo.getUsuario());
-
-                return AuthDTO
-                        .builder()
-                        .token(token)
-                        .info("Usuario creado correctamente")
-                        .build();
             }
         }
-        return null;
+        participanteDTO.getUsuarioDTO().setRol(Rol.PARTICIPANTE);
+        Participante participanteNuevo = participanteService.save(participanteDTO);
+        String token = jwtService.generateToken(participanteNuevo.getUsuario());
+
+        return AuthDTO
+                .builder()
+                .token(token)
+                .info("Usuario creado correctamente")
+                .build();
+
+
+
     }
 
     @PostMapping("/registerOrganizacion")
