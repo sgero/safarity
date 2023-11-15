@@ -1,7 +1,6 @@
 package com.example.safarity.controller;
 
 import com.example.safarity.dto.BusquedaDTO;
-import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.model.Organizacion;
 import com.example.safarity.service.OrganizacionService;

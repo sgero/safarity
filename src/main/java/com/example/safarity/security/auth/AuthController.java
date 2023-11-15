@@ -1,6 +1,5 @@
 package com.example.safarity.security.auth;
 
-import com.example.safarity.controller.ParticipanteController;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.dto.UsuarioDTO;
@@ -130,8 +129,6 @@ public class AuthController {
                 .info("Usuario creado correctamente")
                 .build();
 
-
-
     }
 
     @PostMapping("/registerOrganizacion")
@@ -150,8 +147,6 @@ public class AuthController {
                 .token(token)
                 .info("Usuario creado correctamente")
                 .build();
-
-
 
     }
 
