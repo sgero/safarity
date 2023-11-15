@@ -9,7 +9,6 @@ import com.example.safarity.model.Participante;
 import com.example.safarity.model.Token;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.model.enums.Rol;
-import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.repository.IOrganizacionRepository;
 import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.repository.IUsuarioRepository;
@@ -19,6 +18,7 @@ import com.example.safarity.service.ParticipanteService;
 import com.example.safarity.service.TokenService;
 import com.example.safarity.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,12 +53,22 @@ public class AuthController {
     private IOrganizacionRepository iOrganizacionRepository;
 
     @Autowired
-    private IUsuarioRepository usuarioRepository;
+    private IUsuarioRepository iUsuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
 
     @PostMapping("/login")
     public AuthDTO login(@RequestBody UsuarioDTO usuarioDTO) {
+        if (iUsuarioRepository.findAllByAliasAndActivoTrue(usuarioDTO.getAlias()) == null
+        || !usuarioService.validarPassword(iUsuarioRepository.findAllByAliasAndActivoTrue(usuarioDTO.getAlias()), usuarioDTO.getPassword())){
+            return AuthDTO
+                    .builder()
+                    .info("Credenciales incorrectas")
+                    .build();
+        }
         Usuario usuario = (Usuario) usuarioService.loadUserByUsername(usuarioDTO.getAlias());
         String apiKey = null;
         String mensaje;
@@ -126,19 +136,22 @@ public class AuthController {
 
     @PostMapping("/registerOrganizacion")
     public AuthDTO registerOrganizacion(@RequestBody OrganizacionDTO organizacionDTO){
-        if (iOrganizacionRepository.findTopByCif(organizacionDTO.getCif()) != null || usuarioRepository.findTopByAlias(organizacionDTO.getUsuarioDTO().getAlias()) != null) {
-            return AuthDTO.builder().info("Ya existe").build();
-        } else {
-            organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
-            Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
-            String token = jwtService.generateToken(organizacionNueva.getUsuario());
-
-            return AuthDTO
-                    .builder()
-                    .token(token)
-                    .info("Usuario creado correctamente")
-                    .build();
+        for (Organizacion o : iOrganizacionRepository.findAll()) {
+            if (o.getCif().equals(organizacionDTO.getCif()) || o.getUsuario().getAlias().equals(organizacionDTO.getUsuarioDTO().getAlias())) {
+                return AuthDTO.builder().info("Ya existe").build();
+            }
         }
+        organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
+        Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
+        String token = jwtService.generateToken(organizacionNueva.getUsuario());
+
+        return AuthDTO
+                .builder()
+                .token(token)
+                .info("Usuario creado correctamente")
+                .build();
+
+
 
     }
 
