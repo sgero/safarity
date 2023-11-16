@@ -184,21 +184,26 @@ public class EventoService {
     }
 
     public  List<EventoDTO> busquedaEvento(BusquedaDTO busquedaDTO){
+        List<Evento> eventosBuscados = iEventoRepository.findAll();
+
         if (busquedaDTO.getBusqueda() != null){
-           return eventoMapper.toDTO(iEventoRepository.findAllByNombreLikeAndActivoTrueOrderByNombre("%" + busquedaDTO.getBusqueda() + "%"));
+           eventosBuscados.retainAll(iEventoRepository.findByNombreContainingIgnoreCase(busquedaDTO.getBusqueda()));
 //            for (Evento e : eventoRepository.findAll()){
 //
 //            }
-        }else if (busquedaDTO.getTipoEvento() != null){
-            return eventoMapper.toDTO(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(busquedaDTO.getTipoEvento()));
-        }else {
-            return null;
         }
+        if (busquedaDTO.getTipoEvento() != null){
+            eventosBuscados.retainAll(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(busquedaDTO.getTipoEvento()));
+        }
+        if (busquedaDTO.getTipoPago() != null) {
+            eventosBuscados.retainAll(iEventoRepository.findAllByTipoPagoEqualsAndActivoTrueOrderByNombre(busquedaDTO.getTipoPago()));
+        }
+        if (busquedaDTO.getFecha() != null) {
+            eventosBuscados.retainAll(iEventoRepository.obtenerEventosMes(busquedaDTO.getFecha()));
+        }
+        return eventoMapper.toDTO(eventosBuscados);
     }
 
-//    public EventoDTO mostrarCalculado(){
-//
-//    }
 
 
     //Método para mostrar entradas vendidas y entradas disponibles

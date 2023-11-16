@@ -106,4 +106,15 @@ public class ParticipanteService {
             return "No se ha podido eliminar";
         }
     }
+
+    public ParticipanteDTO mostrarCalculado(ParticipanteDTO participanteFront){
+        Participante participanteCalcular = participanteRepository.getById(participanteFront.getId());
+
+//        for (Ticket t : participanteCalcular.getTickets()){
+//            participanteCalcular.setSaldo(participanteCalcular.getSaldo()-t.getDineroAportado());
+//        }
+
+    ParticipanteDTO participanteCalculado = participanteMapper.toDTO(participanteCalcular);
+        return participanteCalculado;
+    }
 }

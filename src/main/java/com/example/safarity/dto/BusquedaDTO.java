@@ -14,5 +14,5 @@ public class BusquedaDTO {
 
     private TipoPago tipoPago;
 
-    private String fecha;
+    private Integer fecha;
 }
