@@ -11,12 +11,14 @@ import com.example.safarity.model.Usuario;
 import com.example.safarity.model.enums.Rol;
 import com.example.safarity.repository.IOrganizacionRepository;
 import com.example.safarity.repository.IParticipanteRepository;
+import com.example.safarity.repository.IUsuarioRepository;
 import com.example.safarity.security.jwt.JWTService;
 import com.example.safarity.service.OrganizacionService;
 import com.example.safarity.service.ParticipanteService;
 import com.example.safarity.service.TokenService;
 import com.example.safarity.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,10 +52,23 @@ public class AuthController {
     @Autowired
     private IOrganizacionRepository iOrganizacionRepository;
 
+    @Autowired
+    private IUsuarioRepository iUsuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
 
     @PostMapping("/login")
     public AuthDTO login(@RequestBody UsuarioDTO usuarioDTO) {
+        if (iUsuarioRepository.findAllByAliasAndActivoTrue(usuarioDTO.getAlias()) == null
+        || !usuarioService.validarPassword(iUsuarioRepository.findAllByAliasAndActivoTrue(usuarioDTO.getAlias()), usuarioDTO.getPassword())){
+            return AuthDTO
+                    .builder()
+                    .info("Credenciales incorrectas")
+                    .build();
+        }
         Usuario usuario = (Usuario) usuarioService.loadUserByUsername(usuarioDTO.getAlias());
         String apiKey = null;
         String mensaje;
