@@ -49,7 +49,7 @@ public class Organizacion {
     private String logo;
 
     @Column(name = "activo")
-    private boolean activo = true;
+    private boolean activo = false;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_usuario", nullable = false)
