@@ -11,6 +11,7 @@ import com.example.safarity.model.Usuario;
 import com.example.safarity.model.enums.Rol;
 import com.example.safarity.repository.IOrganizacionRepository;
 import com.example.safarity.repository.IParticipanteRepository;
+import com.example.safarity.repository.ITokenRepository;
 import com.example.safarity.repository.IUsuarioRepository;
 import com.example.safarity.security.jwt.JWTService;
 import com.example.safarity.service.OrganizacionService;
@@ -57,6 +58,9 @@ public class AuthController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ITokenRepository iTokenRepository;
 
 
 
@@ -153,6 +157,12 @@ public class AuthController {
 
 
 
+    }
+
+    @PostMapping("/logout")
+    public void logout(AuthDTO auth){
+        String tokenborrar = auth.getToken();
+        iTokenRepository.delete(iTokenRepository.findTopByTokenEquals(tokenborrar));
     }
 
 

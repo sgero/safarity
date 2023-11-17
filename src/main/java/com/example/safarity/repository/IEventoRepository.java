@@ -16,7 +16,7 @@ public interface IEventoRepository extends JpaRepository<Evento, Long> {
 //    List<Evento> obtenerEventos(String nombre);
 
     //List<Evento> findAllByNombreEqualsOrderByNombre(String nombre);
-    List<Evento> findByNombreContainingIgnoreCase(String nombre);
+    List<Evento> findByNombreContainingIgnoreCaseAndActivoTrue(String nombre);
 
     List<Evento> findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(TipoEvento tipoEvento);
 

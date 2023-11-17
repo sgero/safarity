@@ -136,7 +136,7 @@ public class OrganizacionService {
     }
     public  List<OrganizacionDTO> busquedaOrganizacion(BusquedaDTO busquedaDTO){
         if (busquedaDTO.getBusqueda() != null){
-            return organizacionMapper.toDTO(organizacionRepository.findAllByNombreLikeAndActivoTrueOrderByNombre("%" + busquedaDTO.getBusqueda() + "%"));
+            return organizacionMapper.toDTO(organizacionRepository.findByNombreContainingIgnoreCaseAndActivoTrue(busquedaDTO.getBusqueda()));
         }else {
             return null;
         }

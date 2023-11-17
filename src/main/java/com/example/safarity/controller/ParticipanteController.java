@@ -47,4 +47,9 @@ public class ParticipanteController {
         return participanteService.ParticipanteEliminar(participanteDTO);
     }
 
+    @PostMapping(value = "/mostrarParticipante")
+    public ParticipanteDTO mostrarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
+        return participanteService.mostrarCalculado(participanteDTO);
+    }
+
 }

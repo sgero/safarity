@@ -114,7 +114,7 @@ public class ParticipanteService {
 //            participanteCalcular.setSaldo(participanteCalcular.getSaldo()-t.getDineroAportado());
 //        }
 
-    ParticipanteDTO participanteCalculado = participanteMapper.toDTO(participanteCalcular);
+        ParticipanteDTO participanteCalculado = participanteMapper.toDTO(participanteCalcular);
         return participanteCalculado;
     }
 }
