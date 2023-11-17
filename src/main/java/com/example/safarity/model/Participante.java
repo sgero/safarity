@@ -47,7 +47,7 @@ public class Participante {
     private boolean activo = true;
 
     @Column(name="saldo")
-    private Double saldo;
+    private Double saldo = 0.00;
 
 
     @ManyToMany(fetch = FetchType.LAZY)

@@ -31,6 +31,9 @@ public class TicketService {
 
     @Transactional
     public TicketDTO crearTicket(TicketDTO ticketDTO) {
+        Participante participante = participanteRepository.findById(ticketDTO.getParticipanteDTO().getId()).orElse(null);
+        participante.setSaldo(participante.getSaldo()-ticketDTO.getDineroAportado());
+        participanteRepository.save(participante);
         Ticket ticket = ticketMapper.toEntity(ticketDTO);
         ticket.getAsistente().setTicket(ticket);
         return ticketMapper.toDTO(ticketRepository.save(ticket));
