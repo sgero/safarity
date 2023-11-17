@@ -1,6 +1,5 @@
 package com.example.safarity.security.auth;
 
-import com.example.safarity.controller.ParticipanteController;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.dto.UsuarioDTO;
@@ -120,8 +119,8 @@ public class AuthController {
     @PostMapping("/register")
     public AuthDTO register(@RequestBody ParticipanteDTO participanteDTO){
         for (Participante p : iParticipanteRepository.findAll()){
-            if (p.getDni().equals(participanteDTO.getDni()) || p.getUsuario().getAlias().equals(participanteDTO.getUsuarioDTO().getAlias())){
-                return AuthDTO.builder().info("Ya existe").build();
+            if (p.getEmail().equals(participanteDTO.getEmail()) || p.getDni().equals(participanteDTO.getDni()) || p.getUsuario().getAlias().equals(participanteDTO.getUsuarioDTO().getAlias())){
+                return AuthDTO.builder().info("El usuario que estáintentando crear ya existe").build();
             }
         }
         participanteDTO.getUsuarioDTO().setRol(Rol.PARTICIPANTE);
@@ -133,8 +132,6 @@ public class AuthController {
                 .token(token)
                 .info("Usuario creado correctamente")
                 .build();
-
-
 
     }
 
@@ -154,8 +151,6 @@ public class AuthController {
                 .token(token)
                 .info("Usuario creado correctamente")
                 .build();
-
-
 
     }
 

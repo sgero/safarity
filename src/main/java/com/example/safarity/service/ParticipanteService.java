@@ -1,12 +1,8 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.ParticipanteMapper;
-import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.ParticipanteDTO;
-import com.example.safarity.model.Evento;
-import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Participante;
-import com.example.safarity.model.Ticket;
 import com.example.safarity.model.enums.Rol;
 import com.example.safarity.repository.IParticipanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

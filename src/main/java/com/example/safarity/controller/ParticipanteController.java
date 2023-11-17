@@ -1,12 +1,7 @@
 package com.example.safarity.controller;
 
-
-import com.example.safarity.converter.UsuarioMapper;
-import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.model.Participante;
-import com.example.safarity.model.Usuario;
-import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.service.ParticipanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
