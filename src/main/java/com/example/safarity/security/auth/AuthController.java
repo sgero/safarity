@@ -109,7 +109,7 @@ public class AuthController {
         return AuthDTO
                 .builder()
                 .token(apiKey)
-                .info(mensaje)
+                .info(usuario.getRol().toString())
                 .build();
     }
 
