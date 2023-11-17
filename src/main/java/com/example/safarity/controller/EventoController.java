@@ -69,8 +69,14 @@ public class EventoController {
         return eventoService.busquedaEvento(busquedaDTO);
     }
 
-    @PostMapping(value = "/mostrarCalculado")
-    public EventoDTO mostrarCalculado(@RequestBody EventoDTO eventoDTO) {
-        return eventoService.mostrarCalculado(eventoDTO);
+        @PostMapping(value = "/mostrarCalculado")
+        public EventoDTO mostrarCalculado(@RequestBody EventoDTO eventoDTO) {
+            return eventoService.mostrarCalculado(eventoDTO);
+        }
+
+    @GetMapping(value = "/detalles")
+    public EventoDTO eventoDetalles(@RequestParam Long id) {
+        return eventoService.eventoDetalles(id);
     }
+
 }

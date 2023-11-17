@@ -18,11 +18,10 @@ import com.example.safarity.service.ParticipanteService;
 import com.example.safarity.service.TokenService;
 import com.example.safarity.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -73,7 +72,7 @@ public class AuthController {
         String apiKey = null;
         String mensaje;
 
-        if (usuario != null) {
+        if (usuario != null  && usuario.getRol() != null) {
             if (usuarioService.validarPassword(usuario, usuarioDTO.getPassword())) {
 
                 mensaje = "Usuario Logueado";
@@ -110,7 +109,9 @@ public class AuthController {
                 .builder()
                 .token(apiKey)
                 .info(mensaje)
+                .rol(usuario.getRol().ordinal())
                 .build();
+
     }
 
     @PostMapping("/register")
@@ -154,6 +155,7 @@ public class AuthController {
 
 
     }
+
 
 
 }
