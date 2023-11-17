@@ -3,8 +3,6 @@ package com.example.safarity.controller;
 import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.EventoDTO;
-import com.example.safarity.dto.OrganizacionDTO;
-import com.example.safarity.model.Evento;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;

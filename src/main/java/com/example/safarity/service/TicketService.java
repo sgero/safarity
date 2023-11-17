@@ -2,11 +2,9 @@ package com.example.safarity.service;
 
 import com.example.safarity.converter.TicketMapper;
 import com.example.safarity.dto.TicketDTO;
-import com.example.safarity.model.Asistente;
 import com.example.safarity.model.Participante;
 import com.example.safarity.model.Evento;
 import com.example.safarity.model.Ticket;
-import com.example.safarity.repository.IAsistenteRepository;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.repository.ITicketRepository;
@@ -31,6 +29,9 @@ public class TicketService {
 
     @Transactional
     public TicketDTO crearTicket(TicketDTO ticketDTO) {
+        Participante participante = participanteRepository.findById(ticketDTO.getParticipanteDTO().getId()).orElse(null);
+        participante.setSaldo(participante.getSaldo()-ticketDTO.getDineroAportado());
+        participanteRepository.save(participante);
         Ticket ticket = ticketMapper.toEntity(ticketDTO);
         ticket.getAsistente().setTicket(ticket);
         return ticketMapper.toDTO(ticketRepository.save(ticket));

@@ -22,7 +22,7 @@ public class ParticipanteDTO {
 
     private String direccion;
 
-    private Double saldo;
+    private Double saldo = 0.00;
 
     private UsuarioDTO usuarioDTO;
 
