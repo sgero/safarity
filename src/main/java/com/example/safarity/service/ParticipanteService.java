@@ -107,7 +107,7 @@ public class ParticipanteService {
         }
     }
 
-    public ParticipanteDTO mostrarCalculado(ParticipanteDTO participanteFront){
+    public ParticipanteDTO mostrarParticipante(ParticipanteDTO participanteFront){
         Participante participanteCalcular = participanteRepository.getById(participanteFront.getId());
 
 //        for (Ticket t : participanteCalcular.getTickets()){

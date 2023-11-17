@@ -49,7 +49,7 @@ public class ParticipanteController {
 
     @PostMapping(value = "/mostrarParticipante")
     public ParticipanteDTO mostrarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
-        return participanteService.mostrarCalculado(participanteDTO);
+        return participanteService.mostrarParticipante(participanteDTO);
     }
 
 }
