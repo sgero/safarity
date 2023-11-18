@@ -21,7 +21,7 @@ public class OrganizacionDTO {
 
     private String info;
 
-    private String sitioWeb;
+    private String sitio_web;
 
     private String logo;
 
