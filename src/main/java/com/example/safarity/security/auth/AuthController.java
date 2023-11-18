@@ -78,12 +78,14 @@ public class AuthController {
         Usuario usuario = (Usuario) usuarioService.loadUserByUsername(usuarioDTO.getAlias());
         String apiKey = null;
         String mensaje;
+        String alias;
 
         if (usuario != null) {
             if (usuarioService.validarPassword(usuario, usuarioDTO.getPassword())) {
 
                 mensaje = "Usuario Logueado";
                 String userRol = usuarioService.getUserRol(usuarioDTO.getAlias());
+                String userAlias = usuarioService.getUserAlias(usuarioDTO.getAlias());
                 //Usuario sin token
                 if (usuario.getToken() == null) {
                     apiKey = jwtService.generateToken(usuario);
@@ -117,6 +119,7 @@ public class AuthController {
                 .builder()
                 .token(apiKey)
                 .info(mensaje)
+                .alias(usuario.getAlias().toString())
                 .rol(usuario.getRol().toString())
                 .build();
 

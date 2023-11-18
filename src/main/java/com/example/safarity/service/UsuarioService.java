@@ -91,4 +91,12 @@ public class UsuarioService {
         }
         return null;
     }
+
+    public String getUserAlias(String alias) {
+        Usuario loggedInUser = buscarPorUsername(alias);
+        if (loggedInUser != null) {
+            return loggedInUser.getAlias().toString();
+        }
+        return null;
+    }
 }
