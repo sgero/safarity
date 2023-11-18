@@ -60,6 +60,8 @@ public class AuthController {
 
 
 
+
+
     @PostMapping("/login")
     public AuthDTO login(@RequestBody UsuarioDTO usuarioDTO) {
         if (iUsuarioRepository.findAllByAliasAndActivoTrue(usuarioDTO.getAlias()) == null
@@ -77,7 +79,7 @@ public class AuthController {
             if (usuarioService.validarPassword(usuario, usuarioDTO.getPassword())) {
 
                 mensaje = "Usuario Logueado";
-
+                String userRol = usuarioService.getUserRol(usuarioDTO.getAlias());
                 //Usuario sin token
                 if (usuario.getToken() == null) {
                     apiKey = jwtService.generateToken(usuario);
@@ -86,6 +88,7 @@ public class AuthController {
                     token.setToken(apiKey);
                     token.setFechaExpiracion(LocalDateTime.now().plusDays(1));
                     tokenService.save(token);
+
 
                     //Usuario con token caducado
                 } else if (usuario.getToken().getFechaExpiracion().isBefore(LocalDateTime.now())) {
@@ -110,7 +113,9 @@ public class AuthController {
                 .builder()
                 .token(apiKey)
                 .info(mensaje)
+                .rol(usuario.getRol().toString())
                 .build();
+
     }
 
     @PostMapping("/register")
