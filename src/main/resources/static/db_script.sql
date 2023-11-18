@@ -152,8 +152,10 @@ ALTER TABLE asistente
 
 
 select * from usuario;
+select * from participante;
 select * from asistente;
 select * from organizacion;
 select * from evento;
+select * from ticket;
 
 
