@@ -182,7 +182,7 @@ public class EventoService {
     public  List<EventoDTO> busquedaEvento(BusquedaDTO busquedaDTO){
         List<Evento> eventosBuscados = iEventoRepository.findAll();
 
-        if (busquedaDTO.getBusqueda() != null){
+        if (!busquedaDTO.getBusqueda().isEmpty()){
            eventosBuscados.retainAll(iEventoRepository.findByNombreContainingIgnoreCaseAndActivoTrue(busquedaDTO.getBusqueda()));
 //            for (Evento e : eventoRepository.findAll()){
 //
