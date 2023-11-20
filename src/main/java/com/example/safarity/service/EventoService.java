@@ -5,6 +5,8 @@ import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.model.Evento;
 import com.example.safarity.model.Ticket;
+import com.example.safarity.model.enums.TipoEvento;
+import com.example.safarity.model.enums.TipoPago;
 import com.example.safarity.repository.IEventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -188,13 +190,13 @@ public class EventoService {
 //
 //            }
         }
-        if (busquedaDTO.getTipoEvento() != null){
-            eventosBuscados.retainAll(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(busquedaDTO.getTipoEvento()));
+        if (!busquedaDTO.getTipoEvento().isEmpty()){
+            eventosBuscados.retainAll(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(TipoEvento.valueOf(busquedaDTO.getTipoEvento())));
         }
-        if (busquedaDTO.getTipoPago() != null) {
-            eventosBuscados.retainAll(iEventoRepository.findAllByTipoPagoEqualsAndActivoTrueOrderByNombre(busquedaDTO.getTipoPago()));
+        if (!busquedaDTO.getTipoPago().isEmpty()) {
+            eventosBuscados.retainAll(iEventoRepository.findAllByTipoPagoEqualsAndActivoTrueOrderByNombre(TipoPago.valueOf(busquedaDTO.getTipoPago())));
         }
-        if (busquedaDTO.getFecha() != null) {
+        if (busquedaDTO.getFecha() != 0) {
             eventosBuscados.retainAll(iEventoRepository.obtenerEventosMes(busquedaDTO.getFecha()));
         }
         return eventoMapper.toDTO(eventosBuscados);

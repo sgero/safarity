@@ -9,9 +9,9 @@ public class BusquedaDTO {
 
     private String busqueda;
 
-    private TipoEvento tipoEvento;
+    private String tipoEvento;
 
-    private TipoPago tipoPago;
+    private String tipoPago;
 
     private Integer fecha;
 }

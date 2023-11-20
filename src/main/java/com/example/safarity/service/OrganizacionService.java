@@ -53,7 +53,7 @@ public class OrganizacionService {
             organizacion.setEmail(organizacionDTO.getEmail());
             organizacion.setTelefono(organizacionDTO.getTelefono());
             organizacion.setInfo(organizacionDTO.getInfo());
-            organizacion.setSitioWeb(organizacionDTO.getSitio_web());
+            organizacion.setSitioWeb(organizacionDTO.getSitioWeb());
             organizacion.setLogo(organizacionDTO.getLogo());
 
             Organizacion organizacionModificado = organizacionRepository.save(organizacion);
