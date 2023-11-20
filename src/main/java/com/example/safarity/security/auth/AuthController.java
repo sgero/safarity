@@ -162,12 +162,4 @@ public class AuthController {
 
     }
 
-    @PostMapping("/logout")
-    public void logout(String token){
-//      String tokenborrar = token;
-        System.out.println("Solicitud de logout recibida con token: " + token);
-        iTokenRepository.delete(iTokenRepository.findTopByTokenEquals(token));
-    }
-
-
 }
