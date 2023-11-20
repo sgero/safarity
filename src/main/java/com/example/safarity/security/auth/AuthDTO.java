@@ -1,6 +1,5 @@
 package com.example.safarity.security.auth;
 
-import com.example.safarity.model.enums.Rol;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,5 +9,6 @@ public class AuthDTO {
 
     private String token;
     private String info;
-    private Integer rol;
+    private String rol;
+    private String alias;
 }

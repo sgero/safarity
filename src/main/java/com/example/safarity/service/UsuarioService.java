@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.util.List;
 
 @Service
@@ -80,5 +81,22 @@ public class UsuarioService {
     public boolean validarPassword(Usuario usuario, String password) {
 
         return passwordEncoder.matches(password, usuario.getPassword());
+    }
+
+
+    public String getUserRol(String username) {
+        Usuario loggedInUser = buscarPorUsername(username);
+        if (loggedInUser != null) {
+            return loggedInUser.getRol().toString();
+        }
+        return null;
+    }
+
+    public String getUserAlias(String alias) {
+        Usuario loggedInUser = buscarPorUsername(alias);
+        if (loggedInUser != null) {
+            return loggedInUser.getAlias().toString();
+        }
+        return null;
     }
 }

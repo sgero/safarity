@@ -1,6 +1,5 @@
 package com.example.safarity.security.auth;
 
-import com.example.safarity.controller.ParticipanteController;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.dto.UsuarioDTO;
@@ -11,6 +10,7 @@ import com.example.safarity.model.Usuario;
 import com.example.safarity.model.enums.Rol;
 import com.example.safarity.repository.IOrganizacionRepository;
 import com.example.safarity.repository.IParticipanteRepository;
+import com.example.safarity.repository.ITokenRepository;
 import com.example.safarity.repository.IUsuarioRepository;
 import com.example.safarity.security.jwt.JWTService;
 import com.example.safarity.service.OrganizacionService;
@@ -18,10 +18,11 @@ import com.example.safarity.service.ParticipanteService;
 import com.example.safarity.service.TokenService;
 import com.example.safarity.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -57,6 +58,11 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ITokenRepository iTokenRepository;
+
+
+
 
 
     @PostMapping("/login")
@@ -71,12 +77,14 @@ public class AuthController {
         Usuario usuario = (Usuario) usuarioService.loadUserByUsername(usuarioDTO.getAlias());
         String apiKey = null;
         String mensaje;
+        String alias;
 
-        if (usuario != null  && usuario.getRol() != null) {
+        if (usuario != null) {
             if (usuarioService.validarPassword(usuario, usuarioDTO.getPassword())) {
 
                 mensaje = "Usuario Logueado";
-
+                String userRol = usuarioService.getUserRol(usuarioDTO.getAlias());
+                String userAlias = usuarioService.getUserAlias(usuarioDTO.getAlias());
                 //Usuario sin token
                 if (usuario.getToken() == null) {
                     apiKey = jwtService.generateToken(usuario);
@@ -85,6 +93,7 @@ public class AuthController {
                     token.setToken(apiKey);
                     token.setFechaExpiracion(LocalDateTime.now().plusDays(1));
                     tokenService.save(token);
+
 
                     //Usuario con token caducado
                 } else if (usuario.getToken().getFechaExpiracion().isBefore(LocalDateTime.now())) {
@@ -109,7 +118,8 @@ public class AuthController {
                 .builder()
                 .token(apiKey)
                 .info(mensaje)
-                .rol(usuario.getRol().ordinal())
+                .alias(usuario.getAlias().toString())
+                .rol(usuario.getRol().toString())
                 .build();
 
     }
@@ -117,8 +127,8 @@ public class AuthController {
     @PostMapping("/register")
     public AuthDTO register(@RequestBody ParticipanteDTO participanteDTO){
         for (Participante p : iParticipanteRepository.findAll()){
-            if (p.getDni().equals(participanteDTO.getDni()) || p.getUsuario().getAlias().equals(participanteDTO.getUsuarioDTO().getAlias())){
-                return AuthDTO.builder().info("Ya existe").build();
+            if (p.getEmail().equals(participanteDTO.getEmail()) || p.getDni().equals(participanteDTO.getDni()) || p.getUsuario().getAlias().equals(participanteDTO.getUsuarioDTO().getAlias())){
+                return AuthDTO.builder().info("El usuario que estáintentando crear ya existe").build();
             }
         }
         participanteDTO.getUsuarioDTO().setRol(Rol.PARTICIPANTE);
@@ -130,8 +140,6 @@ public class AuthController {
                 .token(token)
                 .info("Usuario creado correctamente")
                 .build();
-
-
 
     }
 
@@ -152,10 +160,6 @@ public class AuthController {
                 .info("Usuario creado correctamente")
                 .build();
 
-
-
     }
-
-
 
 }

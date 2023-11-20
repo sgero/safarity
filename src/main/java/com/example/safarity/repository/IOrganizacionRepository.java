@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface IOrganizacionRepository extends JpaRepository<Organizacion, Integer> {
 
-    List<Organizacion> findAllByNombreLikeAndActivoTrueOrderByNombre(String nombre);
+    List<Organizacion> findByNombreContainingIgnoreCaseAndActivoTrue(String nombre);
 
     Organizacion findTopByCif(String cif);
 

@@ -3,7 +3,6 @@ package com.example.safarity.converter;
 import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Usuario;
 import org.mapstruct.Mapper;
-
 import java.util.List;
 
 @Mapper(componentModel = "spring")

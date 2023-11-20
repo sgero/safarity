@@ -10,4 +10,5 @@ public interface ITokenRepository extends JpaRepository<Token, Integer> {
 
     Token findTopByUsuario(Usuario usuario);
 
+    Token findTopByTokenEquals(String token);
 }

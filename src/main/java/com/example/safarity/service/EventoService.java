@@ -3,15 +3,13 @@ package com.example.safarity.service;
 import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.EventoDTO;
-import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.model.Evento;
-import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Ticket;
+import com.example.safarity.model.enums.TipoEvento;
+import com.example.safarity.model.enums.TipoPago;
 import com.example.safarity.repository.IEventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -184,21 +182,26 @@ public class EventoService {
     }
 
     public  List<EventoDTO> busquedaEvento(BusquedaDTO busquedaDTO){
-        if (busquedaDTO.getBusqueda() != null){
-           return eventoMapper.toDTO(iEventoRepository.findAllByNombreLikeAndActivoTrueOrderByNombre("%" + busquedaDTO.getBusqueda() + "%"));
+        List<Evento> eventosBuscados = iEventoRepository.findAll();
+
+        if (!busquedaDTO.getBusqueda().isEmpty()){
+           eventosBuscados.retainAll(iEventoRepository.findByNombreContainingIgnoreCaseAndActivoTrue(busquedaDTO.getBusqueda()));
 //            for (Evento e : eventoRepository.findAll()){
 //
 //            }
-        }else if (busquedaDTO.getTipoEvento() != null){
-            return eventoMapper.toDTO(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(busquedaDTO.getTipoEvento()));
-        }else {
-            return null;
         }
+        if (!busquedaDTO.getTipoEvento().isEmpty()){
+            eventosBuscados.retainAll(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(TipoEvento.valueOf(busquedaDTO.getTipoEvento())));
+        }
+        if (!busquedaDTO.getTipoPago().isEmpty()) {
+            eventosBuscados.retainAll(iEventoRepository.findAllByTipoPagoEqualsAndActivoTrueOrderByNombre(TipoPago.valueOf(busquedaDTO.getTipoPago())));
+        }
+        if (busquedaDTO.getFecha() != 0) {
+            eventosBuscados.retainAll(iEventoRepository.obtenerEventosMes(busquedaDTO.getFecha()));
+        }
+        return eventoMapper.toDTO(eventosBuscados);
     }
 
-//    public EventoDTO mostrarCalculado(){
-//
-//    }
 
 
     //Método para mostrar entradas vendidas y entradas disponibles

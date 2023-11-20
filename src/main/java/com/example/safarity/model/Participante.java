@@ -3,7 +3,6 @@ package com.example.safarity.model;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Entity;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,7 +46,7 @@ public class Participante {
     private boolean activo = true;
 
     @Column(name="saldo")
-    private Double saldo;
+    private Double saldo = 0.00;
 
 
     @ManyToMany(fetch = FetchType.LAZY)

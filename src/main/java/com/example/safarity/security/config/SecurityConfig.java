@@ -13,9 +13,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
-
 import java.util.Arrays;
-
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -45,6 +43,7 @@ public class SecurityConfig {
                                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/usuario/crear").permitAll()
+                                .requestMatchers("/usuario/logout").permitAll()
                                 .requestMatchers("/organizacion/listar").permitAll()
                                 .requestMatchers("/evento/**").permitAll()
                                 .requestMatchers("/organizacion/crear").permitAll()
@@ -53,8 +52,7 @@ public class SecurityConfig {
                                 .requestMatchers("/organizacion/eliminar").permitAll()
                                 .requestMatchers("/organizacion/buscar").permitAll()
                                 .requestMatchers("/organizacion/mostrarcalculado").permitAll()
-                                .requestMatchers("/evento/mostrarCalculado/**").permitAll()
-                                .requestMatchers("/evento/detalles/**").permitAll()
+                                .requestMatchers("/participante/mostrarParticipante").permitAll()
                                 .requestMatchers("/ticket/**").permitAll()
                                 .requestMatchers("/asistente/**").permitAll()
                                 .requestMatchers("/usuario/listar").hasAnyAuthority(Rol.ADMIN.name())

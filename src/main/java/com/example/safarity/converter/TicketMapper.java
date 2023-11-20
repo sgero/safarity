@@ -6,11 +6,9 @@ import com.example.safarity.service.AsistenteService;
 import com.example.safarity.service.EventoService;
 import com.example.safarity.service.ParticipanteService;
 import org.mapstruct.Mapper;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
