@@ -119,7 +119,6 @@ public class AuthController {
                 .builder()
                 .token(apiKey)
                 .info(mensaje)
-                .alias(usuario.getAlias().toString())
                 .rol(usuario.getRol().toString())
                 .build();
 
