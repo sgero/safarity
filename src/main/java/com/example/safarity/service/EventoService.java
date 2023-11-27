@@ -128,7 +128,11 @@ public class EventoService {
         eventoDTO.setDescripcion(eventoAuxDTO.getDescripcion());
         eventoDTO.setDireccion(eventoAuxDTO.getDireccion());
         eventoDTO.setImagen(eventoAuxDTO.getImagen());
-        eventoDTO.setPrecio(eventoAuxDTO.getPrecio());
+        if (eventoAuxDTO.getTipoPago().equals("PRECIO_FIJO")) {
+            eventoDTO.setPrecio(eventoAuxDTO.getPrecio());
+        }else {
+            eventoDTO.setPrecio(0.00);
+        }
         eventoDTO.setAforo(eventoAuxDTO.getAforo());
         eventoDTO.setFecha_lanzamiento(eventoAuxDTO.getFecha_lanzamiento());
         eventoDTO.setFecha_venta(eventoAuxDTO.getFecha_venta());
