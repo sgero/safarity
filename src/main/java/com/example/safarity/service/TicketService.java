@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -32,6 +34,12 @@ public class TicketService {
         Participante participante = participanteRepository.findById(ticketDTO.getParticipanteDTO().getId()).orElse(null);
         participante.setSaldo(participante.getSaldo()-ticketDTO.getDineroAportado());
         participanteRepository.save(participante);
+
+        LocalDate fecha = LocalDate.parse(LocalDate.now().toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        ticketDTO.setFecha(fechaFormateada);
         Ticket ticket = ticketMapper.toEntity(ticketDTO);
         ticket.getAsistente().setTicket(ticket);
         return ticketMapper.toDTO(ticketRepository.save(ticket));
