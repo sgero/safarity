@@ -2,6 +2,7 @@ package com.example.safarity.repository;
 
 import com.example.safarity.model.Evento;
 import com.example.safarity.model.Organizacion;
+import com.example.safarity.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,5 @@ public interface IOrganizacionRepository extends JpaRepository<Organizacion, Int
 
     Organizacion findTopByCif(String cif);
 
+    Organizacion findTopByUsuario(Usuario usuario);
 }

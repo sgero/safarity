@@ -2,6 +2,7 @@ package com.example.safarity.controller;
 
 import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.dto.BusquedaDTO;
+import com.example.safarity.dto.EventoAuxDTO;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.service.EventoService;
@@ -29,8 +30,8 @@ public class EventoController {
     }
 
     @PostMapping(value = "/crear")
-    public EventoDTO crearEvento(@RequestBody EventoDTO eventoDTO) {
-        return eventoService.crearEvento(eventoDTO);
+    public EventoDTO crearEvento(@RequestBody EventoAuxDTO eventoAuxDTO) {
+        return eventoService.crearEvento(eventoAuxDTO);
     }
 
     @PutMapping(value="/modificar")

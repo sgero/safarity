@@ -1,13 +1,20 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.EventoMapper;
-import com.example.safarity.dto.BusquedaDTO;
-import com.example.safarity.dto.EventoDTO;
+import com.example.safarity.converter.OrganizacionMapper;
+import com.example.safarity.converter.UsuarioMapper;
+import com.example.safarity.dto.*;
 import com.example.safarity.model.Evento;
+import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Ticket;
+import com.example.safarity.model.Token;
 import com.example.safarity.model.enums.TipoEvento;
 import com.example.safarity.model.enums.TipoPago;
 import com.example.safarity.repository.IEventoRepository;
+import com.example.safarity.repository.IOrganizacionRepository;
+import com.example.safarity.repository.ITokenRepository;
+import com.example.safarity.repository.IUsuarioRepository;
+import com.example.safarity.security.auth.TokenDataDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -47,6 +54,21 @@ public class EventoService {
 
     @Autowired
     private IEventoRepository iEventoRepository;
+
+    @Autowired
+    private IOrganizacionRepository iOrganizacionRepository;
+
+    @Autowired
+    private IUsuarioRepository iUsuarioRepository;
+
+    @Autowired
+    private OrganizacionMapper organizacionMapper;
+
+    @Autowired
+    private UsuarioMapper usuarioMapper;
+
+    @Autowired
+    private ITokenRepository iTokenRepository;
 
 
     public Evento getById(Long id){
@@ -98,7 +120,27 @@ public class EventoService {
 
 
     //Crear un EVENTO
-    public EventoDTO crearEvento(EventoDTO eventoDTO) {
+    public EventoDTO crearEvento(EventoAuxDTO eventoAuxDTO) {
+        Token toke = iTokenRepository.findTopByTokenEquals(eventoAuxDTO.getOrganizacion());
+        OrganizacionDTO organizacionDTO = organizacionMapper.toDTO(iOrganizacionRepository.findTopByUsuario(toke.getUsuario()));
+        EventoDTO eventoDTO = new EventoDTO();
+        eventoDTO.setNombre(eventoAuxDTO.getNombre());
+        eventoDTO.setDescripcion(eventoAuxDTO.getDescripcion());
+        eventoDTO.setDireccion(eventoAuxDTO.getDireccion());
+        eventoDTO.setImagen(eventoAuxDTO.getImagen());
+        eventoDTO.setPrecio(eventoAuxDTO.getPrecio());
+        eventoDTO.setAforo(eventoAuxDTO.getAforo());
+        eventoDTO.setFecha_lanzamiento(eventoAuxDTO.getFecha_lanzamiento());
+        eventoDTO.setFecha_venta(eventoAuxDTO.getFecha_venta());
+        eventoDTO.setFecha_inicio(eventoAuxDTO.getFecha_inicio());
+        eventoDTO.setFecha_fin(eventoAuxDTO.getFecha_fin());
+        eventoDTO.setTipoEvento(TipoEvento.valueOf(eventoAuxDTO.getTipoEvento()));
+        eventoDTO.setTipoPago(TipoPago.valueOf(eventoAuxDTO.getTipoPago()));
+
+
+        eventoDTO.setOrganizacionDTO(organizacionDTO);
+
+
         return eventoMapper.toDTO(eventoRepository.save(eventoMapper.toEntity(eventoDTO)));
     }
 

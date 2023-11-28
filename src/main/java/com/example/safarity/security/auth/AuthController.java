@@ -1,5 +1,6 @@
 package com.example.safarity.security.auth;
 
+import com.example.safarity.controller.ParticipanteController;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.dto.UsuarioDTO;
@@ -118,7 +119,6 @@ public class AuthController {
                 .builder()
                 .token(apiKey)
                 .info(mensaje)
-                .alias(usuario.getAlias().toString())
                 .rol(usuario.getRol().toString())
                 .build();
 
@@ -141,6 +141,8 @@ public class AuthController {
                 .info("Usuario creado correctamente")
                 .build();
 
+
+
     }
 
     @PostMapping("/registerOrganizacion")
@@ -160,6 +162,11 @@ public class AuthController {
                 .info("Usuario creado correctamente")
                 .build();
 
+    }
+    @PostMapping("/logout")
+    public void logout(AuthDTO auth){
+        String tokenborrar = auth.getToken();
+        iTokenRepository.delete(iTokenRepository.findTopByTokenEquals(tokenborrar));
     }
 
 }
