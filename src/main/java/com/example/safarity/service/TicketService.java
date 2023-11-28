@@ -1,7 +1,11 @@
 package com.example.safarity.service;
 
+import com.example.safarity.converter.EventoMapper;
+import com.example.safarity.converter.ParticipanteMapper;
 import com.example.safarity.converter.TicketMapper;
+import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.dto.TicketDTO;
+import com.example.safarity.dto.TicketAuxDTO;
 import com.example.safarity.model.Participante;
 import com.example.safarity.model.Evento;
 import com.example.safarity.model.Ticket;
@@ -23,6 +27,10 @@ public class TicketService {
     private ITicketRepository ticketRepository;
     @Autowired
     private TicketMapper ticketMapper;
+    @Autowired
+    private ParticipanteMapper participanteMapper;
+    @Autowired
+    private EventoMapper eventoMapper;
 
 
     public List<TicketDTO> listarTicket() {
@@ -30,16 +38,28 @@ public class TicketService {
     }
 
     @Transactional
-    public TicketDTO crearTicket(TicketDTO ticketDTO) {
-        Participante participante = participanteRepository.findById(ticketDTO.getParticipanteDTO().getId()).orElse(null);
-        participante.setSaldo(participante.getSaldo()-ticketDTO.getDineroAportado());
+    public TicketDTO crearTicket(TicketAuxDTO ticketAuxDTO) {
+        Participante participante = participanteRepository.findById(ticketAuxDTO.getParticipanteDTO()).orElse(null);
+        Evento evento = eventoRepository.findById(ticketAuxDTO.getEventoDTO()).orElse(null);
+        participante.setSaldo(participante.getSaldo()-ticketAuxDTO.getDineroAportado());
         participanteRepository.save(participante);
 
         LocalDate fecha = LocalDate.parse(LocalDate.now().toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
         String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
+        LocalDate fechaA = LocalDate.parse(ticketAuxDTO.getAsistenteDTO().getFecha_nacimiento(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String fechaFormateadaA = fechaA.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        ticketAuxDTO.getAsistenteDTO().setFecha_nacimiento(fechaFormateadaA);
+
+        TicketDTO ticketDTO = new TicketDTO();
         ticketDTO.setFecha(fechaFormateada);
+        ticketDTO.setDineroAportado(ticketAuxDTO.getDineroAportado());
+        ticketDTO.setAsistenteDTO(ticketAuxDTO.getAsistenteDTO());
+        ticketDTO.setParticipanteDTO(participanteMapper.toDTO(participante));
+        ticketDTO.setEventoDTO(eventoMapper.toDTO(evento));
+
+
         Ticket ticket = ticketMapper.toEntity(ticketDTO);
         ticket.getAsistente().setTicket(ticket);
         return ticketMapper.toDTO(ticketRepository.save(ticket));

@@ -1,5 +1,6 @@
 package com.example.safarity.controller;
 
+import com.example.safarity.dto.TicketAuxDTO;
 import com.example.safarity.dto.TicketDTO;
 import com.example.safarity.model.Ticket;
 import com.example.safarity.service.TicketService;
@@ -22,7 +23,7 @@ public class TicketController {
     }
 
     @PostMapping(value = "/crear")
-    public TicketDTO crearTicket(@RequestBody TicketDTO dto) {
+    public TicketDTO crearTicket(@RequestBody TicketAuxDTO dto) {
         return ticketService.crearTicket(dto);
     }
 //    @PutMapping(value = "/modificar")
