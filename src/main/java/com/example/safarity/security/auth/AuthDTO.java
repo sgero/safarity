@@ -10,4 +10,5 @@ public class AuthDTO {
     private String token;
     private String info;
     private String rol;
+    private String alias;
 }

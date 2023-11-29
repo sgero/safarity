@@ -2,13 +2,20 @@ package com.example.safarity.service;
 
 import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.UsuarioDTO;
+import com.example.safarity.model.Token;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IUsuarioRepository;
+import com.example.safarity.security.auth.AuthDTO;
+import com.example.safarity.security.jwt.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.swing.*;
 import java.util.List;
@@ -26,6 +33,9 @@ public class UsuarioService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JWTService tokenService;
 
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -99,4 +109,8 @@ public class UsuarioService {
         }
         return null;
     }
+
+
+
+
 }
