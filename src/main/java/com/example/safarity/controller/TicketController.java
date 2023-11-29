@@ -1,6 +1,7 @@
 package com.example.safarity.controller;
 
 import com.example.safarity.dto.TicketDTO;
+import com.example.safarity.dto.TicketDevDTO;
 import com.example.safarity.model.Ticket;
 import com.example.safarity.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,9 @@ public class TicketController {
 //        return organizacionService.modificarOrganizacion(organizacionDTO);
 //    }
 
-    @DeleteMapping(value = "/eliminar")
-    public Ticket eliminarTicket(@RequestBody TicketDTO ticketDTO) {
-        return ticketService.eliminarTicket(ticketDTO);
+    @PutMapping(value = "/eliminar")
+    public Ticket eliminarTicket(@RequestBody TicketDevDTO ticketDevDTO) {
+        return ticketService.eliminarTicket(ticketDevDTO);
     }
 
 //    @GetMapping(value = "/listarlogicoinactivo")
@@ -43,4 +44,9 @@ public class TicketController {
 //    public List<OrganizacionDTO> listarLogicoOrganizacionTrue(){
 //        return organizacionService.listarLogicoOrganizacionTrue();
 //    }
+
+    @PostMapping(value = "/listarPTickets")
+    public List<TicketDTO> listarPorParticipante(@RequestBody TicketDevDTO ticketDevDTO){
+        return ticketService.listarTicketParticipante(ticketDevDTO);
+    };
 }
