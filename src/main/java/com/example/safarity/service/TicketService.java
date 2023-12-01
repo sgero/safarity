@@ -51,7 +51,7 @@ public class TicketService {
 //    }
 
 
-    public Ticket eliminarTicket(TicketDevDTO ticketDevDTO) {
+    public String eliminarTicket(TicketDevDTO ticketDevDTO) {
         Ticket ticketEliminar = ticketRepository.findById(ticketDevDTO.getTicketID()).orElse(null);
         if (ticketDevDTO.getDevolucion().equals("SI")){
             if (ticketEliminar != null) {
@@ -59,8 +59,8 @@ public class TicketService {
                 participante.setSaldo(participante.getSaldo()+ticketEliminar.getDineroAportado());
                 ticketEliminar.setActivo(false);
                 ticketEliminar.getAsistente().setActivo(false);
-                Ticket ticketEliminado = ticketRepository.save(ticketEliminar);
-                return ticketEliminado;
+                ticketRepository.save(ticketEliminar);
+                return "ticketEliminado";
             } else {
                 return null;
             }
@@ -68,8 +68,8 @@ public class TicketService {
             if (ticketEliminar != null) {
                 ticketEliminar.setActivo(false);
                 ticketEliminar.getAsistente().setActivo(false);
-                Ticket ticketEliminado = ticketRepository.save(ticketEliminar);
-                return ticketEliminado;
+                ticketRepository.save(ticketEliminar);
+                return "ticketEliminado";
             } else {
                 return null;
             }
@@ -117,4 +117,7 @@ public class TicketService {
         return ticketMapper.toDTO(ticketRepository.findAllByParticipanteAndActivoTrue(participante));
     }
 
+    public TicketDTO mostrarTicket(TicketDTO ticketfront){
+        return ticketMapper.toDTO(ticketRepository.findById(ticketfront.getId()).orElse(null));
+    }
 }
