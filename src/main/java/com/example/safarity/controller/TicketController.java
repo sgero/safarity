@@ -32,7 +32,7 @@ public class TicketController {
 //    }
 
     @PutMapping(value = "/eliminar")
-    public Ticket eliminarTicket(@RequestBody TicketDevDTO ticketDevDTO) {
+    public String eliminarTicket(@RequestBody TicketDevDTO ticketDevDTO) {
         return ticketService.eliminarTicket(ticketDevDTO);
     }
 
@@ -48,5 +48,11 @@ public class TicketController {
     @PostMapping(value = "/listarPTickets")
     public List<TicketDTO> listarPorParticipante(@RequestBody TicketDevDTO ticketDevDTO){
         return ticketService.listarTicketParticipante(ticketDevDTO);
-    };
+    }
+
+    @PostMapping(value = "/mostrarTicket")
+    public TicketDTO mostrarTicket(@RequestBody TicketDTO ticketfront){
+        return ticketService.mostrarTicket(ticketfront);
+    }
+
 }
