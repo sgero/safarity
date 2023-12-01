@@ -42,5 +42,4 @@ public class UsuarioController {
         iTokenRepository.delete(iTokenRepository.findTopByTokenEquals(token));
     }
 
-
 }

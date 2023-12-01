@@ -1,10 +1,14 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.ParticipanteMapper;
+import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.ParticipanteDTO;
+import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Participante;
+import com.example.safarity.model.Token;
 import com.example.safarity.model.enums.Rol;
 import com.example.safarity.repository.IParticipanteRepository;
+import com.example.safarity.repository.ITokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +28,10 @@ public class ParticipanteService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ITokenRepository iTokenRepository;
+
 
 
     public Participante getById(Integer id) {
@@ -113,4 +121,12 @@ public class ParticipanteService {
         ParticipanteDTO participanteCalculado = participanteMapper.toDTO(participanteCalcular);
         return participanteCalculado;
     }
+
+    public ParticipanteDTO getPorToken(String token){
+
+        Token token1 = iTokenRepository.findTopByTokenEquals(token);
+        return participanteMapper.toDTO(participanteRepository.findTopByUsuario(token1.getUsuario()));
+
+    }
+
 }

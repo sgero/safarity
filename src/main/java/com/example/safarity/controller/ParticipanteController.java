@@ -1,6 +1,7 @@
 package com.example.safarity.controller;
 
 import com.example.safarity.dto.ParticipanteDTO;
+import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Participante;
 import com.example.safarity.service.ParticipanteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,13 @@ public class ParticipanteController {
     @PostMapping(value = "/mostrarParticipante")
     public ParticipanteDTO mostrarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
         return participanteService.mostrarParticipante(participanteDTO);
+    }
+
+    @PostMapping(value = "/participanteToken")
+    public ParticipanteDTO getPorToken(@RequestBody String token) {
+
+        return participanteService.getPorToken(token);
+
     }
 
 }

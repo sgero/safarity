@@ -4,6 +4,8 @@ import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Token;
 import com.example.safarity.model.Usuario;
+import com.example.safarity.repository.ITicketRepository;
+import com.example.safarity.repository.ITokenRepository;
 import com.example.safarity.repository.IUsuarioRepository;
 import com.example.safarity.security.auth.AuthDTO;
 import com.example.safarity.security.jwt.JWTService;
@@ -34,8 +36,6 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private JWTService tokenService;
 
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -109,8 +109,5 @@ public class UsuarioService {
         }
         return null;
     }
-
-
-
 
 }
