@@ -3,7 +3,6 @@ package com.example.safarity.service;
 import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.converter.ParticipanteMapper;
 import com.example.safarity.converter.TicketMapper;
-import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.dto.TicketDTO;
 import com.example.safarity.dto.TicketAuxDTO;
 import com.example.safarity.dto.TicketDevDTO;
@@ -18,7 +17,6 @@ import com.example.safarity.repository.ITokenRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
