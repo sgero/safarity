@@ -6,8 +6,10 @@ import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.model.Evento;
 import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Ticket;
+import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.repository.IOrganizacionRepository;
+import com.example.safarity.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ public class OrganizacionService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private IUsuarioRepository iUsuarioRepository;
 
     @Autowired
     private IEventoRepository eventoRepository;
@@ -119,13 +124,16 @@ public class OrganizacionService {
         return organizacionRepository.save(entity);
     }
 
-    public OrganizacionDTO mostrarCalculado(OrganizacionDTO organizacionFront){
-        Organizacion organizacionCalcular = organizacionRepository.getById(organizacionFront.getId());
+    public OrganizacionDTO mostrarCalculado(String alias){
+        Usuario usuario = iUsuarioRepository.findAllByAliasAndActivoTrue(alias);
+        Organizacion organizacionCalcular = organizacionRepository.findTopByUsuario(usuario);
         OrganizacionDTO organizacionCalculado = organizacionMapper.toDTO(organizacionCalcular);
         organizacionCalculado.setMonedero(0.00);
         for (Evento e : organizacionCalcular.getEventos()){
             for (Ticket t : e.getTickets()){
-                organizacionCalculado.setMonedero(organizacionCalculado.getMonedero()+t.getDineroAportado());
+                if (t.isActivo()){
+                    organizacionCalculado.setMonedero(organizacionCalculado.getMonedero()+t.getDineroAportado());
+                }
             }
         }
         return organizacionCalculado;

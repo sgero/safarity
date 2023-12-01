@@ -52,8 +52,8 @@ public class OrganizacionController {
     }
 
     @PostMapping(value = "/mostrarcalculado")
-    public OrganizacionDTO mostrarCalculado(@RequestBody OrganizacionDTO organizacionDTO) {
-        return organizacionService.mostrarCalculado(organizacionDTO);
+    public OrganizacionDTO mostrarCalculado(@RequestBody String alias) {
+        return organizacionService.mostrarCalculado(alias);
     }
     @PostMapping(value = "/buscar")
     public List<OrganizacionDTO> listarBusqueda(@RequestBody BusquedaDTO busquedaDTO){
