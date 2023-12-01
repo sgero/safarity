@@ -6,12 +6,15 @@ import com.example.safarity.converter.TicketMapper;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.dto.TicketDTO;
 import com.example.safarity.dto.TicketAuxDTO;
+import com.example.safarity.dto.TicketDevDTO;
 import com.example.safarity.model.Participante;
 import com.example.safarity.model.Evento;
 import com.example.safarity.model.Ticket;
+import com.example.safarity.model.Token;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.repository.ITicketRepository;
+import com.example.safarity.repository.ITokenRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,8 @@ public class TicketService {
     private ParticipanteMapper participanteMapper;
     @Autowired
     private EventoMapper eventoMapper;
+    @Autowired
+    private ITokenRepository iTokenRepository;
 
 
     public List<TicketDTO> listarTicket() {
@@ -74,17 +79,29 @@ public class TicketService {
 //    }
 
 
-    public Ticket eliminarTicket(TicketDTO ticketDTO) {
-        Ticket ticketEliminar = ticketRepository.findById(ticketDTO.getId()).orElse(null);
-        if (ticketEliminar != null) {
-            ticketEliminar.setActivo(false);
-            ticketEliminar.getAsistente().setActivo(false);
-            Ticket ticketEliminado = ticketRepository.save(ticketEliminar);
-            return ticketEliminado;
-        } else {
-            return null;
+    public Ticket eliminarTicket(TicketDevDTO ticketDevDTO) {
+        Ticket ticketEliminar = ticketRepository.findById(ticketDevDTO.getTicketID()).orElse(null);
+        if (ticketDevDTO.getDevolucion().equals("SI")){
+            if (ticketEliminar != null) {
+                Participante participante = participanteRepository.findById(ticketEliminar.getParticipante().getId()).orElse(null);
+                participante.setSaldo(participante.getSaldo()+ticketEliminar.getDineroAportado());
+                ticketEliminar.setActivo(false);
+                ticketEliminar.getAsistente().setActivo(false);
+                Ticket ticketEliminado = ticketRepository.save(ticketEliminar);
+                return ticketEliminado;
+            } else {
+                return null;
+            }
+        }else {
+            if (ticketEliminar != null) {
+                ticketEliminar.setActivo(false);
+                ticketEliminar.getAsistente().setActivo(false);
+                Ticket ticketEliminado = ticketRepository.save(ticketEliminar);
+                return ticketEliminado;
+            } else {
+                return null;
+            }
         }
-
     }
 
 
@@ -102,26 +119,30 @@ public class TicketService {
     }
 
 
-    public Ticket generarTicket(Integer id_participante, Long id_evento, double dinero_aportado) {
-        // Obtener el usuario y el evento basado en los ID proporcionados
-        Participante participante = participanteRepository.findById(id_participante)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+//    public Ticket generarTicket(Integer id_participante, Long id_evento, double dinero_aportado) {
+//        // Obtener el usuario y el evento basado en los ID proporcionados
+//        Participante participante = participanteRepository.findById(id_participante)
+//                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+//
+//        Evento evento = eventoRepository.findById(id_evento)
+//                .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+//
+//        // Crear un nuevo ticket
+//        Ticket ticket = new Ticket();
+//        ticket.setParticipante(participante);
+//        ticket.setEvento(evento);
+//        ticket.setDineroAportado(dinero_aportado);
+//
+//        // Guardar el ticket en la base de datos
+//        ticket = ticketRepository.save(ticket);
+//
+//        return ticket;
+//    }
 
-        Evento evento = eventoRepository.findById(id_evento)
-                .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
-
-        // Crear un nuevo ticket
-        Ticket ticket = new Ticket();
-        ticket.setParticipante(participante);
-        ticket.setEvento(evento);
-        ticket.setDineroAportado(dinero_aportado);
-
-        // Guardar el ticket en la base de datos
-        ticket = ticketRepository.save(ticket);
-
-        return ticket;
+    public List<TicketDTO> listarTicketParticipante(TicketDevDTO ticketDevDTO){
+        Token tokenParticipante = iTokenRepository.findTopByTokenEquals(ticketDevDTO.getTokenP());
+        Participante participante = participanteRepository.findTopByUsuario(tokenParticipante.getUsuario());
+        return ticketMapper.toDTO(ticketRepository.findAllByParticipanteAndActivoTrue(participante));
     }
-
-
 
 }

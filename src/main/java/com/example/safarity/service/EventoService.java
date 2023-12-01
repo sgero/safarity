@@ -128,7 +128,11 @@ public class EventoService {
         eventoDTO.setDescripcion(eventoAuxDTO.getDescripcion());
         eventoDTO.setDireccion(eventoAuxDTO.getDireccion());
         eventoDTO.setImagen(eventoAuxDTO.getImagen());
-        eventoDTO.setPrecio(eventoAuxDTO.getPrecio());
+        if (eventoAuxDTO.getTipoPago().equals("PRECIO_FIJO")) {
+            eventoDTO.setPrecio(eventoAuxDTO.getPrecio());
+        }else {
+            eventoDTO.setPrecio(0.00);
+        }
         eventoDTO.setAforo(eventoAuxDTO.getAforo());
         eventoDTO.setFecha_lanzamiento(eventoAuxDTO.getFecha_lanzamiento());
         eventoDTO.setFecha_venta(eventoAuxDTO.getFecha_venta());
@@ -263,6 +267,21 @@ public class EventoService {
     //Cálculo de entradas vendidas y disponibles a partir de ID que nos llegue por front al pulsar un evento.
     public EventoDTO mostrarCalculado(EventoDTO eventoFront){
         Evento eventoCalcular = eventoRepository.getById(eventoFront.getId());
+        EventoDTO eventoCalculado = eventoMapper.toDTO(eventoCalcular);
+        eventoCalculado.setEntradasVendidas(0);
+        eventoCalculado.setEntradasDisponibles(eventoCalculado.getAforo());
+        eventoCalculado.setTotalRecaudado(0.00);
+        for (Ticket t : eventoCalcular.getTickets()){
+
+            eventoCalculado.setTotalRecaudado(eventoCalculado.getTotalRecaudado()+t.getDineroAportado());
+            eventoCalculado.setEntradasVendidas(eventoCalculado.getEntradasVendidas()+1);
+            eventoCalculado.setEntradasDisponibles(eventoCalculado.getEntradasDisponibles()-1);
+        }
+        return eventoCalculado;
+    }
+
+    public EventoDTO eventoDetalles(Long id){
+        Evento eventoCalcular = eventoRepository.getById(id);
         EventoDTO eventoCalculado = eventoMapper.toDTO(eventoCalcular);
         eventoCalculado.setEntradasVendidas(0);
         eventoCalculado.setEntradasDisponibles(eventoCalculado.getAforo());
