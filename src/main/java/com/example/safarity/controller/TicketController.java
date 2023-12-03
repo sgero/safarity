@@ -31,8 +31,8 @@ public class TicketController {
     }
 
 
-    @Autowired
-    private TicketService ticketService;
+    //@Autowired
+    //private TicketService ticketService;
 
     @GetMapping(value = "/listar")
     public List<TicketDTO> listarTicket() {

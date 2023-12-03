@@ -17,6 +17,7 @@ import com.example.safarity.repository.ITokenRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.naming.Context;
 import java.time.LocalDate;
@@ -36,6 +37,8 @@ public class TicketService {
     private EventoMapper eventoMapper;
     @Autowired
     private ITokenRepository iTokenRepository;
+
+
 
 
     public List<TicketDTO> listarTicket() {
@@ -154,7 +157,9 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    private String loadAndFillTemplate(Context context) {
-        return springTemplateEngine.process("ticketPDF", context);
-    }
+
+
+
+
+
 }

@@ -80,6 +80,7 @@ public class PdfService {
         return context;
     }
 
+
     private String loadAndFillTemplate(Context context) {
         return springTemplateEngine.process("ticketPDF", context);
     }
