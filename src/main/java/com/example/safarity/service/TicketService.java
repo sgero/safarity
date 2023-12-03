@@ -17,6 +17,8 @@ import com.example.safarity.repository.ITokenRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.naming.Context;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -145,5 +147,14 @@ public class TicketService {
 
     public TicketDTO mostrarTicket(TicketDTO ticketfront){
         return ticketMapper.toDTO(ticketRepository.findById(ticketfront.getId()).orElse(null));
+    }
+
+
+    public List<Ticket> list(){
+        return ticketRepository.findAll();
+    }
+
+    private String loadAndFillTemplate(Context context) {
+        return springTemplateEngine.process("ticketPDF", context);
     }
 }
