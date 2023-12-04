@@ -1,3 +1,5 @@
+package com.example.safarity.controller;
+
 import com.example.safarity.model.ContactoFormulario;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,13 +25,13 @@ public class ContactoController {
         try {
             enviarCorreo(formulario);
             return "Correo enviado con éxito.";
-        } catch (MessagingException e) {
+        } catch (MessagingException | jakarta.mail.MessagingException e) {
             return "Error al enviar el correo: " + e.getMessage();
         }
     }
 
-    private void enviarCorreo(ContactoFormulario formulario) throws MessagingException {
-        MimeMessage message = mailSender.createMimeMessage();
+    private void enviarCorreo(ContactoFormulario formulario) throws MessagingException, jakarta.mail.MessagingException {
+        jakarta.mail.internet.MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         helper.setTo("sgarciaguerrero@safareyes.es");
