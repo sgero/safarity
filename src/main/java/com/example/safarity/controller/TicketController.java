@@ -4,10 +4,15 @@ import com.example.safarity.dto.TicketAuxDTO;
 import com.example.safarity.dto.TicketDTO;
 import com.example.safarity.dto.TicketDevDTO;
 import com.example.safarity.model.Ticket;
+import com.example.safarity.service.PdfService;
 import com.example.safarity.service.TicketService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -15,8 +20,19 @@ import java.util.List;
 @RequestMapping(path = "/ticket")
 public class TicketController {
 
+
+    private final TicketService ticketService;
+    private final PdfService pdfService;
+
     @Autowired
-    private TicketService ticketService;
+    public TicketController(TicketService ticketService, PdfService pdfService) {
+        this.ticketService = ticketService;
+        this.pdfService = pdfService;
+    }
+
+
+    //@Autowired
+    //private TicketService ticketService;
 
     @GetMapping(value = "/listar")
     public List<TicketDTO> listarTicket() {
@@ -47,13 +63,31 @@ public class TicketController {
 //    }
 
     @PostMapping(value = "/listarPTickets")
-    public List<TicketDTO> listarPorParticipante(@RequestBody TicketDevDTO ticketDevDTO){
+    public List<TicketDTO> listarPorParticipante(@RequestBody TicketDevDTO ticketDevDTO) {
         return ticketService.listarTicketParticipante(ticketDevDTO);
     }
 
     @PostMapping(value = "/mostrarTicket")
-    public TicketDTO mostrarTicket(@RequestBody TicketDTO ticketfront){
+    public TicketDTO mostrarTicket(@RequestBody TicketDTO ticketfront) {
         return ticketService.mostrarTicket(ticketfront);
+    }
+
+
+    @GetMapping(value = "/pdf")
+    public void downloadPDF(HttpServletResponse response) {
+        try {
+            Path file = Paths.get(pdfService.generateTicketPdf().getAbsolutePath());
+            if (Files.exists(file)) {
+                response.setContentType("application/pdf");
+                response.addHeader("Content-Disposition", "attachment; filename" + file.getFileName());
+                Files.copy(file, response.getOutputStream());
+                response.getOutputStream().flush();
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
     }
 
 }
