@@ -11,4 +11,6 @@ public interface IParticipanteRepository extends JpaRepository<Participante, Int
 
     Participante findTopByUsuario(Usuario usuario);
 
+    Participante getByUsuarioEqualsAndActivoTrue(Usuario usuario);
+
 }
