@@ -51,7 +51,7 @@ public class OrganizacionController {
         return organizacionService.listarLogicoOrganizacionTrue();
     }
 
-    @PostMapping(value = "/mostrarCalculado")
+    @PostMapping(value = "/mostrarcalculado")
     public OrganizacionDTO mostrarCalculado(@RequestBody String alias) {
         return organizacionService.mostrarCalculado(alias);
     }

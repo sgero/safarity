@@ -31,10 +31,10 @@ public class OrganizacionService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private IEventoRepository eventoRepository;
+    private IUsuarioRepository iUsuarioRepository;
 
     @Autowired
-    private IUsuarioRepository usuarioRepository;
+    private IEventoRepository eventoRepository;
 
     public List<OrganizacionDTO> listarOrganizacion() {
         return organizacionMapper.toDTO(organizacionRepository.findAll());
@@ -125,7 +125,7 @@ public class OrganizacionService {
     }
 
     public OrganizacionDTO mostrarCalculado(String alias){
-        Usuario usuario = usuarioRepository.findAllByAliasAndActivoTrue(alias);
+        Usuario usuario = iUsuarioRepository.findAllByAliasAndActivoTrue(alias);
         Organizacion organizacionCalcular = organizacionRepository.findTopByUsuario(usuario);
         OrganizacionDTO organizacionCalculado = organizacionMapper.toDTO(organizacionCalcular);
         organizacionCalculado.setMonedero(0.00);

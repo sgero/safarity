@@ -272,10 +272,11 @@ public class EventoService {
         eventoCalculado.setEntradasDisponibles(eventoCalculado.getAforo());
         eventoCalculado.setTotalRecaudado(0.00);
         for (Ticket t : eventoCalcular.getTickets()){
-
-            eventoCalculado.setTotalRecaudado(eventoCalculado.getTotalRecaudado()+t.getDineroAportado());
-            eventoCalculado.setEntradasVendidas(eventoCalculado.getEntradasVendidas()+1);
-            eventoCalculado.setEntradasDisponibles(eventoCalculado.getEntradasDisponibles()-1);
+            if (t.isActivo()) {
+                eventoCalculado.setTotalRecaudado(eventoCalculado.getTotalRecaudado() + t.getDineroAportado());
+                eventoCalculado.setEntradasVendidas(eventoCalculado.getEntradasVendidas() + 1);
+                eventoCalculado.setEntradasDisponibles(eventoCalculado.getEntradasDisponibles() - 1);
+            }
         }
         return eventoCalculado;
     }
