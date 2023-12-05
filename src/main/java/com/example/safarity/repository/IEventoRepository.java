@@ -29,4 +29,6 @@ public interface IEventoRepository extends JpaRepository<Evento, Long> {
 
     List<Evento> findAllByOrganizacionEquals(Organizacion organizacion);
 
+    Evento findByIdEquals(Long id);
+
 }

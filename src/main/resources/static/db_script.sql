@@ -158,4 +158,4 @@ select * from organizacion;
 select * from evento;
 select * from ticket;
 
-
+select e.id_evento from evento_participante e where e.id_participante = 2;

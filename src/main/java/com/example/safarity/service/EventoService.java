@@ -1,16 +1,14 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.EventoMapper;
+import com.example.safarity.converter.FavoritoMapper;
 import com.example.safarity.converter.OrganizacionMapper;
 import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.*;
 import com.example.safarity.model.*;
 import com.example.safarity.model.enums.TipoEvento;
 import com.example.safarity.model.enums.TipoPago;
-import com.example.safarity.repository.IEventoRepository;
-import com.example.safarity.repository.IOrganizacionRepository;
-import com.example.safarity.repository.ITokenRepository;
-import com.example.safarity.repository.IUsuarioRepository;
+import com.example.safarity.repository.*;
 import com.example.safarity.security.auth.TokenDataDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,6 +65,15 @@ public class EventoService {
 
     @Autowired
     private ITokenRepository iTokenRepository;
+
+    @Autowired
+    private IFavoritoRepository iFavoritoRepository;
+
+    @Autowired
+    private FavoritoMapper favoritoMapper;
+
+    @Autowired
+    private IParticipanteRepository iParticipanteRepository;
 
 
     public Evento getById(Long id){
@@ -300,5 +307,28 @@ public class EventoService {
         return eventoMapper.toDTO(eventoRepository.findAllByOrganizacionEquals(org));
     }
 
+    public void favorito(FavoritoDTO favoritoDTO){
+
+        Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(favoritoDTO.getAlias());
+        Participante participante = iParticipanteRepository.findTopByUsuario(usuario.orElse(null));
+        Evento evento = iEventoRepository.findByIdEquals(favoritoDTO.getEvento());
+
+        Favorito favorito = new Favorito();
+
+        favorito.setEvento(evento);
+        favorito.setParticipante(participante);
+
+        iFavoritoRepository.save(favorito);
+
+    }
+
+    public List<EventoDTO> misFavorito(FavoritoDTO favoritoDTO){
+
+        Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(favoritoDTO.getAlias());
+        Participante participante = iParticipanteRepository.findTopByUsuario(usuario.orElse(null));
+
+        return eventoMapper.toDTO(iFavoritoRepository.findAllByParticipante(participante));
+
+    }
 
 }

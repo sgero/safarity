@@ -4,6 +4,7 @@ import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.EventoAuxDTO;
 import com.example.safarity.dto.EventoDTO;
+import com.example.safarity.dto.FavoritoDTO;
 import com.example.safarity.model.Organizacion;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.service.EventoService;
@@ -83,6 +84,16 @@ public class EventoController {
     @PostMapping(value = "/listarOrganizacion")
     public List<EventoDTO> listarOrganizacion(@RequestBody String alias){
         return eventoService.listarOrganizacion(alias);
+    }
+
+    @PostMapping(value = "/favorito")
+    public void favorito(@RequestBody FavoritoDTO favoritoDTO){
+        eventoService.favorito(favoritoDTO);
+    }
+
+    @PostMapping(value = "/misFavorito")
+    public List<EventoDTO> misFavorito(@RequestBody FavoritoDTO favoritoDTO){
+        return eventoService.misFavorito(favoritoDTO);
     }
 
 }
