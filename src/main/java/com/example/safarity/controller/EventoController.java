@@ -35,8 +35,8 @@ public class EventoController {
     }
 
     @PutMapping(value="/modificar")
-    public EventoDTO modificarEvento(@RequestBody EventoDTO eventoDTO) {
-        return eventoMapper.toDTO(eventoService.modificarEvento(eventoDTO));
+    public EventoDTO modificarEvento(@RequestBody EventoAuxDTO eventoAuxDTO) {
+        return eventoMapper.toDTO(eventoService.modificarEvento(eventoAuxDTO));
     }
 
 

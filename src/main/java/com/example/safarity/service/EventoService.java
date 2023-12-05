@@ -149,8 +149,8 @@ public class EventoService {
     }
 
     //Modificar un EVENTO
-    public Evento modificarEvento(EventoDTO eventoDTO) {
-        Evento evento = eventoRepository.findById(eventoDTO.getId()).orElse(null);
+    public Evento modificarEvento(EventoAuxDTO eventoAuxDTO) {
+        Evento evento = eventoRepository.findById(eventoAuxDTO.getId()).orElse(null);
 
         if (evento == null) {
             return null;
@@ -158,18 +158,23 @@ public class EventoService {
         else
         {
 
-        evento.setNombre(eventoDTO.getNombre());
-        evento.setDescripcion(eventoDTO.getDescripcion());
-        evento.setDireccion(eventoDTO.getDireccion());
-        evento.setImagen(eventoDTO.getImagen());
-        evento.setAforo(eventoDTO.getAforo());
+        evento.setNombre(eventoAuxDTO.getNombre());
+        evento.setDescripcion(eventoAuxDTO.getDescripcion());
+        evento.setDireccion(eventoAuxDTO.getDireccion());
+        evento.setImagen(eventoAuxDTO.getImagen());
+        evento.setAforo(eventoAuxDTO.getAforo());
+            if (eventoAuxDTO.getTipoPago().equals("PRECIO_FIJO")) {
+                evento.setPrecio(eventoAuxDTO.getPrecio());
+            }else {
+                evento.setPrecio(0.00);
+            }
 //        evento.setTotalAsistentes(eventoDTO.getTotalAsistentes());
-        evento.setTipoEvento(eventoDTO.getTipoEvento());
-        evento.setTipoPago(eventoDTO.getTipoPago());
-        evento.setFechaInicio(eventoMapper.StringToLocalDate(eventoDTO.getFecha_inicio()));
-        evento.setFechaFin(eventoMapper.StringToLocalDate(eventoDTO.getFecha_fin()));
-        evento.setFechaLanzamiento(eventoMapper.StringToLocalDate(eventoDTO.getFecha_lanzamiento()));
-        evento.setFechaVentaDisponible(eventoMapper.StringToLocalDate(eventoDTO.getFecha_venta()));
+        evento.setTipoEvento(TipoEvento.valueOf(eventoAuxDTO.getTipoEvento()));
+        evento.setTipoPago(TipoPago.valueOf(eventoAuxDTO.getTipoPago()));
+        evento.setFechaInicio(eventoMapper.StringToLocalDate(eventoAuxDTO.getFecha_inicio()));
+        evento.setFechaFin(eventoMapper.StringToLocalDate(eventoAuxDTO.getFecha_fin()));
+        evento.setFechaLanzamiento(eventoMapper.StringToLocalDate(eventoAuxDTO.getFecha_lanzamiento()));
+        evento.setFechaVentaDisponible(eventoMapper.StringToLocalDate(eventoAuxDTO.getFecha_venta()));
 //        evento.setEntradasVendidas(eventoDTO.getEntradasVendidas());
 
         Evento eventoModificado = eventoRepository.save(evento);
