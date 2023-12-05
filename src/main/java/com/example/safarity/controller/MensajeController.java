@@ -25,7 +25,7 @@ public class MensajeController {
     public ResponseEntity<String> enviarMensaje(@RequestBody MensajeDTO mensaje) {
         try {
             // Lógica para enviar el mensaje por correo electrónico
-            emailService.enviarCorreo("safarityTeam@gmail.com", "Nuevo mensaje de contacto", construirCuerpoMensaje(mensaje));
+            emailService.enviarCorreo("safarityteam@gmail.com", "Nuevo mensaje de contacto", construirCuerpoMensaje(mensaje));
             return new ResponseEntity<>("Mensaje enviado correctamente", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al enviar el mensaje", HttpStatus.INTERNAL_SERVER_ERROR);
