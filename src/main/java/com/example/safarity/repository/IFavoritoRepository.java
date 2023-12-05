@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public interface IFavoritoRepository extends JpaRepository<Favorito, Long> {
 
-//    List<Evento> findAllByParticipante(Participante participante);
+    List<Favorito> findAllByParticipante(Participante participante);
 
-    @Query(value = "select e.id_evento from {h-schema} evento_participante e where e.id_participante = :participante", nativeQuery = true)
-    List<Evento> findAllByParticipante(Participante participante);
+//    @Query(value = "select e.id_evento from {h-schema} evento_participante e where e.id_participante = :participante", nativeQuery = true)
+//    List<Evento> findAllByParticipante(Participante participante);
 
 }

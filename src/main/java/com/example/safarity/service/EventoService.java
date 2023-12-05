@@ -327,8 +327,17 @@ public class EventoService {
         Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(favoritoDTO.getAlias());
         Participante participante = iParticipanteRepository.findTopByUsuario(usuario.orElse(null));
 
-        return eventoMapper.toDTO(iFavoritoRepository.findAllByParticipante(participante));
+        List<Favorito> favoritos = iFavoritoRepository.findAllByParticipante(participante);
 
+        List<Evento> listaEventos = new ArrayList<>();
+
+        for (Favorito f : favoritos){
+
+            listaEventos.add(f.getEvento());
+
+        }
+
+        return eventoMapper.toDTO(listaEventos);
     }
 
 }
