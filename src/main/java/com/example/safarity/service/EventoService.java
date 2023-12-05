@@ -4,10 +4,7 @@ import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.converter.OrganizacionMapper;
 import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.*;
-import com.example.safarity.model.Evento;
-import com.example.safarity.model.Organizacion;
-import com.example.safarity.model.Ticket;
-import com.example.safarity.model.Token;
+import com.example.safarity.model.*;
 import com.example.safarity.model.enums.TipoEvento;
 import com.example.safarity.model.enums.TipoPago;
 import com.example.safarity.repository.IEventoRepository;
@@ -19,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -294,6 +292,12 @@ public class EventoService {
             eventoCalculado.setEntradasDisponibles(eventoCalculado.getEntradasDisponibles()-1);
         }
         return eventoCalculado;
+    }
+
+    public List<EventoDTO> listarOrganizacion(String alias){
+        Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(alias);
+        Organizacion org = iOrganizacionRepository.findTopByUsuario(usuario.orElse(null));
+        return eventoMapper.toDTO(eventoRepository.findAllByOrganizacionEquals(org));
     }
 
 

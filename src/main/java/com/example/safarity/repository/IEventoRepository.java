@@ -1,12 +1,12 @@
 package com.example.safarity.repository;
 
 import com.example.safarity.model.Evento;
+import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.enums.TipoEvento;
 import com.example.safarity.model.enums.TipoPago;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -27,6 +27,6 @@ public interface IEventoRepository extends JpaRepository<Evento, Long> {
     @Query(value = "select * from {h-schema} evento e where extract('MONTH' from e.fecha_inicio) = :mes and e.activo is true order by e.nombre", nativeQuery = true)
     List<Evento> obtenerEventosMes(Integer mes);
 
-
+    List<Evento> findAllByOrganizacionEquals(Organizacion organizacion);
 
 }

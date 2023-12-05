@@ -4,6 +4,7 @@ import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.EventoAuxDTO;
 import com.example.safarity.dto.EventoDTO;
+import com.example.safarity.model.Organizacion;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,14 +69,20 @@ public class EventoController {
         return eventoService.busquedaEvento(busquedaDTO);
     }
 
-        @PostMapping(value = "/mostrarCalculado")
-        public EventoDTO mostrarCalculado(@RequestBody EventoDTO eventoDTO) {
-            return eventoService.mostrarCalculado(eventoDTO);
-        }
+    @PostMapping(value = "/mostrarCalculado")
+    public EventoDTO mostrarCalculado(@RequestBody EventoDTO eventoDTO) {
+        return eventoService.mostrarCalculado(eventoDTO);
+    }
 
     @GetMapping(value = "/detalles")
     public EventoDTO eventoDetalles(@RequestParam Long id) {
         return eventoService.eventoDetalles(id);
+    }
+
+
+    @PostMapping(value = "/listarOrganizacion")
+    public List<EventoDTO> listarOrganizacion(@RequestBody String alias){
+        return eventoService.listarOrganizacion(alias);
     }
 
 }
