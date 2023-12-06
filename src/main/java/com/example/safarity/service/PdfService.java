@@ -20,10 +20,10 @@ public class PdfService {
     private static final String PDF_RESOURCES = "/pdf-resources/";
 
 
-    private SpringTemplateEngine springTemplateEngine;
+    private final SpringTemplateEngine springTemplateEngine;
 
 
-    private TicketService ticketService;
+    private final TicketService ticketService;
 
 
     @Autowired
