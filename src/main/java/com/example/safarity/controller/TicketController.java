@@ -8,6 +8,7 @@ import com.example.safarity.service.PdfService;
 import com.example.safarity.service.TicketService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Files;
@@ -88,6 +89,20 @@ public class TicketController {
             e.printStackTrace();
 
         }
+    }
+
+    @GetMapping("/ticketPDF")
+    public String mostrarTicket(Model model) {
+        // Crea una instancia de Ticket (reemplaza esto con tu lógica de creación de ticket)
+        Ticket ticket = new Ticket();
+        TicketDTO ticketDTO = new TicketDTO();
+
+        // Agrega el objeto "ticket" al modelo
+        model.addAttribute("ticket", ticket);
+        model.addAttribute("ticketDTO", ticketDTO);
+
+        // Retorna el nombre de la plantilla Thymeleaf
+        return "ticketPDF"; // nombre de la plantilla
     }
 
 }
