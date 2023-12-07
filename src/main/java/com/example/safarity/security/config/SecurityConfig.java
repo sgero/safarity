@@ -56,6 +56,7 @@ public class SecurityConfig {
                                 .requestMatchers("/participante/participanteToken").permitAll()
                                 .requestMatchers("/ticket/**").permitAll()
                                 .requestMatchers("/asistente/**").permitAll()
+                                .requestMatchers("/enviar-mensaje").permitAll()
                                 .requestMatchers("/usuario/listar").hasAnyAuthority(Rol.ADMIN.name())
                                 .requestMatchers("/admin/**").hasAnyAuthority(Rol.ADMIN.name())
                                 .anyRequest().authenticated()

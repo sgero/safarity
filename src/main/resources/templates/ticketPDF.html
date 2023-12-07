@@ -1,52 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Mi Ticket</title>
-    <link rel="stylesheet" type="text/css" href="../pdf-resources/css/ticketPdfStyle.css">
+    <link rel="stylesheet" type="text/css" href="../static/pdf-resources/css/ticketPdfStyle.css">
 </head>
 <body>
 <div>
-    <img src="../pdf-resources/img/logo.png" alt="logo" class="logo">
-
+    <img src="../static/img/logoSafarity2.png" alt="logo" class="logo">
 </div>
 
 <h1>TICKET:</h1>
 
 <table class="campos-ticket">
-
-    <th>
-    <td>
-        <p>Aporte: <span th:text="${ticketDTO.dineroAportado}"></span></p>
-    </td>
-    <td>
-        <p>Fecha: <span th:text="${ticketDTO.fecha}"></span></p>
-    </td>
-    <td>
-        <p>Participante: <span th:text="${ticket.participanteDTO}"></span></p>
-    </td>
-    <td>
-        <p>Evento: <span th:text="${ticketDTO.eventoDTO}"></span></p>
-    </td>
-
-
-    </th>
-
-    <tr th:each="ticketDTO : ${ticketDTOs}">
+    <thead>
+    <tr>
+        <th>Importe</th>
+        <th>Fecha</th>
+        <th>Participante</th>
+        <th>Evento</th>
+    </tr>
+    </thead>
+    <tr>
         <td>
-            <p>Participante: <span th:text="${ticketDTO.participante}"></span></p>
+            <p>Importe: <span th:text="${ticket.dineroAportado}"></span></p>
+        </td>
+        <td>
+            <p>Fecha: <span th:text="${ticket.fecha}"></span></p>
+        </td>
+        <td>
+            <p>Participante: <span th:text="${ticket.participante}"></span></p>
+        </td>
+        <td>
+            <p>Evento: <span th:text="${ticket.evento}"></span></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>Importe: <span th:text="${ticketDTO.dineroAportado}"></span></p>
+
+        </td>
         <td>
             <p>Fecha: <span th:text="${ticketDTO.fecha}"></span></p>
         </td>
         <td>
-            <p>Evento: <span th:text="${ticketDTO.eventoDTO}"></span></p>
+            <p>Participante: <span th:text="${ticketDTO.participanteDTO}"></span></p>
         </td>
         <td>
-            <p>Aporte: <span th:text="${ticketDTO.dineroAportado}"></span></p>
+            <p>Evento: <span th:text="${ticketDTO.eventoDTO}"></span></p>
         </td>
     </tr>
 </table>
-
 </body>
 </html>
