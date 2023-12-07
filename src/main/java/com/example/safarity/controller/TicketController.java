@@ -74,24 +74,22 @@ public class TicketController {
     }
 
 
-    @GetMapping(value = "/pdf")
+    @GetMapping(value = "/download-pdf")
     public void downloadPDF(HttpServletResponse response) {
         try {
             Path file = Paths.get(pdfService.generateTicketPdf().getAbsolutePath());
             if (Files.exists(file)) {
                 response.setContentType("application/pdf");
-                response.addHeader("Content-Disposition", "attachment; filename" + file.getFileName());
+                response.addHeader("Content-Disposition", "attachment; filename=" + file.getFileName()); // Corregir espacio aquí
                 Files.copy(file, response.getOutputStream());
                 response.getOutputStream().flush();
-
             }
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 
-    @GetMapping("/ticketPDF")
+    @GetMapping("/down-pdf")
     public String mostrarTicket(Model model) {
         // Crea una instancia de Ticket (reemplaza esto con tu lógica de creación de ticket)
         Ticket ticket = new Ticket();
