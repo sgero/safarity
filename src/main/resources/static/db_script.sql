@@ -146,6 +146,24 @@ ALTER TABLE asistente
 
 
 
+--MODIFICACIONES PARA AÑADIR EL CAMPO DE RESEÑA A LA BBDD FINAL
+-- Asegúrate de que no haya restricciones de clave foránea activas
+ALTER TABLE evento_participante
+    DROP CONSTRAINT IF EXISTS evento_evento_participante,
+    DROP CONSTRAINT IF EXISTS participante_evento_participante;
+
+-- Agregar el campo de resenya
+ALTER TABLE evento_participante
+    ADD COLUMN resenya VARCHAR(1000);
+
+
+-- Vuelve a agregar las restricciones de clave foránea
+ALTER TABLE evento_participante
+    ADD CONSTRAINT evento_evento_participante FOREIGN KEY (id_evento) REFERENCES evento(id),
+    ADD CONSTRAINT participante_evento_participante FOREIGN KEY (id_participante) REFERENCES participante(id);
+
+
+
 -- HASTA AQUÍ EL ESQUEMA FINAL
 
 -- CONSULTAS
