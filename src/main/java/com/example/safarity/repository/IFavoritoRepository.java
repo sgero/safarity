@@ -1,20 +1,25 @@
 package com.example.safarity.repository;
 
-import com.example.safarity.model.Evento;
 import com.example.safarity.model.Favorito;
 import com.example.safarity.model.Participante;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import java.util.Optional;
 
-@Repository
 public interface IFavoritoRepository extends JpaRepository<Favorito, Long> {
 
-    List<Favorito> findAllByParticipante(Participante participante);
 
-//    @Query(value = "select e.id_evento from {h-schema} evento_participante e where e.id_participante = :participante", nativeQuery = true)
-//    List<Evento> findAllByParticipante(Participante participante);
+        List<Favorito> findByParticipante(Participante participante);
+
+
+        Optional<Favorito> findByParticipanteIdAndEventoId(Long participanteId, Long eventoId);
+
+
 
 }
+
+
+
+
+
+

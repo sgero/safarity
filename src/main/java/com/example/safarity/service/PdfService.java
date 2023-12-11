@@ -1,7 +1,7 @@
 package com.example.safarity.service;
 
 import com.example.safarity.model.Ticket;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import com.example.safarity.repository.ITicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -20,16 +20,21 @@ public class PdfService {
     private static final String PDF_RESOURCES = "/pdf-resources/";
 
 
-    private SpringTemplateEngine springTemplateEngine;
+    private final SpringTemplateEngine springTemplateEngine;
 
 
-    private TicketService ticketService;
+    private final TicketService ticketService;
+
+    @Autowired
+    private ITicketRepository ticketRepository;
 
 
     @Autowired
     public PdfService(SpringTemplateEngine springTemplateEngine, TicketService ticketService) {
         this.springTemplateEngine = springTemplateEngine;
         this.ticketService = ticketService;
+
+
     }
 
 

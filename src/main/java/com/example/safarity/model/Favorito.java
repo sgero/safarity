@@ -3,13 +3,12 @@ package com.example.safarity.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Table(name = "evento_participante", schema = "safarity", catalog = "postgres")
+@Entity
+@Table(name = "evento_participante", schema = "safarity")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode()
-@Entity
 public class Favorito {
 
     @Id
@@ -17,12 +16,17 @@ public class Favorito {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_participante")
+    private Participante participante;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_evento")
     private Evento evento;
 
-    @ManyToOne
-    @JoinColumn(name = "id_participante")
-    private Participante participante;
+    @Column(name = "resenya")
+    private String resenya;
+
+
 
 }
