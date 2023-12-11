@@ -96,4 +96,14 @@ public class EventoController {
         return eventoService.misFavorito(favoritoDTO);
     }
 
+    @PostMapping(value = "/comprobarFavorito")
+    public Boolean comprobarFavorito(@RequestBody FavoritoDTO favoritoDTO){
+        return eventoService.comprobarFavorito(favoritoDTO);
+    }
+
+    @PostMapping(value = "/eliminarFavorito")
+    public void eliminarFavorito(@RequestBody FavoritoDTO favoritoDTO){
+        eventoService.eliminarFavorito(favoritoDTO);
+    }
+
 }

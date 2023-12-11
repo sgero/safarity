@@ -327,17 +327,34 @@ public class EventoService {
         Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(favoritoDTO.getAlias());
         Participante participante = iParticipanteRepository.findTopByUsuario(usuario.orElse(null));
 
-        List<Favorito> favoritos = iFavoritoRepository.findAllByParticipante(participante);
-
-        List<Evento> listaEventos = new ArrayList<>();
-
-        for (Favorito f : favoritos){
-
-            listaEventos.add(f.getEvento());
-
-        }
+        List<Evento> listaEventos = iFavoritoRepository.findEventosByParticipante(participante);
 
         return eventoMapper.toDTO(listaEventos);
+    }
+
+    public Boolean comprobarFavorito(FavoritoDTO favoritoDTO){
+
+        Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(favoritoDTO.getAlias());
+        Participante participante = iParticipanteRepository.findTopByUsuario(usuario.orElse(null));
+
+        Evento evento = iEventoRepository.findByIdEquals(favoritoDTO.getEvento());
+
+        Optional<Evento> comprobarEvento = iFavoritoRepository.findEventoByParticipante(participante, evento);
+
+        return comprobarEvento.isPresent();
+    }
+
+    public void eliminarFavorito(FavoritoDTO favoritoDTO){
+
+        Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(favoritoDTO.getAlias());
+        Participante participante = iParticipanteRepository.findTopByUsuario(usuario.orElse(null));
+
+        Evento evento = iEventoRepository.findByIdEquals(favoritoDTO.getEvento());
+
+        Optional<Favorito> favorito = iFavoritoRepository.findTopByEventoAndAndParticipante(evento, participante);
+
+        iFavoritoRepository.delete(favorito.orElse(null));
+
     }
 
 }
