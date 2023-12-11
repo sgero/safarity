@@ -6,6 +6,9 @@ import lombok.Data;
 
 @Data
 public class EventoAuxDTO {
+
+    private Long id;
+
     private String nombre;
 
     private String direccion;
