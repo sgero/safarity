@@ -6,8 +6,11 @@ import com.example.safarity.dto.TicketDevDTO;
 import com.example.safarity.model.Ticket;
 import com.example.safarity.service.PdfService;
 import com.example.safarity.service.TicketService;
+import com.example.safarity.service.UsuarioService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +28,13 @@ public class TicketController {
     private final TicketService ticketService;
     private final PdfService pdfService;
 
+    private UsuarioService usuarioService = null;
+
     @Autowired
     public TicketController(TicketService ticketService, PdfService pdfService) {
         this.ticketService = ticketService;
         this.pdfService = pdfService;
+        this.usuarioService = usuarioService;
     }
 
 
@@ -102,5 +108,18 @@ public class TicketController {
         // Retorna el nombre de la plantilla Thymeleaf
         return "ticketPDF"; // nombre de la plantilla
     }
+
+
+    @GetMapping("/obtener-rol")
+    public ResponseEntity<Integer> obtenerRolDelUsuario(@RequestParam String nombreUsuario) {
+        Integer rol = usuarioService.obtenerRolDelUsuario(nombreUsuario);
+
+        if (rol != null) {
+            return ResponseEntity.ok(rol);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Otra respuesta según tu lógica
+        }
+    }
+
 
 }
