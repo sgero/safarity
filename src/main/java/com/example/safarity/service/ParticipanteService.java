@@ -6,9 +6,11 @@ import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Participante;
 import com.example.safarity.model.Token;
+import com.example.safarity.model.Usuario;
 import com.example.safarity.model.enums.Rol;
 import com.example.safarity.repository.IParticipanteRepository;
 import com.example.safarity.repository.ITokenRepository;
+import com.example.safarity.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,9 @@ public class ParticipanteService {
 
     @Autowired
     private ITokenRepository iTokenRepository;
+
+    @Autowired
+    private IUsuarioRepository usuarioRepository;
 
 
 
@@ -111,8 +116,9 @@ public class ParticipanteService {
         }
     }
 
-    public ParticipanteDTO mostrarParticipante(ParticipanteDTO participanteFront){
-        Participante participanteCalcular = participanteRepository.getById(participanteFront.getId());
+    public ParticipanteDTO mostrarParticipante(String alias){
+        Usuario usuario = usuarioRepository.findAllByAliasAndActivoTrue(alias);
+        Participante participanteCalcular = participanteRepository.getByUsuarioEqualsAndActivoTrue(usuario);
 
 //        for (Ticket t : participanteCalcular.getTickets()){
 //            participanteCalcular.setSaldo(participanteCalcular.getSaldo()-t.getDineroAportado());

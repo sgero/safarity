@@ -121,8 +121,10 @@ create table asistente(
 
 create table evento_participante(
 
+    id serial not null,
     id_evento int4 not null,
     id_participante int4 not null,
+    primary key (id),
     constraint evento_evento_participante foreign key (id_evento) references evento(id),
     constraint participante_evento_participante foreign key (id_participante) references participante(id)
 
@@ -146,6 +148,24 @@ ALTER TABLE asistente
 
 
 
+--MODIFICACIONES PARA AÑADIR EL CAMPO DE RESEÑA A LA BBDD FINAL
+-- Asegúrate de que no haya restricciones de clave foránea activas
+ALTER TABLE evento_participante
+    DROP CONSTRAINT IF EXISTS evento_evento_participante,
+    DROP CONSTRAINT IF EXISTS participante_evento_participante;
+
+-- Agregar el campo de resenya
+ALTER TABLE evento_participante
+    ADD COLUMN resenya VARCHAR(1000);
+
+
+-- Vuelve a agregar las restricciones de clave foránea
+ALTER TABLE evento_participante
+    ADD CONSTRAINT evento_evento_participante FOREIGN KEY (id_evento) REFERENCES evento(id),
+    ADD CONSTRAINT participante_evento_participante FOREIGN KEY (id_participante) REFERENCES participante(id);
+
+
+
 -- HASTA AQUÍ EL ESQUEMA FINAL
 
 -- CONSULTAS
@@ -158,4 +178,4 @@ select * from organizacion;
 select * from evento;
 select * from ticket;
 
-
+select e.id_evento from evento_participante e where e.id_participante = 2;

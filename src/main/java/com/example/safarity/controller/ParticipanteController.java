@@ -44,8 +44,8 @@ public class ParticipanteController {
     }
 
     @PostMapping(value = "/mostrarParticipante")
-    public ParticipanteDTO mostrarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
-        return participanteService.mostrarParticipante(participanteDTO);
+    public ParticipanteDTO mostrarParticipante(@RequestBody String alias) {
+        return participanteService.mostrarParticipante(alias);
     }
 
     @PostMapping(value = "/participanteToken")
