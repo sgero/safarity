@@ -121,8 +121,10 @@ create table asistente(
 
 create table evento_participante(
 
+    id serial not null,
     id_evento int4 not null,
     id_participante int4 not null,
+    primary key (id),
     constraint evento_evento_participante foreign key (id_evento) references evento(id),
     constraint participante_evento_participante foreign key (id_participante) references participante(id)
 
@@ -176,4 +178,4 @@ select * from organizacion;
 select * from evento;
 select * from ticket;
 
-
+select e.id_evento from evento_participante e where e.id_participante = 2;

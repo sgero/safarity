@@ -20,7 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 //@RequiredArgsConstructor
@@ -110,4 +112,18 @@ public class UsuarioService {
         return null;
     }
 
+
+    private Map<String, Integer> usuariosYRoles = new HashMap<>();
+
+    public UsuarioService() {
+        // Inicialización de usuarios y roles (esto podría obtenerse de una base de datos)
+        usuariosYRoles.put("ADMIN", 0);
+        usuariosYRoles.put("ORGANIZACION", 1);
+        usuariosYRoles.put("PARTICIPANTE", 2);
+    }
+
+    public Integer obtenerRolDelUsuario(String nombreUsuario) {
+        // Simulación de obtener el rol del usuario desde la base de datos
+        return usuariosYRoles.get(nombreUsuario);
+    }
 }

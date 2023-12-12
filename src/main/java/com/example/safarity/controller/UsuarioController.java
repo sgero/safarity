@@ -5,6 +5,8 @@ import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.ITokenRepository;
 import com.example.safarity.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,4 +44,15 @@ public class UsuarioController {
         iTokenRepository.delete(iTokenRepository.findTopByTokenEquals(token));
     }
 
+
+    @GetMapping("/obtener-rol")
+    public ResponseEntity<Integer> obtenerRolDelUsuario(@RequestParam String nombreUsuario) {
+        Integer rol = Integer.valueOf(usuarioService.getUserRol(nombreUsuario));
+
+        if (rol != null) {
+            return ResponseEntity.ok(rol);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Otra respuesta según tu lógica
+        }
+    }
 }
