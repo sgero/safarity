@@ -1,7 +1,9 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.UsuarioMapper;
+import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.dto.UsuarioDTO;
+import com.example.safarity.model.Participante;
 import com.example.safarity.model.Token;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.ITicketRepository;
@@ -126,4 +128,11 @@ public class UsuarioService {
         // Simulación de obtener el rol del usuario desde la base de datos
         return usuariosYRoles.get(nombreUsuario);
     }
+
+    public UsuarioDTO mostrarUsuario(String alias){
+        Usuario usuario = usuarioRepository.findAllByAliasAndActivoTrue(alias);
+
+        return usuarioMapper.toDTO(usuario);
+    }
+
 }
