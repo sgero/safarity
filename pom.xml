@@ -180,7 +180,18 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+            <!-- Configuración para desactivar la compartición de clases -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <jvmArguments>
+                        <jvmArgument>-Xshare:off</jvmArgument>
+                    </jvmArguments>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
 
 </project>

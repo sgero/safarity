@@ -1,5 +1,6 @@
 package com.example.safarity.controller;
 
+import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.dto.UsuarioDTO;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.ITokenRepository;
@@ -55,4 +56,11 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Otra respuesta según tu lógica
         }
     }
+
+    @PostMapping(value = "/mostrarUsuario")
+    public UsuarioDTO mostrarParticipante(@RequestBody String alias) {
+        return usuarioService.mostrarUsuario(alias);
+    }
+
+
 }
