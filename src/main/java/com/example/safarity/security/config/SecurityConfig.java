@@ -51,6 +51,7 @@ public class SecurityConfig {
                                 .requestMatchers("/participante/crear").permitAll()
                                 .requestMatchers("/organizacion/eliminar").permitAll()
                                 .requestMatchers("/organizacion/buscar").permitAll()
+                                .requestMatchers("/participante/saldo").permitAll()
                                 .requestMatchers("/organizacion/mostrarcalculado").permitAll()
                                 .requestMatchers("/participante/mostrarParticipante").permitAll()
                                 .requestMatchers("/participante/participanteToken").permitAll()
