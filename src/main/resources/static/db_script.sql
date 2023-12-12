@@ -1,3 +1,4 @@
+drop table if exists resenya;
 drop table if exists asistente;
 drop table if exists ticket;
 drop table if exists evento_participante;
@@ -141,6 +142,18 @@ create table token(
 
 );
 
+create table resenya(
+
+                      id serial not null,
+                      estrella numeric NOT NULL check (estrella between 1 and 5),
+                      texto varchar(1000) not null,
+                      id_evento int4 not null,
+                      id_usuario int4 not null,
+                      constraint resenya_usuario foreign key (id_usuario) references usuario(id),
+                      constraint resenya_evento foreign key (id_evento) references evento(id)
+
+);
+
 
 ALTER TABLE asistente
     ALTER COLUMN id_ticket DROP NOT NULL;
@@ -156,7 +169,7 @@ ALTER TABLE evento_participante
 
 -- Agregar el campo de resenya
 ALTER TABLE evento_participante
-    ADD COLUMN resenya VARCHAR(1000);
+    drop COLUMN if exists resenya;
 
 
 -- Vuelve a agregar las restricciones de clave foránea
