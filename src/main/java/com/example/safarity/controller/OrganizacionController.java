@@ -1,5 +1,7 @@
 package com.example.safarity.controller;
 
+import com.example.safarity.converter.EventoMapper;
+import com.example.safarity.converter.OrganizacionMapper;
 import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.OrganizacionDTO;
 import com.example.safarity.model.Organizacion;
@@ -17,6 +19,9 @@ public class OrganizacionController {
     @Autowired
     private OrganizacionService organizacionService;
 
+    @Autowired
+    private OrganizacionMapper organizacionMapper;
+
     @GetMapping(value = "/listar")
     public List<OrganizacionDTO> listarOrganizacion() {
         return organizacionService.listarOrganizacion();
@@ -28,8 +33,8 @@ public class OrganizacionController {
     }
 
     @PutMapping(value = "/modificar")
-    public Organizacion modificarOrganizacion(@RequestBody OrganizacionDTO organizacionDTO) {
-        return organizacionService.modificarOrganizacion(organizacionDTO);
+    public OrganizacionDTO modificarOrganizacion(@RequestBody OrganizacionDTO organizacionDTO) {
+        return organizacionMapper.toDTO(organizacionService.modificarOrganizacion(organizacionDTO));
     }
 
     //@DeleteMapping

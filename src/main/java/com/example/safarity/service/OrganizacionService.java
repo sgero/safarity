@@ -1,5 +1,6 @@
 package com.example.safarity.service;
 
+import com.example.safarity.converter.EventoMapper;
 import com.example.safarity.converter.OrganizacionMapper;
 import com.example.safarity.dto.BusquedaDTO;
 import com.example.safarity.dto.OrganizacionDTO;
@@ -7,6 +8,8 @@ import com.example.safarity.model.Evento;
 import com.example.safarity.model.Organizacion;
 import com.example.safarity.model.Ticket;
 import com.example.safarity.model.Usuario;
+import com.example.safarity.model.enums.TipoEvento;
+import com.example.safarity.model.enums.TipoPago;
 import com.example.safarity.repository.IEventoRepository;
 import com.example.safarity.repository.IOrganizacionRepository;
 import com.example.safarity.repository.IUsuarioRepository;
@@ -53,13 +56,19 @@ public class OrganizacionService {
 
         if (organizacion == null) {
             return null;
-        } else {
+        }
+        else
+        {
+
             organizacion.setNombre(organizacionDTO.getNombre());
             organizacion.setEmail(organizacionDTO.getEmail());
+            organizacion.setCif(organizacionDTO.getCif());
             organizacion.setTelefono(organizacionDTO.getTelefono());
             organizacion.setInfo(organizacionDTO.getInfo());
             organizacion.setSitioWeb(organizacionDTO.getSitioWeb());
             organizacion.setLogo(organizacionDTO.getLogo());
+            organizacion.setDireccion(organizacionDTO.getDireccion());
+
 
             Organizacion organizacionModificado = organizacionRepository.save(organizacion);
             return organizacionModificado;
