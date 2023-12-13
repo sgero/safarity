@@ -22,7 +22,7 @@ public class ResenyaController {
 
     @GetMapping(value = "/listar")
     public List<ResenyaDTO> listarResenya() {
-        return resenyaService.listarResenya();
+        return resenyaService.listarResenyaAll();
     }
 
 
@@ -42,4 +42,10 @@ public class ResenyaController {
     public String eliminarResenya(@RequestBody ResenyaDTO resenyaDTO) {
         return resenyaService.eliminarResenya(resenyaDTO);
     }
+
+    @PostMapping(value = "/listaresenya")
+    public List<ResenyaDTO> listarResenyaSegunEvento(@RequestBody Long id_evento) {
+        return resenyaService.listarResenyaSegunEvento(id_evento);
+    }
+
 }
