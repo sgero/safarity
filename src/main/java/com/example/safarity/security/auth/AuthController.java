@@ -148,10 +148,9 @@ public class AuthController {
 
     @PostMapping("/registerOrganizacion")
     public AuthDTO registerOrganizacion(@RequestBody OrganizacionDTO organizacionDTO){
-        for (Organizacion o : iOrganizacionRepository.findAll()) {
-            if (o.getCif().equals(organizacionDTO.getCif()) || o.getUsuario().getAlias().equals(organizacionDTO.getUsuarioDTO().getAlias())) {
-                return AuthDTO.builder().info("Ya existe").build();
-            }
+        Organizacion organizacion = iOrganizacionRepository.orgCifAlias(organizacionDTO.getCif(),organizacionDTO.getUsuarioDTO().getAlias());
+        if (organizacion != null){
+            return AuthDTO.builder().info("Ya existe").build();
         }
         organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
         Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
