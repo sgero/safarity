@@ -55,4 +55,8 @@ public class ParticipanteController {
 
     }
 
+    @PutMapping(value = "/saldo")
+    public ParticipanteDTO aumentarSaldo(@RequestBody ParticipanteDTO participanteDTO) {
+        return participanteService.aumentarSaldo(participanteDTO);
+    }
 }

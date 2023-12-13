@@ -135,4 +135,11 @@ public class ParticipanteService {
 
     }
 
+    public ParticipanteDTO aumentarSaldo(ParticipanteDTO participanteDTO){
+        Participante participante = participanteRepository.findById(participanteDTO.getId()).orElse(null);
+        participante.setSaldo(participanteDTO.getSaldo());
+        participanteRepository.save(participante);
+        return participanteMapper.toDTO(participante);
+    }
+
 }
