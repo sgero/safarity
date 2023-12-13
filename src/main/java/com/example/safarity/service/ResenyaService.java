@@ -2,7 +2,10 @@ package com.example.safarity.service;
 
 
 import com.example.safarity.converter.AsistenteMapper;
+import com.example.safarity.dto.EventoDTO;
+import com.example.safarity.model.Evento;
 import com.example.safarity.repository.IAsistenteRepository;
+import com.example.safarity.repository.IEventoRepository;
 import org.springframework.stereotype.Service;
 import com.example.safarity.converter.ResenyaMapper;
 import com.example.safarity.dto.ResenyaDTO;
@@ -12,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Service
@@ -24,19 +27,27 @@ public class ResenyaService {
     @Autowired
     private ResenyaMapper resenyaMapper;
 
+    @Autowired
+    private IEventoRepository eventoRepository;
 
 
         public Resenya getById(Integer id) {
         return resenyaRepository.findById(id).orElse(null);
     }
 
-    public List<ResenyaDTO> listarResenya() {
+    public List<ResenyaDTO> listarResenyaAll() {
 
         List<ResenyaDTO> listResenyas = new ArrayList<>();
         resenyaRepository.findAll().forEach(a -> listResenyas.add(resenyaMapper.toDTO(a)));
 
         return listResenyas;
 
+    }
+
+
+    public List<ResenyaDTO> listarResenyaSegunEvento(Long id_evento) {
+         Optional<Evento> evento = eventoRepository.findById(id_evento);
+         return resenyaMapper.toDTO(resenyaRepository.findAllByEvento(evento.orElse(null)));
     }
 
     public ResenyaDTO crearResenya(ResenyaDTO resenyaDTO) {

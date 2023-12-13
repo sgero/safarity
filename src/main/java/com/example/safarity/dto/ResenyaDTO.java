@@ -16,7 +16,7 @@ public class ResenyaDTO {
     @NotBlank
     private String texto;
 
-    private Integer id_evento;
+    private EventoDTO eventoDTO;
 
-    private Integer id_usuario;
+    private UsuarioDTO usuarioDTO;
 }
