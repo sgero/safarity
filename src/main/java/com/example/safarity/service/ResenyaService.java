@@ -4,8 +4,11 @@ package com.example.safarity.service;
 import com.example.safarity.converter.AsistenteMapper;
 import com.example.safarity.dto.EventoDTO;
 import com.example.safarity.model.Evento;
+import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.IAsistenteRepository;
 import com.example.safarity.repository.IEventoRepository;
+import com.example.safarity.repository.IUsuarioRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.stereotype.Service;
 import com.example.safarity.converter.ResenyaMapper;
 import com.example.safarity.dto.ResenyaDTO;
@@ -29,6 +32,9 @@ public class ResenyaService {
 
     @Autowired
     private IEventoRepository eventoRepository;
+
+    @Autowired
+    private IUsuarioRepository usuarioRepository;
 
 
         public Resenya getById(Integer id) {
@@ -86,5 +92,13 @@ public class ResenyaService {
         }
     }
 
+    public ResenyaDTO comprobarResenyaSegunEvento(ResenyaDTO resenyaDTO) {
+
+        Optional<Evento> evento = eventoRepository.findTopById(resenyaDTO.getEventoDTO().getId());
+
+        Optional<Usuario> usuario = usuarioRepository.findTopByAlias(resenyaDTO.getTexto());
+
+        return resenyaMapper.toDTO(resenyaRepository.findTopByEventoAndUsuario(evento.orElse(null), usuario.orElse(null)));
+    }
 
 }
