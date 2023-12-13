@@ -29,7 +29,7 @@ public class ParticipanteController {
     }
 
     @PutMapping(value = "/modificar")
-    public Participante modificarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
+    public ParticipanteDTO modificarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
         return participanteService.modificarParticipante(participanteDTO);
     }
 

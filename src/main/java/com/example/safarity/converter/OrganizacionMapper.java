@@ -51,7 +51,7 @@ public abstract class OrganizacionMapper {
     }
 
     @Named(value = "conversorStringFecha")
-    LocalDate StringToLocalDate(String fecha) {
+    public LocalDate StringToLocalDate(String fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(fecha, formatter);
     }
