@@ -127,11 +127,15 @@ public class AuthController {
 
     @PostMapping("/register")
     public AuthDTO register(@RequestBody ParticipanteDTO participanteDTO){
-        for (Participante p : iParticipanteRepository.findAll()){
-            if (p.getEmail().equals(participanteDTO.getEmail()) || p.getDni().equals(participanteDTO.getDni()) || p.getUsuario().getAlias().equals(participanteDTO.getUsuarioDTO().getAlias())){
-                return AuthDTO.builder().info("El usuario que estáintentando crear ya existe").build();
-            }
+        Participante participante = iParticipanteRepository.orgCifAlias(participanteDTO.getDni(),participanteDTO.getUsuarioDTO().getAlias(),participanteDTO.getEmail());
+        if (participante != null){
+            return AuthDTO.builder().info("Ya existe").build();
         }
+//        for (Participante p : iParticipanteRepository.findAll()){
+//            if (p.getEmail().equals(participanteDTO.getEmail()) || p.getDni().equals(participanteDTO.getDni()) || p.getUsuario().getAlias().equals(participanteDTO.getUsuarioDTO().getAlias())){
+//                return AuthDTO.builder().info("El usuario que estáintentando crear ya existe").build();
+//            }
+//        }
         participanteDTO.getUsuarioDTO().setRol(Rol.PARTICIPANTE);
         Participante participanteNuevo = participanteService.save(participanteDTO);
         String token = jwtService.generateToken(participanteNuevo.getUsuario());
@@ -148,10 +152,9 @@ public class AuthController {
 
     @PostMapping("/registerOrganizacion")
     public AuthDTO registerOrganizacion(@RequestBody OrganizacionDTO organizacionDTO){
-        for (Organizacion o : iOrganizacionRepository.findAll()) {
-            if (o.getCif().equals(organizacionDTO.getCif()) || o.getUsuario().getAlias().equals(organizacionDTO.getUsuarioDTO().getAlias())) {
-                return AuthDTO.builder().info("Ya existe").build();
-            }
+        Organizacion organizacion = iOrganizacionRepository.orgCifAlias(organizacionDTO.getCif(),organizacionDTO.getUsuarioDTO().getAlias());
+        if (organizacion != null){
+            return AuthDTO.builder().info("Ya existe").build();
         }
         organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
         Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
