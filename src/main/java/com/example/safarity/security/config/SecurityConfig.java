@@ -60,6 +60,7 @@ public class SecurityConfig {
                                 .requestMatchers("/asistente/**").permitAll()
                                 .requestMatchers("/enviar-mensaje").permitAll()
                                 .requestMatchers("/obtener-rol").permitAll()
+                                .requestMatchers("/resenya/**").permitAll()
                                 .requestMatchers("/usuario/listar").hasAnyAuthority(Rol.ADMIN.name())
                                 .requestMatchers("/admin/**").hasAnyAuthority(Rol.ADMIN.name())
                                 .anyRequest().authenticated()
