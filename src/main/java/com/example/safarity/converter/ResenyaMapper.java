@@ -13,7 +13,13 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ResenyaMapper {
 
-    List<Resenya> toEntity(List<ResenyaDTO> entitys);
+    Resenya toEntity(ResenyaDTO dto);
 
-    List<ResenyaDTO> toDTO(List<Resenya> dtos);
+    ResenyaDTO toDTO(Resenya entity);
+
+    List<Resenya> toEntity(List<ResenyaDTO> dtos);
+
+    List<ResenyaDTO> toDTO(List<Resenya> entitys);
+
+
 }
