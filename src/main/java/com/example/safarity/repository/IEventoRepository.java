@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IEventoRepository extends JpaRepository<Evento, Long> {
@@ -39,5 +40,7 @@ public interface IEventoRepository extends JpaRepository<Evento, Long> {
             "AND (:nombre IS NULL OR LOWER(e.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))) " +
             "AND e.activo IS TRUE ORDER BY e.nombre", nativeQuery = true)
     List<Evento>consultabuscador(String nombre,Integer tipoEvento,Integer tipoPago,Integer mes);
+
+    Optional<Evento> findTopById(Long id);
 
 }

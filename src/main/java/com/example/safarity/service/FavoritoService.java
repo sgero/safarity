@@ -52,12 +52,10 @@ public class FavoritoService {
 //        return eventosFavoritos;
 //    }
 
-    public void agregarResenya(Long participanteId, Long eventoId, String resenya) {
+    public void agregarResenya(Long participanteId, Long eventoId) {
         // Lógica para agregar reseña a un evento
         Favorito favorito = favoritoRepository.findByParticipanteIdAndEventoId(participanteId, eventoId)
                 .orElseThrow(() -> new RuntimeException("No se encontró el evento"));
-
-        favorito.setResenya(resenya);
         favoritoRepository.save(favorito);
 
         // Puedes actualizar el evento en la base de datos con la nueva reseña

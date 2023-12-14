@@ -1,6 +1,7 @@
 package com.example.safarity.controller;
 
 import com.example.safarity.converter.ResenyaMapper;
+import com.example.safarity.dto.FavoritoDTO;
 import com.example.safarity.dto.ResenyaDTO;
 import com.example.safarity.service.ResenyaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,16 @@ public class ResenyaController {
     @PostMapping(value = "/listaresenya")
     public List<ResenyaDTO> listarResenyaSegunEvento(@RequestBody Long id_evento) {
         return resenyaService.listarResenyaSegunEvento(id_evento);
+    }
+
+    @PostMapping(value = "/comprobaresenya")
+    public ResenyaDTO comprobarResenyaSegunEvento(@RequestBody ResenyaDTO resenyaDTO) {
+        return resenyaService.comprobarResenyaSegunEvento(resenyaDTO);
+    }
+
+    @PostMapping(value = "/valoracionmedia")
+    public Double valoracionMedia(@RequestBody Long id_evento) {
+        return resenyaService.valoracionMedia(id_evento);
     }
 
 }
