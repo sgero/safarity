@@ -192,3 +192,4 @@ select * from evento;
 select * from ticket;
 
 select e.id_evento from evento_participante e where e.id_participante = 2;
+alter table evento alter column imagen type varchar (50000);
