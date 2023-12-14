@@ -129,7 +129,7 @@ public class AuthController {
     public AuthDTO register(@RequestBody ParticipanteDTO participanteDTO){
         Participante participante = iParticipanteRepository.orgCifAlias(participanteDTO.getDni(),participanteDTO.getUsuarioDTO().getAlias(),participanteDTO.getEmail());
         if (participante != null){
-            return AuthDTO.builder().info("Ya existe").build();
+            return AuthDTO.builder().info("El usuario ya existe").build();
         }
 //        for (Participante p : iParticipanteRepository.findAll()){
 //            if (p.getEmail().equals(participanteDTO.getEmail()) || p.getDni().equals(participanteDTO.getDni()) || p.getUsuario().getAlias().equals(participanteDTO.getUsuarioDTO().getAlias())){
@@ -154,7 +154,7 @@ public class AuthController {
     public AuthDTO registerOrganizacion(@RequestBody OrganizacionDTO organizacionDTO){
         Organizacion organizacion = iOrganizacionRepository.orgCifAlias(organizacionDTO.getCif(),organizacionDTO.getUsuarioDTO().getAlias());
         if (organizacion != null){
-            return AuthDTO.builder().info("Ya existe").build();
+            return AuthDTO.builder().info("La organizacion ya existe").build();
         }
         organizacionDTO.getUsuarioDTO().setRol(Rol.ORGANIZACION);
         Organizacion organizacionNueva = organizacionService.save(organizacionDTO);
