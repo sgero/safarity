@@ -1,7 +1,9 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.UsuarioMapper;
+import com.example.safarity.dto.ParticipanteDTO;
 import com.example.safarity.dto.UsuarioDTO;
+import com.example.safarity.model.Participante;
 import com.example.safarity.model.Token;
 import com.example.safarity.model.Usuario;
 import com.example.safarity.repository.ITicketRepository;
@@ -20,7 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 //@RequiredArgsConstructor
@@ -108,6 +112,27 @@ public class UsuarioService {
             return loggedInUser.getAlias().toString();
         }
         return null;
+    }
+
+
+    private Map<String, Integer> usuariosYRoles = new HashMap<>();
+
+    public UsuarioService() {
+        // Inicialización de usuarios y roles (esto podría obtenerse de una base de datos)
+        usuariosYRoles.put("ADMIN", 0);
+        usuariosYRoles.put("ORGANIZACION", 1);
+        usuariosYRoles.put("PARTICIPANTE", 2);
+    }
+
+    public Integer obtenerRolDelUsuario(String nombreUsuario) {
+        // Simulación de obtener el rol del usuario desde la base de datos
+        return usuariosYRoles.get(nombreUsuario);
+    }
+
+    public UsuarioDTO mostrarUsuario(String alias){
+        Usuario usuario = usuarioRepository.findAllByAliasAndActivoTrue(alias);
+
+        return usuarioMapper.toDTO(usuario);
     }
 
 }

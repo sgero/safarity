@@ -23,11 +23,11 @@ public class FavoritoController {
         return ResponseEntity.ok("Evento agregado a favoritos");
     }
 
-    @GetMapping("/eventos/{participanteId}")
-    public ResponseEntity<List<Favorito>> obtenerEventosFavoritos(@PathVariable Long participanteId) {
-        List<Favorito> eventos = favoritoService.obtenerEventosFavoritos(participanteId);
-        return ResponseEntity.ok(eventos);
-    }
+//    @GetMapping("/eventos/{participanteId}")
+//    public ResponseEntity<List<Favorito>> obtenerEventosFavoritos(@PathVariable Long participanteId) {
+//        List<Favorito> eventos = favoritoService.obtenerEventosFavoritos(participanteId);
+//        return ResponseEntity.ok(eventos);
+//    }
 
     @PostMapping("/resenyas")
     public ResponseEntity<String> agregarResenya(@RequestParam Long participanteId, @RequestParam Long eventoId, @RequestBody String resenya) {

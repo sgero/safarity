@@ -42,15 +42,15 @@ public class FavoritoService {
     }
 
 
-    @GetMapping(value = "/eventos/{participanteId}")
-    public List<Favorito> obtenerEventosFavoritos(@PathVariable Long participanteId) {
-        // Lógica para obtener eventos favoritos de un participante
-        Participante participante = participanteRepository.findById(Math.toIntExact(participanteId))
-                .orElseThrow(() -> new RuntimeException("Participante no encontrado"));
-
-        List<Favorito> eventosFavoritos = favoritoRepository.findByParticipante(participante);
-        return eventosFavoritos;
-    }
+//    @GetMapping(value = "/eventos/{participanteId}")
+//    public List<Favorito> obtenerEventosFavoritos(@PathVariable Long participanteId) {
+//        // Lógica para obtener eventos favoritos de un participante
+//        Participante participante = participanteRepository.findById(Math.toIntExact(participanteId))
+//                .orElseThrow(() -> new RuntimeException("Participante no encontrado"));
+//
+//        List<Favorito> eventosFavoritos = favoritoRepository.findByParticipante(participante);
+//        return eventosFavoritos;
+//    }
 
     public void agregarResenya(Long participanteId, Long eventoId, String resenya) {
         // Lógica para agregar reseña a un evento

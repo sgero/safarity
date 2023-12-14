@@ -66,7 +66,7 @@ public class ParticipanteService {
         return participanteMapper.toDTO(participanteRepository.save(participanteMapper.toEntity(participanteDTO)));
     }
 
-    public Participante modificarParticipante(ParticipanteDTO participanteDTO) {
+    public ParticipanteDTO modificarParticipante(ParticipanteDTO participanteDTO) {
         Participante participante = participanteRepository.findById(participanteDTO.getId()).orElse(null);
 
         if (participante == null) {
@@ -83,7 +83,7 @@ public class ParticipanteService {
 
             Participante participanteModificado = participanteRepository.save(participante);
 
-            return participanteModificado;
+            return participanteMapper.toDTO(participanteModificado);
         }
     }
 
@@ -133,6 +133,13 @@ public class ParticipanteService {
         Token token1 = iTokenRepository.findTopByTokenEquals(token);
         return participanteMapper.toDTO(participanteRepository.findTopByUsuario(token1.getUsuario()));
 
+    }
+
+    public ParticipanteDTO aumentarSaldo(ParticipanteDTO participanteDTO){
+        Participante participante = participanteRepository.findById(participanteDTO.getId()).orElse(null);
+        participante.setSaldo(participanteDTO.getSaldo());
+        participanteRepository.save(participante);
+        return participanteMapper.toDTO(participante);
     }
 
 }

@@ -1,16 +1,14 @@
 package com.example.safarity.service;
 
 import com.example.safarity.converter.EventoMapper;
+import com.example.safarity.converter.FavoritoMapper;
 import com.example.safarity.converter.OrganizacionMapper;
 import com.example.safarity.converter.UsuarioMapper;
 import com.example.safarity.dto.*;
 import com.example.safarity.model.*;
 import com.example.safarity.model.enums.TipoEvento;
 import com.example.safarity.model.enums.TipoPago;
-import com.example.safarity.repository.IEventoRepository;
-import com.example.safarity.repository.IOrganizacionRepository;
-import com.example.safarity.repository.ITokenRepository;
-import com.example.safarity.repository.IUsuarioRepository;
+import com.example.safarity.repository.*;
 import com.example.safarity.security.auth.TokenDataDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,6 +65,15 @@ public class EventoService {
 
     @Autowired
     private ITokenRepository iTokenRepository;
+
+    @Autowired
+    private IFavoritoRepository iFavoritoRepository;
+
+    @Autowired
+    private FavoritoMapper favoritoMapper;
+
+    @Autowired
+    private IParticipanteRepository iParticipanteRepository;
 
 
     public Evento getById(Long id){
@@ -147,8 +154,8 @@ public class EventoService {
     }
 
     //Modificar un EVENTO
-    public Evento modificarEvento(EventoDTO eventoDTO) {
-        Evento evento = eventoRepository.findById(eventoDTO.getId()).orElse(null);
+    public Evento modificarEvento(EventoAuxDTO eventoAuxDTO) {
+        Evento evento = eventoRepository.findById(eventoAuxDTO.getId()).orElse(null);
 
         if (evento == null) {
             return null;
@@ -156,18 +163,23 @@ public class EventoService {
         else
         {
 
-        evento.setNombre(eventoDTO.getNombre());
-        evento.setDescripcion(eventoDTO.getDescripcion());
-        evento.setDireccion(eventoDTO.getDireccion());
-        evento.setImagen(eventoDTO.getImagen());
-        evento.setAforo(eventoDTO.getAforo());
+        evento.setNombre(eventoAuxDTO.getNombre());
+        evento.setDescripcion(eventoAuxDTO.getDescripcion());
+        evento.setDireccion(eventoAuxDTO.getDireccion());
+        evento.setImagen(eventoAuxDTO.getImagen());
+        evento.setAforo(eventoAuxDTO.getAforo());
+            if (eventoAuxDTO.getTipoPago().equals("PRECIO_FIJO")) {
+                evento.setPrecio(eventoAuxDTO.getPrecio());
+            }else {
+                evento.setPrecio(0.00);
+            }
 //        evento.setTotalAsistentes(eventoDTO.getTotalAsistentes());
-        evento.setTipoEvento(eventoDTO.getTipoEvento());
-        evento.setTipoPago(eventoDTO.getTipoPago());
-        evento.setFechaInicio(eventoMapper.StringToLocalDate(eventoDTO.getFecha_inicio()));
-        evento.setFechaFin(eventoMapper.StringToLocalDate(eventoDTO.getFecha_fin()));
-        evento.setFechaLanzamiento(eventoMapper.StringToLocalDate(eventoDTO.getFecha_lanzamiento()));
-        evento.setFechaVentaDisponible(eventoMapper.StringToLocalDate(eventoDTO.getFecha_venta()));
+        evento.setTipoEvento(TipoEvento.valueOf(eventoAuxDTO.getTipoEvento()));
+        evento.setTipoPago(TipoPago.valueOf(eventoAuxDTO.getTipoPago()));
+        evento.setFechaInicio(eventoMapper.StringToLocalDate(eventoAuxDTO.getFecha_inicio()));
+        evento.setFechaFin(eventoMapper.StringToLocalDate(eventoAuxDTO.getFecha_fin()));
+        evento.setFechaLanzamiento(eventoMapper.StringToLocalDate(eventoAuxDTO.getFecha_lanzamiento()));
+        evento.setFechaVentaDisponible(eventoMapper.StringToLocalDate(eventoAuxDTO.getFecha_venta()));
 //        evento.setEntradasVendidas(eventoDTO.getEntradasVendidas());
 
         Evento eventoModificado = eventoRepository.save(evento);
@@ -226,24 +238,25 @@ public class EventoService {
     }
 
     public  List<EventoDTO> busquedaEvento(BusquedaDTO busquedaDTO){
-        List<Evento> eventosBuscados = iEventoRepository.findAll();
-
-        if (!busquedaDTO.getBusqueda().isEmpty()){
-           eventosBuscados.retainAll(iEventoRepository.findByNombreContainingIgnoreCaseAndActivoTrue(busquedaDTO.getBusqueda()));
-//            for (Evento e : eventoRepository.findAll()){
-//
-//            }
-        }
-        if (!busquedaDTO.getTipoEvento().isEmpty()){
-            eventosBuscados.retainAll(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(TipoEvento.valueOf(busquedaDTO.getTipoEvento())));
-        }
-        if (!busquedaDTO.getTipoPago().isEmpty()) {
-            eventosBuscados.retainAll(iEventoRepository.findAllByTipoPagoEqualsAndActivoTrueOrderByNombre(TipoPago.valueOf(busquedaDTO.getTipoPago())));
-        }
-        if (busquedaDTO.getFecha() != 0) {
-            eventosBuscados.retainAll(iEventoRepository.obtenerEventosMes(busquedaDTO.getFecha()));
-        }
-        return eventoMapper.toDTO(eventosBuscados);
+       // List<Evento> eventosBuscados = iEventoRepository.findAll();
+        List<Evento> eventosbuscaditos= iEventoRepository.consultabuscador(busquedaDTO.getBusqueda().isEmpty() ? null :busquedaDTO.getBusqueda(),busquedaDTO.getTipoEvento().isEmpty() ? null :TipoEvento.valueOf(busquedaDTO.getTipoEvento()).ordinal(),busquedaDTO.getTipoPago().isEmpty() ? null :TipoPago.valueOf(busquedaDTO.getTipoPago()).ordinal(),busquedaDTO.getFecha() == 0 ? null :busquedaDTO.getFecha());
+//        if (!busquedaDTO.getBusqueda().isEmpty()){
+//           eventosBuscados.retainAll(iEventoRepository.findByNombreContainingIgnoreCaseAndActivoTrue(busquedaDTO.getBusqueda()));
+////            for (Evento e : eventoRepository.findAll()){
+////
+////            }
+//        }
+//        if (!busquedaDTO.getTipoEvento().isEmpty()){
+//            eventosBuscados.retainAll(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(TipoEvento.valueOf(busquedaDTO.getTipoEvento())));
+//        }
+//        if (!busquedaDTO.getTipoPago().isEmpty()) {
+//            eventosBuscados.retainAll(iEventoRepository.findAllByTipoPagoEqualsAndActivoTrueOrderByNombre(TipoPago.valueOf(busquedaDTO.getTipoPago())));
+//        }
+//        if (busquedaDTO.getFecha() != 0) {
+//            eventosBuscados.retainAll(iEventoRepository.obtenerEventosMes(busquedaDTO.getFecha()));
+//        }
+//        eventoMapper.toDTO(eventosBuscados);
+        return eventoMapper.toDTO(eventosbuscaditos);
     }
 
 
@@ -300,5 +313,54 @@ public class EventoService {
         return eventoMapper.toDTO(eventoRepository.findAllByOrganizacionEquals(org));
     }
 
+    public void favorito(FavoritoDTO favoritoDTO){
+
+        Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(favoritoDTO.getAlias());
+        Participante participante = iParticipanteRepository.findTopByUsuario(usuario.orElse(null));
+        Evento evento = iEventoRepository.findByIdEquals(favoritoDTO.getEvento());
+
+        Favorito favorito = new Favorito();
+
+        favorito.setEvento(evento);
+        favorito.setParticipante(participante);
+
+        iFavoritoRepository.save(favorito);
+
+    }
+
+    public List<EventoDTO> misFavorito(FavoritoDTO favoritoDTO){
+
+        Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(favoritoDTO.getAlias());
+        Participante participante = iParticipanteRepository.findTopByUsuario(usuario.orElse(null));
+
+        List<Evento> listaEventos = iFavoritoRepository.findEventosByParticipante(participante);
+
+        return eventoMapper.toDTO(listaEventos);
+    }
+
+    public Boolean comprobarFavorito(FavoritoDTO favoritoDTO){
+
+        Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(favoritoDTO.getAlias());
+        Participante participante = iParticipanteRepository.findTopByUsuario(usuario.orElse(null));
+
+        Evento evento = iEventoRepository.findByIdEquals(favoritoDTO.getEvento());
+
+        Optional<Evento> comprobarEvento = iFavoritoRepository.findEventoByParticipante(participante, evento);
+
+        return comprobarEvento.isPresent();
+    }
+
+    public void eliminarFavorito(FavoritoDTO favoritoDTO){
+
+        Optional<Usuario> usuario = iUsuarioRepository.findTopByAlias(favoritoDTO.getAlias());
+        Participante participante = iParticipanteRepository.findTopByUsuario(usuario.orElse(null));
+
+        Evento evento = iEventoRepository.findByIdEquals(favoritoDTO.getEvento());
+
+        Optional<Favorito> favorito = iFavoritoRepository.findTopByEventoAndAndParticipante(evento, participante);
+
+        iFavoritoRepository.delete(favorito.orElse(null));
+
+    }
 
 }

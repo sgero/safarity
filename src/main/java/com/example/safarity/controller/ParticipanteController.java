@@ -29,7 +29,7 @@ public class ParticipanteController {
     }
 
     @PutMapping(value = "/modificar")
-    public Participante modificarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
+    public ParticipanteDTO modificarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
         return participanteService.modificarParticipante(participanteDTO);
     }
 
@@ -55,4 +55,8 @@ public class ParticipanteController {
 
     }
 
+    @PutMapping(value = "/saldo")
+    public ParticipanteDTO aumentarSaldo(@RequestBody ParticipanteDTO participanteDTO) {
+        return participanteService.aumentarSaldo(participanteDTO);
+    }
 }
