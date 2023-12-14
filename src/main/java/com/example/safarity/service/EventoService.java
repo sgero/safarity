@@ -238,24 +238,25 @@ public class EventoService {
     }
 
     public  List<EventoDTO> busquedaEvento(BusquedaDTO busquedaDTO){
-        List<Evento> eventosBuscados = iEventoRepository.findAll();
-
-        if (!busquedaDTO.getBusqueda().isEmpty()){
-           eventosBuscados.retainAll(iEventoRepository.findByNombreContainingIgnoreCaseAndActivoTrue(busquedaDTO.getBusqueda()));
-//            for (Evento e : eventoRepository.findAll()){
-//
-//            }
-        }
-        if (!busquedaDTO.getTipoEvento().isEmpty()){
-            eventosBuscados.retainAll(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(TipoEvento.valueOf(busquedaDTO.getTipoEvento())));
-        }
-        if (!busquedaDTO.getTipoPago().isEmpty()) {
-            eventosBuscados.retainAll(iEventoRepository.findAllByTipoPagoEqualsAndActivoTrueOrderByNombre(TipoPago.valueOf(busquedaDTO.getTipoPago())));
-        }
-        if (busquedaDTO.getFecha() != 0) {
-            eventosBuscados.retainAll(iEventoRepository.obtenerEventosMes(busquedaDTO.getFecha()));
-        }
-        return eventoMapper.toDTO(eventosBuscados);
+       // List<Evento> eventosBuscados = iEventoRepository.findAll();
+        List<Evento> eventosbuscaditos= iEventoRepository.consultabuscador(busquedaDTO.getBusqueda().isEmpty() ? null :busquedaDTO.getBusqueda(),busquedaDTO.getTipoEvento().isEmpty() ? null :TipoEvento.valueOf(busquedaDTO.getTipoEvento()).ordinal(),busquedaDTO.getTipoPago().isEmpty() ? null :TipoPago.valueOf(busquedaDTO.getTipoPago()).ordinal(),busquedaDTO.getFecha() == 0 ? null :busquedaDTO.getFecha());
+//        if (!busquedaDTO.getBusqueda().isEmpty()){
+//           eventosBuscados.retainAll(iEventoRepository.findByNombreContainingIgnoreCaseAndActivoTrue(busquedaDTO.getBusqueda()));
+////            for (Evento e : eventoRepository.findAll()){
+////
+////            }
+//        }
+//        if (!busquedaDTO.getTipoEvento().isEmpty()){
+//            eventosBuscados.retainAll(iEventoRepository.findAllByTipoEventoEqualsAndActivoTrueOrderByNombre(TipoEvento.valueOf(busquedaDTO.getTipoEvento())));
+//        }
+//        if (!busquedaDTO.getTipoPago().isEmpty()) {
+//            eventosBuscados.retainAll(iEventoRepository.findAllByTipoPagoEqualsAndActivoTrueOrderByNombre(TipoPago.valueOf(busquedaDTO.getTipoPago())));
+//        }
+//        if (busquedaDTO.getFecha() != 0) {
+//            eventosBuscados.retainAll(iEventoRepository.obtenerEventosMes(busquedaDTO.getFecha()));
+//        }
+//        eventoMapper.toDTO(eventosBuscados);
+        return eventoMapper.toDTO(eventosbuscaditos);
     }
 
 

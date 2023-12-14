@@ -6,6 +6,7 @@ import com.example.safarity.model.enums.TipoEvento;
 import com.example.safarity.model.enums.TipoPago;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,14 @@ public interface IEventoRepository extends JpaRepository<Evento, Long> {
     List<Evento> findAllByOrganizacionEquals(Organizacion organizacion);
 
     Evento findByIdEquals(Long id);
+
+    @Query(value = "SELECT * FROM {h-schema}evento e " +
+            "WHERE (:mes IS NULL OR EXTRACT('MONTH' FROM e.fecha_inicio) = :mes) " +
+            "AND (:tipoEvento IS NULL OR e.tipo_evento = :tipoEvento) " +
+            "AND (:tipoPago IS NULL OR e.tipo_pago = :tipoPago) " +
+            "AND (:nombre IS NULL OR LOWER(e.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))) " +
+            "AND e.activo IS TRUE ORDER BY e.nombre", nativeQuery = true)
+    List<Evento>consultabuscador(String nombre,Integer tipoEvento,Integer tipoPago,Integer mes);
 
     Optional<Evento> findTopById(Long id);
 
