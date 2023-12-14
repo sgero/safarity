@@ -1,6 +1,5 @@
 package com.example.safarity.controller;
 
-import com.example.safarity.model.Favorito;
 import com.example.safarity.service.FavoritoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,15 +22,9 @@ public class FavoritoController {
         return ResponseEntity.ok("Evento agregado a favoritos");
     }
 
-//    @GetMapping("/eventos/{participanteId}")
-//    public ResponseEntity<List<Favorito>> obtenerEventosFavoritos(@PathVariable Long participanteId) {
-//        List<Favorito> eventos = favoritoService.obtenerEventosFavoritos(participanteId);
-//        return ResponseEntity.ok(eventos);
-//    }
-
     @PostMapping("/resenyas")
-    public ResponseEntity<String> agregarResenya(@RequestParam Long participanteId, @RequestParam Long eventoId, @RequestBody String resenya) {
-        favoritoService.agregarResenya(participanteId, eventoId, resenya);
+    public ResponseEntity<String> agregarResenya(@RequestParam Long participanteId, @RequestParam Long eventoId) {
+        favoritoService.agregarResenya(participanteId, eventoId);
         return ResponseEntity.ok("Reseña agregada con éxito");
     }
 }

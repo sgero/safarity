@@ -24,9 +24,4 @@ public class Favorito {
     @JoinColumn(name = "id_evento")
     private Evento evento;
 
-    @Column(name = "resenya")
-    private String resenya;
-
-
-
 }
