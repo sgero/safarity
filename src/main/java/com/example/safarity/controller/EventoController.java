@@ -42,7 +42,7 @@ public class EventoController {
     }
 
 
-    @PutMapping(value="/eliminar")
+    @PostMapping(value="/eliminar")
     public String eliminarEvento(@RequestBody EventoDTO eventoDTO){
         return eventoService.eliminarEvento(eventoDTO);
     }

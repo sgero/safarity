@@ -54,4 +54,9 @@ public class ResenyaController {
         return resenyaService.comprobarResenyaSegunEvento(resenyaDTO);
     }
 
+    @PostMapping(value = "/valoracionmedia")
+    public Double valoracionMedia(@RequestBody Long id_evento) {
+        return resenyaService.valoracionMedia(id_evento);
+    }
+
 }

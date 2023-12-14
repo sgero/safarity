@@ -197,8 +197,6 @@ public class EventoService {
             return "No se ha podido eliminar el evento";
         }
 
-
-
     }
 
     public String eventoEliminar(EventoDTO eventoDTO){

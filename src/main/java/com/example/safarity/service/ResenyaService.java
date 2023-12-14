@@ -101,4 +101,8 @@ public class ResenyaService {
         return resenyaMapper.toDTO(resenyaRepository.findTopByEventoAndUsuario(evento.orElse(null), usuario.orElse(null)));
     }
 
+    public Double valoracionMedia(Long id_evento) {
+        return resenyaRepository.valoracionMedia(id_evento);
+    }
+
 }
