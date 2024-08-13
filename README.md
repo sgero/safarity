@@ -1,5 +1,6 @@
 # Safarity
 SAFA CHARITY EVENTS ORGANIZER
+
 Welcome to **Safarity**! 🌟 Your go-to platform for organizing and managing charitable events, connecting communities, and making a positive impact.
 
 ## Description
